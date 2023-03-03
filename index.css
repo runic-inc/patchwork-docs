@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+.sidebar-toggle-button { display: none; }
+
+:root { 
+	--mono-shade4: hsl(var(--mono-hue), var(--mono-saturation), 10%);
+	--base-color: var(--mono-shade4);
+	--base-font-family: 'Inter';
+	--sidebar-background: transparent;
+	--sidebar-nav-pagelink-background: initial;
+	--sidebar-nav-pagelink-padding: 0;
+}
