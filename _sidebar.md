@@ -1,7 +1,7 @@
 - Introduction
 
-    - [Abstract](/)
-    - Vision
+    - [Summary](introduction/summary.md)
+    - [How does it work?](introduction/howitworks.md)
     - [Glossary](introduction/glossary.md)
     
 - Runic Standards

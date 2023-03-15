@@ -1,3 +1,0 @@
-## Abstract
-
-Non-Fungible Tokens (NFTs) have become increasingly popular in recent years as a means of representing unique digital assets, such as artwork, music, and videos. However, while the content of an NFT is immutable on the blockchain, its metadata, such as the artist's name, description, and copyright information, is often stored off-chain. In this whitepaper, we present an Ethereum protocol that allows anyone to publish metadata to anyone else's NFTs through the use of on-chain Meta NFTs.
