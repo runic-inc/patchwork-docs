@@ -16,3 +16,4 @@
     - Fragment Manager
 
 - [Runic Developer Kit](rdk/rdk.md)
+    - [Application json](rdk/samplejson.md)
