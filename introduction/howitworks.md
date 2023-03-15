@@ -2,7 +2,7 @@
 
 Runic protocol lets users or developers mint new Runic Meta NFTs, or Meta NFTs soulbound to existing NFTs. These Meta NFTs enforce read/write/whitelist/transfer rules for Fragment NFTs, which themselves are NFT metadata primitives (eg., XP, coupons, in-game items, pfp attributes like a red hat). 
 
-**TODO** Add diagram showing Original, Meta, and Fragment NFTs + interactions
+![Overview](RunicOverview.png)
 
 The protocol provides named application scopes which are the foundation for rule-based access for on-chain applications. Once claimed, a scope defines which contracts may mint NFTs and update NFT metadata.
 
