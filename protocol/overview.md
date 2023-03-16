@@ -49,7 +49,7 @@ uint256 metaTokenId = prot.createMetaNFT(scopeName, originalNFT.ownerOf(1), addr
 uint8 id = appMetaNFT.registerReferenceAddress(address(fragmentNFT));
 
 // Init storage 
-// TODO: This step goes away once we add intialization hasn't occured yet the first time assignNFT is called
+// TODO: This step goes away once we add intialization if it hasn't occured yet the first time assignNFT is called
 AppMetaNFTMetadata memory data;
 appMetaNFT.storeMetadata(1, data);
 
