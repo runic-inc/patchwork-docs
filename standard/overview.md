@@ -1,14 +1,13 @@
 ## Runic ERC-1155 Extensions Standards 
 
+### ERC-1155 Extensions for on-chain metadata
+
 Runic ERC-1155 Extensions add functions for:
 * Defining metadata schema
 * Storing packed binary metadata
 * Retrieving packed binary  metadata
 * Retrieving an image URI for a token
 * Setting field-level permissions for multi-app metadata access
-
-
-### ERC-1155 Extensions for on-chain metadata
 
 ```
 interface IRunicNFT {

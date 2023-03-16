@@ -4,11 +4,11 @@
     - [How does it work?](introduction/howitworks.md)
     - [Glossary](introduction/glossary.md)
     
-- Runic Standards
+- [Runic Standards](standard/overview.md)
 
-    - [Overview](standard/overview.md)
-    - Meta NFT Interface
-    - Fragment NFT Interface
+    - [ERC-1155 Extensions](standard/overview.md?id=erc-1155-extensions-for-on-chain-metadata)
+    - [Low-storage NFT refs](standard/overview.md?id=low-storage-nft-reference-support)
+    - [Extending existing NFTs](standard/overview.md?id=extending-existing-nfts-with-on-chain-metadata)
 
 - Runic Protocol
 
