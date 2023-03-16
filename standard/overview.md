@@ -33,7 +33,7 @@ Here is an example of an NFT as an entity model for our application "Foo". This 
 
 ![Meta NFTs](metanft.jpg)
 
-### low-storage NFT reference support
+### Low-storage NFT reference support
 
 Traditional parent-child relationships require 512 bits of storage per side, requiring 4 minimum stores per relationship (2x256 for parent and 2x256 for child) at an initial cost of 80,000 gas. The Runic lite reference standard creates a smaller address space which allows for up to 256 whitelisted NFT addresses to be assignable to a target NFT address. The assignable NFTs are referred to as "Fragments" in the Runic protocol system. Fragments are part of a whole NFT, but all of them are NFTs, so they are tradeable, on-chain and have all of the qualities of a Runic NFT. With the lite reference implementation, it's possible to record a relationship in 2.25 stores, cutting gas use almost in half to initially 50,000 and making it far more efficient to compose NFTs where 4-8 Fragments create a new NFT. 
 
@@ -61,7 +61,13 @@ interface IRunicAssignableNFT {
 
 ![NFT Composed from fragments](fragments-composed.jpg)
 
-### extending existing NFTs with on-chain metadata
+### Extending existing NFTs with on-chain metadata
 
-TODO
+Runic NFTs can be deployed as a soulbound metadata layer, effectively extending an existing NFT with on-chain metadata. Depending on the case, a developer can either import some or all of the off-chain metadata on-chain or just add their own metadata to the NFT. 
+
+Here is a diagram showing an application "Foo" which mints a "Fighter" that can be based on an existing NFT. The "FooFighter" minted NFT is used by this and other applications and leverages the original NFT's assets and metadata.
+
+![Extending existing NFT](extending-existing-nft.jpg)
+
+To extend an NFT, the metadata is defined in JSON and the on-chain contract factory is used. A scope is claimed for the Foo game and is used for minting and permissions. The schema is turned into a meta contract via the generator and once minted, is bound to the original NFT, which must be owned by the address that owns the meta NFT.
 
