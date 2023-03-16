@@ -7,6 +7,32 @@ The FragmentManager is a key component of the Runic Protocol that enforces data 
 - The FragmentManager enforces whitelists for which other application scopes can modify fragment state.
 - The FragmentManager enforces that some Fragments were specified as "Soulbound" to the Meta NFT, and thus transfers are always forbidden.
 
+### FragmentManager API
+
+```solidity
+// Claim a new applcation scope
+function claimScope(string calldata scopeName);
+
+// Give control of an application scope to a new owner
+function transferScopeOwnership(string calldata scopeName, address newOwner);
+function getScopeOwner(string calldata scopeName) public view returns (address owner);
+
+// Add/remove approved operators
+function addOperator(string calldata scopeName, address op);
+function removeOperator(string calldata scopeName, address op);
+
+// Mint a new meta NFT in a scope, soulbound to a non-Runic NFT
+function createMetaNFT(string calldata scopeName, address owner, address originalNFTAddress, uint originalNFTTokenId, address metaAddress) public returns (uint256 tokenId);
+
+// Assign fragment NFT to Meta NFT
+function assignNFT(string calldata scopeName, address fragment, uint fragmentTokenId, address target, uint targetTokenId);
+function unassignNFT(string calldata scopeName, address fragment, uint fragmentTokenId);
+function bulkAssignNFT(string calldata scopeName, address[8] calldata artifacts, uint[8] calldata tokenIds, address target, uint targetTokenId);
+
+// Check if nft is allowed to be transferred
+function checkTransfer(address nft, uint256 tokenId);
+```
+
 ## ContractFactory
 
 The ContractFactory is a tool that allows developers to automatically create Meta NFTs and Fragment NFTs for their applications. The workflow for using the ContractFactory is as follows:
