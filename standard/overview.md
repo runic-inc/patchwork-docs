@@ -59,7 +59,7 @@ interface IRunicAssignableNFT {
 }
 ```
 
-TODO diagram
+![NFT Composed from fragments](fragments-composed.jpg)
 
 ### extending existing NFTs with on-chain metadata
 
