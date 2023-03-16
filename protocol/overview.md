@@ -1,4 +1,6 @@
-## FragmentManager
+## Runic Protocol
+
+### FragmentManager
 
 The FragmentManager is a key component of the Runic Protocol that enforces data integrity between fragments and the NFTs they are assigned to. Some ways in which it does this include:
 
@@ -7,7 +9,7 @@ The FragmentManager is a key component of the Runic Protocol that enforces data 
 - The FragmentManager enforces whitelists for which other application scopes can modify fragment state.
 - The FragmentManager enforces that some Fragments were specified as "Soulbound" to the Meta NFT, and thus transfers are always forbidden.
 
-### FragmentManager API
+#### FragmentManager API
 
 ```solidity
 // Claim a new applcation scope
@@ -33,7 +35,7 @@ function bulkAssignNFT(string calldata scopeName, address[8] calldata artifacts,
 function checkTransfer(address nft, uint256 tokenId);
 ```
 
-### Sample Code
+#### Sample Code
 ```solidity
 prot = new RunicProtocol();            // Fragment Manager
 originalNFT = new OriginalNFT();       // e.g., BAYC
@@ -59,7 +61,7 @@ prot.assignNFT(scopeName, address(fragmenttNFT), 1, address(appMetaNFT), metaTok
 ```
 
 
-## ContractFactory
+### ContractFactory
 
 The ContractFactory is a tool that allows developers to automatically create Meta NFTs and Fragment NFTs for their applications. The workflow for using the ContractFactory is as follows:
 
