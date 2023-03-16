@@ -33,6 +33,32 @@ function bulkAssignNFT(string calldata scopeName, address[8] calldata artifacts,
 function checkTransfer(address nft, uint256 tokenId);
 ```
 
+### Sample Code
+```solidity
+prot = new RunicProtocol();            // Fragment Manager
+originalNFT = new OriginalNFT();       // e.g., BAYC
+appMetaNFT = new ApplicationMetaNFT(); // rdk generated Meta NFT Contract
+fragmentNFT = new FragmentNFT();       // rdk generated Fragment NFT Contract
+
+scopeName = "NFT Fighter";
+
+prot.claimScope(scopeName);
+uint256 metaTokenId = prot.createMetaNFT(scopeName, originalNFT.ownerOf(1), address(originalNFT), 1, address(appMetaNFT));
+
+// Register fragmentNFT to appMetaNFT
+uint8 id = appMetaNFT.registerReferenceAddress(address(fragmentNFT));
+
+// Init storage 
+// TODO: This step goes away once we add intialization hasn't occured yet the first time assignNFT is called
+AppMetaNFTMetadata memory data;
+appMetaNFT.storeMetadata(1, data);
+
+//Assign a fragment to a meta NFT
+prot.assignNFT(scopeName, address(fragmenttNFT), 1, address(appMetaNFT), metaTokenId);
+
+```
+
+
 ## ContractFactory
 
 The ContractFactory is a tool that allows developers to automatically create Meta NFTs and Fragment NFTs for their applications. The workflow for using the ContractFactory is as follows:
