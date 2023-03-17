@@ -68,20 +68,14 @@ prot.assignNFT(scopeName, address(fragmenttNFT), 1, address(appMetaNFT), metaTok
 The ContractFactory is a tool that allows developers to automatically create Meta NFTs and Fragment NFTs for their applications. The workflow for using the ContractFactory is as follows:
 
 1. The user expresses their application and fragment types and rules in JSON format.
-2. The user uses the TypeScript Runic Developer Kit (rdk) to validate the schema and generate a bytecode payload that is compatible with the Runic ContractFactory.
+2. The user uses the [Runic Developer Kit (RDK)](rdk/rdk.md?id=runic-developer-kit-rdk-technical-document) to [validate the schema](rdk/rdk.md??id=schema-validation) and [generate a Solidity contract](rdk/rdk.md?id=contract-generation) that can be deployed with the Runic ContractFactory.
 3. The user calls a function `deployApplication` on the ContractFactory smart contract, providing an application scope name and the bytecode generated from the Runic Developer Kit.
 4. The ContractFactory creates Meta NFT and Fragment NFT contracts as specified in the application schema, with rules that are enforced by the FragmentManager.
 
-Here's an example of how to use the Runic Developer Kit (rdk) to generate bytecode that is compatible with the Runic ContractFactory:
+Here's an example of how to use the Runic Developer Kit (rdk) to generate a contract that is compatible with the Runic ContractFactory that can then be compiled to bytecode using solc:
 
-```typescript
-import { Runic } from "runic-sdk";
-
-
-const rdk = new Runic();
-rdk.validateSchema(applicationSchema);
-
-const bytecode = rdk.generateBytecode(applicationSchema);
+```bash
+rdk generate-contract schema.json -o contract.sol
 ```
 
 Here's an example of the `deployApplication` function prototype for the ContractFactory smart contract:

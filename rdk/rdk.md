@@ -41,6 +41,37 @@ rdk validate-schema schema.json
 
 If the schema is valid, the RDK will output a confirmation message.
 
+#### Example schema JSON
+
+```[
+    {
+        "id": 1,
+        "key": "fragmentIDs",
+        "type": "uint64",
+        "arrayLength": 8,
+        "description": "The fragments that comprise this NFT"
+    },
+    {
+        "id": 2,
+        "key": "xp",
+        "type": "uint16",
+        "description": "This NFT's XP"
+    },
+    {
+        "id": 3,
+        "key": "level",
+        "type": "uint8",
+        "description": "This NFT's level"
+    },
+    {
+        "id": 4,
+        "key": "nickname",
+        "type": "char16",
+        "description": "This NFT's nick name"
+    }
+]
+```
+
 ### Contract Generation
 
 To generate a contract using RDK, follow these steps:
@@ -52,7 +83,7 @@ To generate a contract using RDK, follow these steps:
 rdk generate-contract schema.json -o contract.sol
 ```
 
-The RDK will output the generated contract in Solidity format.
+The RDK will output the generated contract in Solidity format which can then be compiled to bytecode using solc or deployed using the RDK deployer.
 
 ### Application Creation (Scaffolding)
 
@@ -110,7 +141,7 @@ module.exports = {
 rdk deploy contract.sol --network mainnet
 ```
 
-The RDK will deploy your contract to the specified network and output the contract address.
+The RDK will compile your contract with solc then deploy your contract to the specified network and output the contract address.
 
 ### Runic Node
 
