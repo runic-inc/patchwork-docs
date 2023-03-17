@@ -2,6 +2,7 @@
 
     - [Summary](introduction/summary.md)
     - [How does it work?](introduction/howitworks.md)
+    - [Example Use Cases](introduction/usecases.md)
     - [Glossary](introduction/glossary.md)
     
 - [Patchwork Standards](standard/overview.md?id=patchwork-erc-1155-extensions-standards)
