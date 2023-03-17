@@ -1,6 +1,6 @@
 ## Runic Protocol
 
-The heart of the protocol is made up primarily of two contracts: The Fragment Manager for orchestrating fragments, and the Contract Factory for generating Runic Compatible Meta and Fragment NFTS.
+The heart of the protocol is made up primarily of two contracts: The Fragment Manager for orchestrating fragments, and the Contract Factory for generating Runic compatible Meta and Fragment NFTS.
 
 ### FragmentManager
 
