@@ -43,7 +43,8 @@ If the schema is valid, the PDK will output a confirmation message.
 
 #### Example schema JSON
 
-```[
+```json
+[
     {
         "id": 1,
         "key": "fragmentIDs",
