@@ -1,18 +1,15 @@
-- Introduction
-
+- [Introduction](introduction/summary.md)
     - [Summary](introduction/summary.md)
     - [How does it work?](introduction/howitworks.md)
     - [Example Use Cases](introduction/usecases.md)
     - [Glossary](introduction/glossary.md)
     
-- [Patchwork Standards](standard/overview.md?id=patchwork-erc-1155-extensions-standards)
-
+- [Patchwork Standards](standard/overview.md)
     - [ERC-1155 Extensions](standard/overview.md?id=erc-1155-extensions-for-on-chain-metadata)
     - [Low-storage NFT refs](standard/overview.md?id=low-storage-nft-reference-support)
     - [Extending existing NFTs](standard/overview.md?id=extending-existing-nfts-with-on-chain-metadata)
 
-- [Patchwork Protocol](protocol/overview.md?id=patchwork-protocol)
-
+- [Patchwork Protocol](protocol/overview.md)
     - [Fragment Manager](protocol/overview.md?id=fragmentmanager)
     - [Contract Factory](protocol/overview.md?id=contractfactory)
 

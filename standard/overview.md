@@ -1,4 +1,4 @@
-## Patchwork ERC-1155 Extensions Standards 
+## Patchwork Standards
 
 ### ERC-1155 Extensions for on-chain metadata
 
@@ -9,7 +9,7 @@ Patchwork ERC-1155 Extensions add functions for:
 * Retrieving an image URI for a token
 * Setting field-level permissions for multi-app metadata access
 
-```
+```solidity
 interface IPatchworkNFT {
   function schemaURI() external returns (string memory);
   function schema() external returns (MetadataSchema memory);
@@ -38,7 +38,7 @@ Traditional parent-child relationships require 512 bits of storage per side, req
 
 The use cases include having standard item sets like clothes or weapons, traits like "happy" or "sad", partitioned storage like medals and progress, coupons, boosts, modifiers and almost any adjective that a person could think of.
 
-```
+```solidity
 interface IPatchworkLiteRef {
   function registerReferenceAddress(address ref) external returns (uint8 id);
   function redactReferenceAddress(uint8 id) external; // future / less necessary
@@ -50,7 +50,7 @@ interface IPatchworkLiteRef {
 }
 ```
 
-```
+```solidity
 interface IPatchworkAssignableNFT {
   function assign(uint256 ourTokenId, address to, uint256 tokenId) external;
   function unassign(uint256 ourTokenId) external;

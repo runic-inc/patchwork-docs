@@ -1,4 +1,4 @@
-## Patchwork Developer Kit (PDK) Technical Document
+## Patchwork Developer Kit (PDK)
 
 The Patchwork Developer Kit (PDK) is a powerful tool for developers who want to create and deploy applications using the Patchwork Protocol. This document outlines the process for installing the PDK, validating a schema, generating a contract, creating an application, generating contract bindings, and deploying a contract.
 
