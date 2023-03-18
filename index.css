@@ -1,4 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@font-face {
+	font-family: 'frag';
+	src: url('fonts/ppfragment-glarelight.woff2') format('woff2');
+	font-weight: 300;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'frag';
+	src: url('fonts/ppfragment-glareregular.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'frag serif';
+	src: url('fonts/ppfragment-seriflight.woff2') format('woff2');
+	font-weight: 300;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'frag serif';
+	src: url('fonts/ppfragment-serifregular.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'sohne';
+	src: url('fonts/test-soehne-buch.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'sohne';
+	src: url('fonts/test-soehne-halbfett.woff2') format('woff2');
+	font-weight: 600;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'sohne mono';
+	src: url('fonts/test-soehne-mono-buch.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
 
 .sidebar-toggle-button { display: none; }
 
@@ -11,9 +52,9 @@
 	--theme-color-lightest: #C3E5E0;
 	--theme-color-light-faded: #97BCB622;
 	--theme-color-punch: #CEFF65;
-	--font-serif: 'PP Fragment';
-	--font-sans: 'Test Söhne';
-	--font-mono: 'Test Söhne Mono';
+	--font-serif: 'frag';
+	--font-sans: 'sohne';
+	--font-mono: 'sohne mono';
 	--mono-shade4: hsl(var(--mono-hue), var(--mono-saturation), 10%);
 	
 	
@@ -42,7 +83,8 @@
 	
 	
 	/* Code blocks */
-	--code-font-size: 14px;
+	--code-font-size: 15px;
+	--code-font-family: 'sohne mono';
 	--code-inline-background: #000;
 	--code-inline-color: var(--theme-color-lightest);
 	--code-theme-background: var(--theme-color-light-faded);
