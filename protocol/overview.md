@@ -26,7 +26,7 @@ function addOperator(string calldata scopeName, address op);
 function removeOperator(string calldata scopeName, address op);
 
 // Mint a new patch in a scope, soulbound to a non-Patchwork NFT
-function createMetaNFT(string calldata scopeName, address owner, address originalNFTAddress, uint originalNFTTokenId, address patchAddress) public returns (uint256 tokenId);
+function createPatchNFT(string calldata scopeName, address owner, address originalNFTAddress, uint originalNFTTokenId, address patchAddress) public returns (uint256 tokenId);
 
 // Assign fragment NFT to Patch
 function assignNFT(string calldata scopeName, address fragment, uint fragmentTokenId, address target, uint targetTokenId);
