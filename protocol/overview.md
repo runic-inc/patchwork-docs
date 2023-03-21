@@ -39,26 +39,26 @@ function checkTransfer(address nft, uint256 tokenId);
 
 #### Sample Code
 ```solidity
-prot = new PatchworkProtocol();        // Fragment Manager
-originalNFT = new OriginalNFT();       // e.g., BAYC
-appMetaNFT = new ApplicationMetaNFT(); // pdk generated Patch Contract
-fragmentNFT = new FragmentNFT();       // pdk generated Fragment NFT Contract
+prot = new PatchworkProtocol();          // Fragment Manager
+originalNFT = new OriginalNFT();         // e.g., BAYC
+appPatchNFT = new ApplicationPatchNFT(); // pdk generated Patch Contract
+fragmentNFT = new FragmentNFT();         // pdk generated Fragment NFT Contract
 
 scopeName = "NFT Fighter";
 
 prot.claimScope(scopeName);
-uint256 patchTokenId = prot.createMetaNFT(scopeName, originalNFT.ownerOf(1), address(originalNFT), 1, address(appMetaNFT));
+uint256 patchTokenId = prot.createPatchNFT(scopeName, originalNFT.ownerOf(1), address(originalNFT), 1, address(appPatchNFT));
 
-// Register fragmentNFT to appMetaNFT
-uint8 id = appMetaNFT.registerReferenceAddress(address(fragmentNFT));
+// Register fragmentNFT to appPatchNFT
+uint8 id = appPatchNFT.registerReferenceAddress(address(fragmentNFT));
 
 // Init storage 
 // TODO: This step goes away once we add intialization if it hasn't occured yet the first time assignNFT is called
-AppMetaNFTMetadata memory data;
-appMetaNFT.storeMetadata(1, data);
+AppPatchNFTMetadata memory data;
+appPatchNFT.storeMetadata(1, data);
 
 //Assign a fragment to a Patch
-prot.assignNFT(scopeName, address(fragmenttNFT), 1, address(appMetaNFT), patchTokenId);
+prot.assignNFT(scopeName, address(fragmenttNFT), 1, address(appPatchNFT), patchTokenId);
 
 ```
 
