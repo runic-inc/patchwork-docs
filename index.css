@@ -42,6 +42,11 @@
 }
 
 .sidebar-toggle-button { display: none; }
+@media (max-width: 767px) {
+	.sidebar-toggle-button {
+	  display: block;
+	}
+  }
 
 :root {
 	
