@@ -1,8 +1,8 @@
 ## Patchwork Standards
 
-### ERC-1155 Extensions for on-chain metadata
+### ERC-721 Extensions for on-chain metadata
 
-Patchwork ERC-1155 Extensions add functions for:
+Patchwork ERC-721 Extensions add functions for:
 * Defining metadata schema
 * Storing packed binary metadata
 * Retrieving packed binary  metadata
@@ -11,18 +11,22 @@ Patchwork ERC-1155 Extensions add functions for:
 
 ```solidity
 interface IPatchworkNFT {
-  function schemaURI() external returns (string memory);
-  function schema() external returns (MetadataSchema memory);
-  function imageURI(uint256 _tokenId) external returns (string memory);
-  function setPermissions(address to, uint256 permissions) external;
-  function storePackedMetadataSlot(uint256 _tokenId, uint256 slot, uint256 data) external;
-  function loadPackedMetadataSlot(uint256 _tokenId, uint256 slot) external returns (uint256);
+    function getScopeName() external returns (string memory);
+    function schemaURI() external returns (string memory);
+    function schema() external returns (MetadataSchema memory);
+    function imageURI(uint256 _tokenId) external returns (string memory);
+    function setPermissions(address to, uint256 permissions) external;
+    function storePackedMetadataSlot(uint256 _tokenId, uint256 slot, uint256 data) external;
+    function loadPackedMetadataSlot(uint256 _tokenId, uint256 slot) external returns (uint256);
+    function getLockNonce(uint256 tokenId) external returns (uint256 nonce);
+    function isLocked(uint256 tokenId) external returns (bool);
+    function setLocked(uint256 tokenId, bool locked) external;
 }
 ```
 
 Metadata fields are defined in normal JSON and an optimized byte packer is generated into a new contract. To save storage, fields should be defined as short as possible. As most application-level fields are not typically larger than 64 bit and often can be a single bit flag or a small 8 or 16 bit field for counting with a small maximum, many fields can be packed into a single uint256, which is the storage word size in EVM. This allows for effective batch writes, incuring only one storage gas cost for potentially many fields.
 
-Secure Patchwork ERC-1155s are generated from the Patchwork protocol contract, which accepts metadata schemas in binary format, something our SDK will convert from JSON. Custom Patchwork ERC-1155s can also be generated in Solidity client-side so that they can be customized before deployment. 
+Secure Patchwork ERC-721s are generated from the Patchwork protocol contract, which accepts metadata schemas in binary format, something our SDK will convert from JSON. Custom Patchwork ERC-721 can also be generated in Solidity client-side so that they can be customized before deployment. 
 
 Because metadata is available on-chain, other contracts can directly read and interact with an NFT's metadata, allowing for applications that mint and update their own tokens, potentially with no fixed server infrastructure. This enables complex but gas efficient interactions such as parent-child assignment using storage-efficient referencing (see below) and NFTs as schemad application entity models.
 
@@ -45,16 +49,23 @@ interface IPatchworkLiteRef {
   function getLiteReference(address addr, uint256 tokenId) external returns (uint64 referenceAddress);
   function getReferenceAddressAndTokenID(uint64 referenceAddress) external returns (address addr, uint256 tokenId);
   function addReference(uint256 ourTokenId, uint64 referenceAddress) external;
-  function addBulkReferences(uint256 ourTokenId, uint64[] calldata _referenceAddresses) external;
+  function batchAddReferences(uint256 tokenId, uint64[] calldata liteRefs) external;
   function removeReference(uint256 ourTokenId, uint64 referenceAddress) external;
+  function loadReferenceAddressAndTokenId(uint256 idx) external returns (address addr, uint256 tokenId);
+  function loadAllReferences(uint256 tokenId) external returns (address[] memory addresses, uint256[] memory tokenIds);
 }
 ```
 
 ```solidity
 interface IPatchworkAssignableNFT {
-  function assign(uint256 ourTokenId, address to, uint256 tokenId) external;
-  function unassign(uint256 ourTokenId) external;
-  function getAssignedTo(uint256 ourTokenId) external returns (address, uint256);
+    function getScopeName() external returns (string memory);
+    function assign(uint256 ourTokenId, address to, uint256 tokenId) external;
+    function unassign(uint256 ourTokenId) external;
+    function getAssignedTo(uint256 ourTokenId) external returns (address, uint256);
+    function unassignedOwnerOf(uint256 ourTokenId) external returns (address);
+    function onAssignedTransfer(address from, address to, uint256 tokenId) external;
+    function updateOwnership(uint256 tokenId) external;
+    function patchworkCompatible_() external returns (bytes2);
 }
 ```
 
@@ -62,7 +73,17 @@ interface IPatchworkAssignableNFT {
 
 ### Extending existing NFTs with on-chain metadata
 
-Patchwork NFTs can be deployed as a soulbound metadata layer, effectively extending an existing NFT with on-chain metadata. Depending on the case, a developer can either import some or all of the off-chain metadata on-chain or just add their own metadata to the NFT. 
+Patchwork NFTs can be deployed as a Patch, which is a soulbound metadata layer, effectively extending an existing NFT with on-chain metadata. Depending on the case, a developer can either import some or all of the off-chain metadata on-chain or just add their own metadata to the NFT. 
+
+```solidity
+interface IPatchworkPatch {
+    function getScopeName() external returns (string memory);
+    function mintPatch(address owner, address originalNFTAddress, uint originalNFTTokenId) external returns (uint256 tokenId);
+    function updateOwnership(uint256 tokenId) external;
+    function unpatchedOwnerOf(uint256 tokenId) external returns (address);
+    function patchworkCompatible_() external returns (bytes1);
+}
+```
 
 Here is a diagram showing an application "Foo" which mints a "Fighter" that can be based on an existing NFT. The "FooFighter" minted NFT is used by this and other applications and leverages the original NFT's assets and metadata.
 

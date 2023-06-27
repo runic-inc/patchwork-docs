@@ -1,92 +1,31 @@
-## Patchwork Protocol
+## Patchwork Protocol Overview
 
-The heart of the protocol is made up primarily of two contracts: The Fragment Manager for orchestrating fragments, and the Contract Factory for generating Patchwork compatible Patches and Fragment NFTS.
+The Patchwork Protocol provides a standardized way to create, manage, and manipulate complex relationships and data structures for NFTs. It ensures the integrity and security of NFT operations, including assignment and unassignment of fragments, batch assignments, transfers, lock states, and ownership updates.
 
-### FragmentManager
+### Scopes
 
-The FragmentManager is a key component of the Patchwork Protocol that enforces data integrity between fragments and the NFTs they are assigned to. Some ways in which it does this include:
+A scope in the Patchwork Protocol is a robust data structure designed to manage access control and settings for various entities. A scope can correspond to a specific product, a group of entities within a product, a company, and more. By categorizing and managing NFTs under different scopes, the protocol provides fine-grained access control and ensures data integrity for various business scenarios.
 
-- A fragment can only ever be owned by one Patch.
-- Only the Patch that owns the Fragment can perform operations on the Fragment NFT, unless the Patch owner has delegated write/transfer access to another Patch or application scope.
-- The FragmentManager enforces whitelists for which other application scopes can modify fragment state.
-- The FragmentManager enforces that some Fragments were specified as "Soulbound" to the Patch, and thus transfers are always forbidden.
+A scope defines the owner and optional operators who have the permission to perform certain operations, such as assigning or unassigning NFT fragments. It can also be configured to allow users to assign their own NFTs within the scope. This user-centric design makes scopes a versatile tool for managing access rights in different contexts.
 
-#### FragmentManager API
+### Assigning and Unassigning NFT Fragments
 
-```solidity
-// Claim a new applcation scope
-function claimScope(string calldata scopeName);
+The protocol provides mechanisms to assign an NFT fragment to a target NFT and to unassign it. These operations are highly secured, ensuring only authorized parties can perform them. The protocol also ensures the proper management of scope, which is essential to maintain the integrity of NFT relationships. In addition to single assignments, batch assignment operations are also supported for efficiency and convenience.
 
-// Give control of an application scope to a new owner
-function transferScopeOwnership(string calldata scopeName, address newOwner);
-function getScopeOwner(string calldata scopeName) public view returns (address owner);
+### Transfer and Ownership Operations
 
-// Add/remove approved operators
-function addOperator(string calldata scopeName, address op);
-function removeOperator(string calldata scopeName, address op);
+Transfers in the Patchwork Protocol are carried out in strict compliance with predefined rules and actions, preserving the integrity of NFT assignments. Before a transfer occurs, the protocol verifies whether the token is assignable and checks for any conditions that could block the transfer (like if the token is soulbound). If the checks pass, the protocol handles the transfer, ensuring that any effects of the transfer propagate correctly to assigned NFTs.
 
-// Mint a new patch in a scope, soulbound to a non-Patchwork NFT
-function createPatchNFT(string calldata scopeName, address owner, address originalNFTAddress, uint originalNFTTokenId, address patchAddress) public returns (uint256 tokenId);
+In the Patchwork Protocol, when an NFT is transferred, any NFTs assigned to it will be owned by the new owner. Although the ownership status of these assigned NFTs will not be immediately updated in storage due to gas efficiency considerations, events will be sent out to update any listening indexers, ensuring the system remains accurate and up-to-date. 
 
-// Assign fragment NFT to Patch
-function assignNFT(string calldata scopeName, address fragment, uint fragmentTokenId, address target, uint targetTokenId);
-function unassignNFT(string calldata scopeName, address fragment, uint fragmentTokenId);
-function bulkAssignNFT(string calldata scopeName, address[8] calldata artifacts, uint[8] calldata tokenIds, address target, uint targetTokenId);
+Additionally, the correct owner will always be returned in the `ownerOf()` call, even if the storage hasn't been updated yet.
 
-// Check if nft is allowed to be transferred
-function checkTransfer(address nft, uint256 tokenId);
-```
+### Ownership Updates
 
-#### Sample Code
-```solidity
-prot = new PatchworkProtocol();          // Fragment Manager
-originalNFT = new OriginalNFT();         // e.g., BAYC
-appPatchNFT = new ApplicationPatchNFT(); // pdk generated Patch Contract
-fragmentNFT = new FragmentNFT();         // pdk generated Fragment NFT Contract
+The protocol also supports operations to update the storage of the ownership tree of a specific Patchwork NFT. Whether the NFT supports the IPatchworkAssignable interface or the IPatchworkPatch interface, the ownership update is handled correctly, reflecting changes throughout the NFT's relationships and ensuring data integrity.
 
-scopeName = "NFT Fighter";
+### Locks
 
-prot.claimScope(scopeName);
-uint256 patchTokenId = prot.createPatchNFT(scopeName, originalNFT.ownerOf(1), address(originalNFT), 1, address(appPatchNFT));
+To mitigate fraud risks and ensure the integrity of NFT relationships, the Patchwork Protocol utilizes a locking mechanism. Before certain operations like assignments and transfers, the protocol checks whether the involved NFTs are locked or not.
 
-// Register fragmentNFT to appPatchNFT
-uint8 id = appPatchNFT.registerReferenceAddress(address(fragmentNFT));
-
-// Init storage 
-// TODO: This step goes away once we add intialization if it hasn't occured yet the first time assignNFT is called
-AppPatchNFTMetadata memory data;
-appPatchNFT.storeMetadata(1, data);
-
-//Assign a fragment to a Patch
-prot.assignNFT(scopeName, address(fragmenttNFT), 1, address(appPatchNFT), patchTokenId);
-
-```
-
-
-### ContractFactory
-
-The ContractFactory is a tool that allows developers to automatically create Patches and Fragment NFTs for their applications. The workflow for using the ContractFactory is as follows:
-
-1. The user expresses their application and fragment types and rules in JSON format.
-2. The user uses the [Patchwork Developer Kit (PDK)](pdk/pdk.md?id=patchwork-developer-kit-pdk-technical-document) to [validate the schema](pdk/pdk.md??id=schema-validation) and [generate a Solidity contract](pdk/pdk.md?id=contract-generation) that can be deployed with the Patchwork ContractFactory.
-3. The user calls a function `deployApplication` on the ContractFactory smart contract, providing an application scope name and the bytecode generated from the Patchwork Developer Kit.
-4. The ContractFactory creates Patch and Fragment NFT contracts as specified in the application schema, with rules that are enforced by the FragmentManager.
-
-Here's an example of how to use the Patchwork Developer Kit (pdk) to generate a contract that is compatible with the Patchwork ContractFactory that can then be compiled to bytecode using solc:
-
-```bash
-pdk generate-contract schema.json -o contract.sol
-```
-
-Here's an example of the `deployApplication` function prototype for the ContractFactory smart contract:
-
-```solidity
-function generateContract(PatchworkSchema schema, PatchworkContractOpts opts) public returns (bytes memory bytecode);
-function deployApplication(bytes32 scopeName, bytes memory bytecode) public returns (address patch);
-```
-
-The `deployApplication` function takes two arguments: the name of the application scope (`scopeName`) and the bytecode generated from the Patchwork Developer Kit or from the factory contract (`bytecode`). It returns the address of the newly-created Patch contract and adds default scoped permissions for the NFT contract.
-
-By using the verified factory contract or Patchwork Developer Kit to validate the schema and generate bytecode, and then calling the `deployApplication` function on the ContractFactory smart contract, developers can easily create new Patch and Fragment NFT contracts that are compatible with the Patchwork Protocol and enforced by the FragmentManager.
-
-
+A lock uses a nonce to protect the NFT relationships from being maliciously altered. Specifically, it can prevent a seller from removing relationships from an NFT before a sale. In this way, locks are instrumental in maintaining the authenticity and trustworthiness of NFT transactions in the protocol.
