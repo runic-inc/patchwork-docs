@@ -11,11 +11,4 @@
 
 - [Patchwork Protocol](protocol/overview.md)
 
-- [Patchwork Developer Kit](pdk/pdk.md?id=patchwork-developer-kit-pdk-technical-document)
-    - [Installation](pdk/pdk.md?id=installation)
-    - [Schema Validation](pdk/pdk.md??id=schema-validation)
-    - [Contract Generation](pdk/pdk.md?id=contract-generation)
-    - [Application Creation](pdk/pdk.md?id=application-creation-scaffolding)
-    - [Generating Contract Bindings](pdk/pdk.md?id=generating-contract-bindings)
-    - [Contract Deployment](pdk/pdk.md?id=contract-deployment)
-    - [Patchwork Node](pdk/pdk.md?id=patchwork-node)
+- [Patchwork Developer Kit](pdk/pdk.md)
