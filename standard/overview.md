@@ -26,7 +26,7 @@ interface IPatchworkNFT {
 
 Metadata fields are defined in normal JSON and an optimized byte packer is generated into a new contract. To save storage, fields should be defined as short as possible. As most application-level fields are not typically larger than 64 bit and often can be a single bit flag or a small 8 or 16 bit field for counting with a small maximum, many fields can be packed into a single uint256, which is the storage word size in EVM. This allows for effective batch writes, incuring only one storage gas cost for potentially many fields.
 
-Secure Patchwork ERC-721s are generated from the Patchwork protocol contract, which accepts metadata schemas in binary format, something our SDK will convert from JSON. Custom Patchwork ERC-721 can also be generated in Solidity client-side so that they can be customized before deployment. 
+Secure Patchwork ERC-721s are generated in Solidity client-side using the PDK so that they can be customized before deployment. 
 
 Because metadata is available on-chain, other contracts can directly read and interact with an NFT's metadata, allowing for applications that mint and update their own tokens, potentially with no fixed server infrastructure. This enables complex but gas efficient interactions such as parent-child assignment using storage-efficient referencing (see below) and NFTs as schemad application entity models.
 
