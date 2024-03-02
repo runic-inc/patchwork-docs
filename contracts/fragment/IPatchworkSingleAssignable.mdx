@@ -1,0 +1,113 @@
+---
+title: 'IPatchworkSingleAssignable'
+description: 'Interface for contracts supporting Patchwork assignment'
+icon: 'grid-2'
+---
+import Separator from '/snippets/separator.mdx';
+
+
+
+<Info>
+<div class="border-b border-zinc-500/20 dark:border-zinc-500/30 pb-4 flex" style={{gap: '4px', fontFamily: 'var(--font-jetbrains-mono)'}}>
+<span class="token keyword">import</span> <span class="token string">"@patchwork/contracts/PatchworkSingleAssignable/IPatchworkSingleAssignable.sol"</span><span class="token punctuation">;</span>
+</div>
+
+**Inherits:**
+[`IPatchworkAssignable`](/src/interfaces/IPatchworkAssignable.sol/interface.IPatchworkAssignable.md)
+</Info>
+
+
+<Separator />
+
+## Functions
+---
+### unassign
+
+Unassigns a token
+
+
+```solidity
+function unassign(uint256 ourTokenId) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`ourTokenId`|`uint256`|ID of our token|
+
+
+### getAssignedTo
+
+Returns the address and token ID that our token is assigned to
+
+
+```solidity
+function getAssignedTo(uint256 ourTokenId) external view returns (address, uint256);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`ourTokenId`|`uint256`|ID of our token|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`<none>`|`address`|address the address this is assigned to|
+|`<none>`|`uint256`|uint256 the tokenId this is assigned to|
+
+
+### unassignedOwnerOf
+
+Returns the underlying stored owner of a token ignoring current assignment
+
+
+```solidity
+function unassignedOwnerOf(uint256 ourTokenId) external view returns (address);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`ourTokenId`|`uint256`|ID of our token|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`<none>`|`address`|address address of the owner|
+
+
+### onAssignedTransfer
+
+Sends events for a token when the assigned-to token has been transferred
+
+
+```solidity
+function onAssignedTransfer(address from, address to, uint256 tokenId) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`from`|`address`|Sender address|
+|`to`|`address`|Recipient address|
+|`tokenId`|`uint256`|ID of the token|
+
+
+### updateOwnership
+
+Updates the real underlying ownership of a token in storage (if different from current)
+
+
+```solidity
+function updateOwnership(uint256 tokenId) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+
+

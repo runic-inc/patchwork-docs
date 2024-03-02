@@ -1,0 +1,88 @@
+---
+title: 'IPatchworkMetadata'
+description: 'Metadata for IPatchwork721 and related contract interfaces'
+icon: 'code-simple'
+---
+import Separator from '/snippets/separator.mdx';
+
+<Info>
+<div class="flex" style={{gap: '4px', fontFamily: 'var(--font-jetbrains-mono)'}}>
+<span class="token keyword">import</span> <span class="token string">"@patchwork/contracts/Patchwork721/IPatchworkMetadata.sol"</span><span class="token punctuation">;</span>
+</div>
+</Info>
+
+<Separator />
+
+## Structs
+---
+### MetadataSchema
+Struct defining the overall structure of the metadata and containing entries describing each data field..
+
+
+```solidity
+struct MetadataSchema {
+    uint256 version;
+    MetadataSchemaEntry[] entries;
+}
+```
+
+### MetadataSchemaEntry
+Struct defining individual entries within the metadata schema, detailing the properties and types of each data field.
+
+
+```solidity
+struct MetadataSchemaEntry {
+    uint256 id;
+    uint256 permissionId;
+    FieldType fieldType;
+    uint256 fieldCount;
+    FieldVisibility visibility;
+    uint256 slot;
+    uint256 offset;
+    string key;
+}
+```
+
+<Separator />
+## Enums
+---
+### FieldType
+Enumeration of possible field data types. This defines the various basic data types for the fields.
+
+
+```solidity
+enum FieldType {
+    BOOLEAN,
+    INT8,
+    INT16,
+    INT32,
+    INT64,
+    INT128,
+    INT256,
+    UINT8,
+    UINT16,
+    UINT32,
+    UINT64,
+    UINT128,
+    UINT256,
+    CHAR8,
+    CHAR16,
+    CHAR32,
+    CHAR64,
+    LITEREF,
+    ADDRESS,
+    STRING
+}
+```
+
+### FieldVisibility
+Enumeration of field visibility options. Specifies whether a field is publicly accessible or private.
+
+
+```solidity
+enum FieldVisibility {
+    PUBLIC,
+    PRIVATE
+}
+```
+

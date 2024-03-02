@@ -1,0 +1,72 @@
+---
+title: 'IPatchworkMintable'
+description: ''
+icon: 'code-simple'
+---
+
+import Separator from '/snippets/separator.mdx';
+
+
+
+<Info>
+<div class="border-b border-zinc-500/20 dark:border-zinc-500/30 pb-4 flex" style={{gap: '4px', fontFamily: 'var(--font-jetbrains-mono)'}}>
+<span class="token keyword">import</span> <span class="token string">"@patchwork/contracts/PatchworkMintable/IPatchworkMintable.sol"</span><span class="token punctuation">;</span>
+</div>
+
+**Inherits:**
+[`IPatchworkScoped`](/contracts/core/IPatchworkScoped)
+</Info>
+
+
+<Separator />
+
+## Functions
+---
+### mint
+
+Mints a single token to a specified address.
+
+
+```solidity
+function mint(address to, bytes calldata data) external payable returns (uint256 tokenId);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`to`|`address`|The address to which the token will be minted.|
+|`data`|`bytes`|Additional data to be passed to the minting process.|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|The ID of the minted token.|
+
+
+### mintBatch
+
+Mints multiple tokens to a specified address.
+
+
+```solidity
+function mintBatch(address to, bytes calldata data, uint256 quantity)
+    external
+    payable
+    returns (uint256[] memory tokenIds);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`to`|`address`|The address to which the tokens will be minted.|
+|`data`|`bytes`|Additional data to be passed to the minting process.|
+|`quantity`|`uint256`|The number of tokens to mint.|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenIds`|`uint256[]`|An array of the IDs of the minted tokens.|
+
+

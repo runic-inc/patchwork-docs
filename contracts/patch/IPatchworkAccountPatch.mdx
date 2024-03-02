@@ -1,0 +1,45 @@
+---
+title: 'IPatchworkAccountPatch'
+description: 'Interface for contracts supporting Patchwork Patch standard'
+icon: 'frame'
+---
+import Separator from '/snippets/separator.mdx';
+
+
+
+<Info>
+<div class="border-b border-zinc-500/20 dark:border-zinc-500/30 pb-4 flex" style={{gap: '4px', fontFamily: 'var(--font-jetbrains-mono)'}}>
+<span class="token keyword">import</span> <span class="token string">"@patchwork/contracts/PatchworkAccountPatch/IPatchworkAccountPatch.sol"</span><span class="token punctuation">;</span>
+</div>
+
+**Inherits:**
+[`IPatchworkScoped`](/contracts/core/IPatchworkScoped)
+</Info>
+
+
+<Separator />
+
+## Functions
+---
+### mintPatch
+
+Creates a new token for the owner, representing a patch
+
+
+```solidity
+function mintPatch(address owner, address target) external payable returns (uint256 tokenId);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`owner`|`address`|Address of the owner of the token|
+|`target`|`address`|Address of the original account|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the newly minted token|
+
+

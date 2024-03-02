@@ -1,0 +1,143 @@
+---
+title: 'PatchworkUtils'
+description: 'Helper functions'
+icon: 'toolbox'
+---
+import Separator from '/snippets/separator.mdx';
+
+<Info>
+<div class="flex" style={{gap: '4px', fontFamily: 'var(--font-jetbrains-mono)'}}>
+<span class="token keyword">import</span> <span class="token string">"@patchwork/contracts/PatchworkUtils/PatchworkUtils.sol"</span><span class="token punctuation">;</span>
+</div>
+</Info>
+
+<Separator />
+
+## Functions
+---
+### toString8
+
+Converts uint64 raw data to an 8 character string
+
+
+```solidity
+function toString8(uint64 raw) internal pure returns (string memory out);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`raw`|`uint64`|the raw data|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`out`|`string`|the string|
+
+
+### toString16
+
+Converts uint128 raw data to a 16 character string
+
+
+```solidity
+function toString16(uint128 raw) internal pure returns (string memory out);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`raw`|`uint128`|the raw data|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`out`|`string`|the string|
+
+
+### toString32
+
+Converts uint256 raw data to a 32 character string
+
+
+```solidity
+function toString32(uint256 raw) internal pure returns (string memory out);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`raw`|`uint256`|the raw data|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`out`|`string`|the string|
+
+
+### trimUp
+
+Trims a raw string to its null-terminated length
+
+
+```solidity
+function trimUp(bytes memory byteArray) internal pure returns (string memory out);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`byteArray`|`bytes`|the raw string|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`out`|`string`|the trimmed string|
+
+
+### convertUint16ToBytes
+
+Converts a uint16 into a 2-byte array
+
+
+```solidity
+function convertUint16ToBytes(uint16 input) internal pure returns (bytes memory);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`input`|`uint16`|the uint16|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`<none>`|`bytes`|bytes the array|
+
+
+### strToUint256
+
+Converts a string to a uint256
+
+
+```solidity
+function strToUint256(string memory str) internal pure returns (uint256 val);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`str`|`string`|the string to convert|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`val`|`uint256`|the uint256 value|
+
+

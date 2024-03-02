@@ -1,0 +1,61 @@
+---
+title: 'IPatchwork1155Patch'
+description: 'Interface for contracts supporting Patchwork patch standard'
+icon: 'frame'
+---
+import Separator from '/snippets/separator.mdx';
+
+
+
+<Info>
+<div class="border-b border-zinc-500/20 dark:border-zinc-500/30 pb-4 flex" style={{gap: '4px', fontFamily: 'var(--font-jetbrains-mono)'}}>
+<span class="token keyword">import</span> <span class="token string">"@patchwork/contracts/Patchwork1155Patch/IPatchwork1155Patch.sol"</span><span class="token punctuation">;</span>
+</div>
+
+**Inherits:**
+[`IPatchworkScoped`](/contracts/core/IPatchworkScoped)
+</Info>
+
+
+<Separator />
+
+## Functions
+---
+### mintPatch
+
+Creates a new token for the owner, representing a patch
+
+
+```solidity
+function mintPatch(address to, PatchTarget memory target) external payable returns (uint256 tokenId);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`to`|`address`|Address of the owner of the patch token|
+|`target`|`PatchTarget`|Path to an 1155 to patch|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the newly minted token|
+
+
+<Separator />
+
+## Structs
+---
+### PatchTarget
+A canonical path to a Patched ERC-1155.
+
+
+```solidity
+struct PatchTarget {
+    address addr;
+    uint256 tokenId;
+    address account;
+}
+```
+

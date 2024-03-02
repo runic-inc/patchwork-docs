@@ -1,0 +1,83 @@
+---
+title: 'IPatchworkAssignable'
+description: 'Interface for contracts supporting Patchwork assignment'
+icon: 'grid-2'
+---
+import Separator from '/snippets/separator.mdx';
+
+
+
+<Info>
+<div class="border-b border-zinc-500/20 dark:border-zinc-500/30 pb-4 flex" style={{gap: '4px', fontFamily: 'var(--font-jetbrains-mono)'}}>
+<span class="token keyword">import</span> <span class="token string">"@patchwork/contracts/PatchworkAssignable/IPatchworkAssignable.sol"</span><span class="token punctuation">;</span>
+</div>
+
+**Inherits:**
+[`IPatchworkScoped`](/contracts/core/IPatchworkScoped)
+</Info>
+
+
+<Separator />
+
+## Functions
+---
+### assign
+
+Assigns a token to another
+
+
+
+```solidity
+function assign(uint256 ourTokenId, address to, uint256 tokenId) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`ourTokenId`|`uint256`|ID of our token|
+|`to`|`address`|Address to assign to|
+|`tokenId`|`uint256`|ID of the token to assign|
+
+
+### allowAssignment
+
+Checks permissions for assignment
+
+
+```solidity
+function allowAssignment(
+    uint256 ourTokenId,
+    address target,
+    uint256 targetTokenId,
+    address targetOwner,
+    address by,
+    string memory scopeName
+) external view returns (bool);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`ourTokenId`|`uint256`|the tokenID to assign|
+|`target`|`address`|the address of the target|
+|`targetTokenId`|`uint256`|the tokenID of the target|
+|`targetOwner`|`address`|the ownerOf of the target|
+|`by`|`address`|the account invoking the assignment to Patchwork Protocol|
+|`scopeName`|`string`|the scope name of the contract to assign to|
+
+
+<Separator />
+
+## Structs
+---
+### Assignment
+Represents an assignment of a token from an external NFT contract to a token in this contract.
+
+
+```solidity
+struct Assignment {
+    address tokenAddr;
+    uint256 tokenId;
+}
+```
+

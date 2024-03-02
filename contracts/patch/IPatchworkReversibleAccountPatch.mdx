@@ -1,0 +1,36 @@
+# IPatchworkReversibleAccountPatch
+[Git Source](https://github.com/runic-inc/patchwork/blob/b277ab5dc0fae6951fd9bad572b7402c2469cfde/src/interfaces/IPatchworkAccountPatch.sol)
+
+**Inherits:**
+[IPatchworkAccountPatch](/src/interfaces/IPatchworkAccountPatch.sol/interface.IPatchworkAccountPatch.md)
+
+**Author:**
+Runic Labs, Inc
+
+Interface for contracts supporting Patchwork account patch standard with reverse lookup
+
+
+## Functions
+### getTokenIdByTarget
+
+Returns the token ID (if it exists) for an NFT that may have been patched
+
+*Requires reverse storage enabled*
+
+
+```solidity
+function getTokenIdByTarget(address target) external returns (uint256 tokenId);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`target`|`address`|Address of the original account|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the newly minted token|
+
+

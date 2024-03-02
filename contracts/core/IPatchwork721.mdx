@@ -1,0 +1,307 @@
+---
+title: 'IPatchwork721'
+description: 'Interface for contracts supporting Patchwork metadata standard.'
+icon: 'code-simple'
+---
+
+import Separator from '/snippets/separator.mdx';
+
+
+
+
+<Info>
+<div class="border-b border-zinc-500/20 dark:border-zinc-500/30 pb-4 flex" style={{gap: '4px', fontFamily: 'var(--font-jetbrains-mono)'}}>
+<span class="token keyword">import</span> <span class="token string">"@patchwork/contracts/Patchwork721/IPatchwork721.sol"</span><span class="token punctuation">;</span>
+</div>
+
+
+**Inherits:**
+[`IPatchworkScoped`](/contracts/core/IPatchworkScoped) [`IPatchworkMetadata`](/contracts/core/IPatchworkMetadata) [`IERC5192`](https://eips.ethereum.org/EIPS/eip-5192) [`IERC721`](https://docs.openzeppelin.com/contracts/4.x/api/token/erc721) 
+
+
+</Info>
+
+
+
+<Separator />
+
+## Functions
+---
+### schemaURI
+
+Returns the URI of the schema
+
+
+```solidity
+function schemaURI() external view returns (string memory);
+```
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`<none>`|`string`|string the URI of the schema|
+
+
+### schema
+
+Returns the metadata schema
+
+
+```solidity
+function schema() external view returns (MetadataSchema memory);
+```
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`<none>`|`MetadataSchema`|MetadataSchema the metadata schema|
+
+
+### imageURI
+
+Returns the URI of the image associated with the given token ID
+
+
+```solidity
+function imageURI(uint256 tokenId) external view returns (string memory);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`<none>`|`string`|string the image URI|
+
+
+### setPermissions
+
+Sets permissions for a given address
+
+
+```solidity
+function setPermissions(address to, uint256 permissions) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`to`|`address`|Address to set permissions for|
+|`permissions`|`uint256`|Permissions value|
+
+
+### storePackedMetadataSlot
+
+Stores packed metadata for a given token ID and slot
+
+
+```solidity
+function storePackedMetadataSlot(uint256 tokenId, uint256 slot, uint256 data) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+|`slot`|`uint256`|Slot to store metadata|
+|`data`|`uint256`|Metadata to store|
+
+
+### storePackedMetadata
+
+Stores packed metadata for a given token ID
+
+
+```solidity
+function storePackedMetadata(uint256 tokenId, uint256[] memory data) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+|`data`|`uint256[]`|Metadata to store|
+
+
+### loadPackedMetadataSlot
+
+Loads packed metadata for a given token ID and slot
+
+
+```solidity
+function loadPackedMetadataSlot(uint256 tokenId, uint256 slot) external view returns (uint256);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+|`slot`|`uint256`|Slot to load metadata from|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`<none>`|`uint256`|uint256 the raw slot data as a uint256|
+
+
+### loadPackedMetadata
+
+Loads packed metadata for a given token ID
+
+
+```solidity
+function loadPackedMetadata(uint256 tokenId) external view returns (uint256[] memory);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`<none>`|`uint256[]`|uint256[] the raw slot data as a uint256 array|
+
+
+### getFreezeNonce
+
+Returns the freeze nonce for a given token ID.
+
+
+```solidity
+function getFreezeNonce(uint256 tokenId) external view returns (uint256 nonce);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`nonce`|`uint256`|the nonce|
+
+
+### setFrozen
+
+Sets the freeze status of a token (ERC-5192).
+
+
+```solidity
+function setFrozen(uint256 tokenId, bool frozen) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+|`frozen`|`bool`|Freeze status to set|
+
+
+### frozen
+
+Gets the freeze status of a token (ERC-5192).
+
+
+```solidity
+function frozen(uint256 tokenId) external view returns (bool);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`<none>`|`bool`|bool true if frozen, false if not|
+
+
+### setLocked
+
+Sets the lock status of a token (ERC-5192).
+
+
+```solidity
+function setLocked(uint256 tokenId, bool locked) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+|`locked`|`bool`|Lock status to set|
+
+
+<Separator />
+
+## Events
+---
+### Frozen
+Emitted when the freeze status is changed to frozen.
+
+
+```solidity
+event Frozen(uint256 indexed tokenId);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|The identifier for a token.|
+
+### Thawed
+Emitted when the locking status is changed to not frozen.
+
+
+```solidity
+event Thawed(uint256 indexed tokenId);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|The identifier for a token.|
+
+### PermissionChange
+Emitted when the permissions are changed
+
+
+```solidity
+event PermissionChange(address indexed to, uint256 permissions);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`to`|`address`|The address the permissions are assigned to|
+|`permissions`|`uint256`|The permissions|
+
+### SchemaChange
+Emitted when the schema has changed
+
+
+```solidity
+event SchemaChange(address indexed addr);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|the address of the Patchwork721|
+

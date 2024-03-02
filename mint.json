@@ -21,41 +21,114 @@
   "tabs": [
     {
       "name": "Patchwork Development Kit",
-      "url": "api-reference"
+      "url": "pdk"
+    },
+    {
+      "name": "Contracts Reference",
+      "url": "contracts"
     }
   ],
   "navigation": [
     {
       "group": "Get Started",
       "pages": [
-        "introduction",
-        "quickstart",
-        "development"
+        "protocol/getting-started/introduction",
+        "protocol/getting-started/quickstart",
+        "protocol/getting-started/hello-world"
       ]
     },
     {
-      "group": "Essentials",
+      "group": "Core Concepts",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "protocol/core-concepts/metadata",
+        "protocol/core-concepts/scopes",
+        "protocol/core-concepts/patches",
+        "protocol/core-concepts/fragments"
       ]
     },
+    {
+      "group": "Working with Patchwork",
+      "pages": [
+        "protocol/guide/interfaces",
+        "protocol/guide/scopes",
+        "protocol/guide/data-modeling",
+        "protocol/guide/assignments",
+        "protocol/guide/freezing-locking",
+        "protocol/guide/events",
+        "protocol/guide/fees"
+      ]
+    },
+    {
+      "group": "Info",
+      "pages": [
+        "protocol/info/networks",
+        "protocol/info/changelog"
+      ]
+    },
+
+
+
+    
     {
       "group": "API Documentation",
       "pages": [
-        "api-reference/introduction"
+        "pdk/introduction"
       ]
     },
     {
       "group": "Endpoint Examples",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "pdk/endpoint/get",
+        "pdk/endpoint/create",
+        "pdk/endpoint/delete"
+      ]
+    },
+
+
+
+    
+    {
+      "group": "Protocol API",
+      "pages": [
+        "contracts/core/IPatchworkProtocol"
+      ]
+    },
+    {
+      "group": "Core Interfaces",
+      "pages": [
+        "contracts/core/IPatchworkScoped",
+        {
+          "group": "IPatchwork721",
+          "icon": "hexagon-vertical-nft-slanted",
+          "pages": [
+            "contracts/core/IPatchwork721",
+            "contracts/core/IPatchworkMetadata"
+          ]
+        },
+        "contracts/core/IPatchworkLiteRef",
+        "contracts/core/IPatchworkMintable"
+      ]
+    },
+    {
+      "group": "Patch Interfaces",
+      "pages": [
+        "contracts/patch/IPatchworkPatch",
+        "contracts/patch/IPatchworkAccountPatch",
+        "contracts/patch/IPatchwork1155Patch"
+      ]
+    },
+    {
+      "group": "Fragment Interfaces",
+      "pages": [
+        "contracts/fragment/IPatchworkAssignable",
+        "contracts/fragment/IPatchworkSingleAssignable",
+        "contracts/fragment/IPatchworkMultiAssignable"
+      ]
+    },
+    {
+      "group": "Utils",
+      "pages": [
+        "contracts/utils/PatchworkUtils"
       ]
     }
   ],

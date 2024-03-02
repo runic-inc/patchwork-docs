@@ -1,0 +1,403 @@
+---
+title: 'IPatchworkLiteRef'
+description: 'Interface for contracts that have Lite Reference ID support.'
+icon: 'code-simple'
+---
+import Separator from '/snippets/separator.mdx';
+
+<Info>
+<div class="flex" style={{gap: '4px', fontFamily: 'var(--font-jetbrains-mono)'}}>
+<span class="token keyword">import</span> <span class="token string">"@patchwork/contracts/PatchworkLiteRef/IPatchworkLiteRef.sol"</span><span class="token punctuation">;</span>
+</div>
+</Info>
+
+<Separator />
+
+## Functions
+---
+
+### registerReferenceAddress
+
+Registers a reference address
+
+
+```solidity
+function registerReferenceAddress(address addr) external returns (uint8 id);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address to register|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`id`|`uint8`|ID assigned to the address|
+
+
+### getReferenceId
+
+Gets the ID assigned to the address from registration
+
+
+```solidity
+function getReferenceId(address addr) external view returns (uint8 id, bool redacted);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Registered address|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`id`|`uint8`|ID assigned to the address|
+|`redacted`|`bool`|Redacted status|
+
+
+### getReferenceAddress
+
+Gets the address assigned to this id
+
+
+```solidity
+function getReferenceAddress(uint8 id) external view returns (address addr, bool redacted);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`id`|`uint8`|ID assigned to the address|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Registered address|
+|`redacted`|`bool`|Redacted status|
+
+
+### redactReferenceAddress
+
+Redacts a reference address
+
+
+```solidity
+function redactReferenceAddress(uint8 id) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`id`|`uint8`|ID of the address to redact|
+
+
+### unredactReferenceAddress
+
+Unredacts a reference address
+
+
+```solidity
+function unredactReferenceAddress(uint8 id) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`id`|`uint8`|ID of the address to unredact|
+
+
+### getLiteReference
+
+Returns a lite reference for a given address and token ID
+
+
+```solidity
+function getLiteReference(address addr, uint256 tokenId) external view returns (uint64 liteRef, bool redacted);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address to get reference for|
+|`tokenId`|`uint256`|ID of the token|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`liteRef`|`uint64`|Lite reference|
+|`redacted`|`bool`|Redacted status|
+
+
+### getReferenceAddressAndTokenId
+
+Returns an address and token ID for a given lite reference
+
+
+```solidity
+function getReferenceAddressAndTokenId(uint64 liteRef) external view returns (address addr, uint256 tokenId);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`liteRef`|`uint64`|Lite reference to get address and token ID for|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address|
+|`tokenId`|`uint256`|Token ID|
+
+
+### addReference
+
+Adds a reference to a token
+
+
+```solidity
+function addReference(uint256 tokenId, uint64 liteRef) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+|`liteRef`|`uint64`|LiteRef to add|
+
+
+### addReference
+
+Adds a reference to a token
+
+
+```solidity
+function addReference(uint256 tokenId, uint64 liteRef, uint256 targetMetadataId) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+|`liteRef`|`uint64`|LiteRef to add|
+|`targetMetadataId`|`uint256`|The metadata ID on the target to assign to|
+
+
+### addReferenceBatch
+
+Adds multiple references to a token
+
+
+```solidity
+function addReferenceBatch(uint256 tokenId, uint64[] calldata liteRefs) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+|`liteRefs`|`uint64[]`|Array of lite references to add|
+
+
+### addReferenceBatch
+
+Adds multiple references to a token
+
+
+```solidity
+function addReferenceBatch(uint256 tokenId, uint64[] calldata liteRefs, uint256 targetMetadataId) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+|`liteRefs`|`uint64[]`|Array of lite references to add|
+|`targetMetadataId`|`uint256`|The metadata ID on the target to assign to|
+
+
+### removeReference
+
+Removes a reference from a token
+
+
+```solidity
+function removeReference(uint256 tokenId, uint64 liteRef) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+|`liteRef`|`uint64`|Lite reference to remove|
+
+
+### removeReference
+
+Removes a reference from a token
+
+
+```solidity
+function removeReference(uint256 tokenId, uint64 liteRef, uint256 targetMetadataId) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+|`liteRef`|`uint64`|Lite reference to remove|
+|`targetMetadataId`|`uint256`|The metadata ID on the target to unassign from|
+
+
+### loadReferenceAddressAndTokenId
+
+Loads a reference address and token ID at a given index
+
+
+```solidity
+function loadReferenceAddressAndTokenId(uint256 ourTokenId, uint256 idx)
+    external
+    view
+    returns (address addr, uint256 tokenId);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`ourTokenId`|`uint256`|ID of the token|
+|`idx`|`uint256`|Index to load from|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address|
+|`tokenId`|`uint256`|Token ID|
+
+
+### loadAllStaticReferences
+
+Loads all static references for a given token ID
+
+
+```solidity
+function loadAllStaticReferences(uint256 tokenId)
+    external
+    view
+    returns (address[] memory addresses, uint256[] memory tokenIds);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addresses`|`address[]`|Array of addresses|
+|`tokenIds`|`uint256[]`|Array of token IDs|
+
+
+### getDynamicReferenceCount
+
+Count all dynamic references for a given token ID
+
+
+```solidity
+function getDynamicReferenceCount(uint256 tokenId) external view returns (uint256 count);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`count`|`uint256`|the number of dynamic references|
+
+
+### loadDynamicReferencePage
+
+Load a page of dynamic references for a given token ID
+
+
+```solidity
+function loadDynamicReferencePage(uint256 tokenId, uint256 offset, uint256 count)
+    external
+    view
+    returns (address[] memory addresses, uint256[] memory tokenIds);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|ID of the token|
+|`offset`|`uint256`|The starting offset 0-indexed|
+|`count`|`uint256`|The maximum number of references to return|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addresses`|`address[]`|An array of reference addresses|
+|`tokenIds`|`uint256[]`|An array of reference token IDs|
+
+
+## Events
+### Redact
+Emitted when a contract redacts a fragment
+
+
+```solidity
+event Redact(address indexed target, address indexed fragment);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`target`|`address`|the contract which issued the redaction|
+|`fragment`|`address`|the fragment that was redacted|
+
+### Unredact
+Emitted when a contract unredacts a fragment
+
+
+```solidity
+event Unredact(address indexed target, address indexed fragment);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`target`|`address`|the contract which revoked the redaction|
+|`fragment`|`address`|the fragment that was unredacted|
+
+### Register
+Emitted when a contract registers a fragment
+
+
+```solidity
+event Register(address indexed target, address indexed fragment, uint8 idx);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`target`|`address`|the contract that registered the fragment|
+|`fragment`|`address`|the fragment that was registered|
+|`idx`|`uint8`|the idx of the literef|
+

@@ -1,0 +1,36 @@
+# IPatchworkReversible1155Patch
+[Git Source](https://github.com/runic-inc/patchwork/blob/b277ab5dc0fae6951fd9bad572b7402c2469cfde/src/interfaces/IPatchwork1155Patch.sol)
+
+**Inherits:**
+[IPatchwork1155Patch](/src/interfaces/IPatchwork1155Patch.sol/interface.IPatchwork1155Patch.md)
+
+**Author:**
+Runic Labs, Inc
+
+Interface for contracts supporting Patchwork patch standard with reverse lookup
+
+
+## Functions
+### getTokenIdByTarget
+
+Returns the token ID (if it exists) for an 1155 that may have been patched
+
+*Requires reverse storage enabled*
+
+
+```solidity
+function getTokenIdByTarget(PatchTarget memory target) external returns (uint256 tokenId);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`target`|`PatchTarget`|The 1155 target that was patched|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|token ID of the patch|
+
+

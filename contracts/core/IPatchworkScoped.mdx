@@ -1,0 +1,34 @@
+---
+title: 'IPatchworkScoped'
+description: 'Core interface for contracts supporting Scopes'
+icon: 'code-simple'
+---
+import Separator from '/snippets/separator.mdx';
+
+<Info>
+<div class="flex" style={{gap: '4px', fontFamily: 'var(--font-jetbrains-mono)'}}>
+<span class="token keyword">import</span> <span class="token string">"@patchwork/contracts/PatchworkScoped/IPatchworkScoped.sol"</span><span class="token punctuation">;</span>
+</div>
+</Info>
+
+<Separator />
+
+## Functions
+
+---
+
+### getScopeName
+
+Get the scope this NFT claims to belong to
+
+
+```solidity
+function getScopeName() external view returns (string memory);
+```
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`<none>`|`string`|string the name of the scope|
+
+

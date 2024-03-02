@@ -1,0 +1,2204 @@
+---
+title: 'IPatchworkProtocol'
+description: 'Interface for interacting with Patchwork Protocol'
+icon: 'badge'
+iconType: 'solid'
+---
+import Separator from '/snippets/separator.mdx';
+
+<Info>
+<div class="flex" style={{gap: '4px', fontFamily: 'var(--font-jetbrains-mono)'}}>
+<span class="token keyword">import</span> <span class="token string">"@patchwork/contracts/PatchworkProtocol/IPatchworkProtocol.sol"</span><span class="token punctuation">;</span>
+</div>
+</Info>
+
+<Separator />
+## Functions
+
+---
+
+### claimScope
+
+Claim a scope, with owner set to caller.
+
+
+```solidity
+function claimScope(string calldata scopeName) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|Name of the scope|
+
+
+### transferScopeOwnership
+
+Transfer ownership of a scope to a new entity.
+
+<Warning>Must be accepted by transferee (see [acceptScopeTransfer](/src/interfaces/IPatchworkProtocol.sol/interface.IPatchworkProtocol.md#acceptscopetransfer))</Warning>
+
+
+```solidity
+function transferScopeOwnership(string calldata scopeName, address newOwner) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|Name of the scope|
+|`newOwner`|`address`|Address of the new owner|
+
+
+### cancelScopeTransfer
+
+Cancel a pending scope transfer
+
+
+```solidity
+function cancelScopeTransfer(string calldata scopeName) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|Name of the scope|
+
+
+### acceptScopeTransfer
+
+Accept a scope transfer
+
+
+```solidity
+function acceptScopeTransfer(string calldata scopeName) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|Name of the scope|
+
+
+### getScopeOwnerElect
+
+Get owner-elect of a scope
+
+
+```solidity
+function getScopeOwnerElect(string calldata scopeName) external view returns (address ownerElect);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|Name of the scope|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`ownerElect`|`address`|Address of the scope's owner-elect|
+
+
+### getScopeOwner
+
+Get owner of a scope
+
+
+```solidity
+function getScopeOwner(string calldata scopeName) external view returns (address owner);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|Name of the scope|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`owner`|`address`|Address of the scope owner|
+
+
+
+### addOperator
+
+Add an operator to a scope
+
+
+```solidity
+function addOperator(string calldata scopeName, address op) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|Name of the scope|
+|`op`|`address`|Address of the operator|
+
+
+### removeOperator
+
+Remove an operator from a scope
+
+
+```solidity
+function removeOperator(string calldata scopeName, address op) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|Name of the scope|
+|`op`|`address`|Address of the operator|
+
+
+### setScopeRules
+
+Set rules for a scope
+
+
+```solidity
+function setScopeRules(string calldata scopeName, bool allowUserPatch, bool allowUserAssign, bool requireWhitelist)
+    external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|Name of the scope|
+|`allowUserPatch`|`bool`|Boolean indicating whether user patches are allowed|
+|`allowUserAssign`|`bool`|Boolean indicating whether user assignments are allowed|
+|`requireWhitelist`|`bool`|Boolean indicating whether whitelist is required|
+
+
+### addWhitelist
+
+Add an address to a scope's whitelist
+
+
+```solidity
+function addWhitelist(string calldata scopeName, address addr) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|Name of the scope|
+|`addr`|`address`|Address to be whitelisted|
+
+
+### removeWhitelist
+
+Remove an address from a scope's whitelist
+
+
+```solidity
+function removeWhitelist(string calldata scopeName, address addr) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|Name of the scope|
+|`addr`|`address`|Address to be removed from the whitelist|
+
+
+### setMintConfiguration
+
+Set the mint configuration for a given address
+
+
+```solidity
+function setMintConfiguration(address addr, MintConfig memory config) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|The address for which to set the mint configuration, must be IPatchworkMintable|
+|`config`|`MintConfig`|The mint configuration to be set|
+
+
+### getMintConfiguration
+
+Get the mint configuration for a given address
+
+
+```solidity
+function getMintConfiguration(address addr) external view returns (MintConfig memory config);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|The address for which to get the mint configuration|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`config`|`MintConfig`|The mint configuration of the given address|
+
+
+### setPatchFee
+
+Set the patch fee for a given address
+
+<Warning>Must be banker of scope claimed by addr to call</Warning>
+
+
+```solidity
+function setPatchFee(address addr, uint256 baseFee) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|The address for which to set the patch fee|
+|`baseFee`|`uint256`|The patch fee to be set in wei|
+
+
+### getPatchFee
+
+Get the patch fee for a given address
+
+
+```solidity
+function getPatchFee(address addr) external view returns (uint256 baseFee);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|The address for which to get the patch fee|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`baseFee`|`uint256`|The patch fee of the given address in wei|
+
+---
+
+### setAssignFee
+
+Set the assign fee for a given fragment address
+
+<Warning>Must be Banker of scope claimed by fragmentAddress to call.</Warning>
+
+
+```solidity
+function setAssignFee(address fragmentAddress, uint256 baseFee) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`fragmentAddress`|`address`|The address of the fragment for which to set the fee|
+|`baseFee`|`uint256`|The assign fee to be set in wei|
+
+---
+
+
+### getAssignFee
+
+Get the assign fee for a given fragment address
+
+
+```solidity
+function getAssignFee(address fragmentAddress) external view returns (uint256 baseFee);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`fragmentAddress`|`address`|The address of the fragment for which to get the fee|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`baseFee`|`uint256`|The assign fee of the given fragment address in wei|
+
+
+### addBanker
+
+Add a banker to a given scope
+
+<Warning>Must be owner of scope to call.</Warning>
+
+
+```solidity
+function addBanker(string memory scopeName, address addr) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The name of the scope|
+|`addr`|`address`|The address to be added as a banker|
+
+
+### removeBanker
+
+Remove a banker from a given scope
+
+<Warning>Must be owner of scope to call.</Warning>
+
+
+```solidity
+function removeBanker(string memory scopeName, address addr) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The name of the scope|
+|`addr`|`address`|The address to be removed as a banker|
+
+
+### withdraw
+
+Withdraw an amount from the balance of a given scope
+
+<Warning>Must be owner of scope or Banker of scope to call.</Warning>
+
+<Note>Transfers `amount` to the msg.sender</Note>
+
+
+```solidity
+function withdraw(string memory scopeName, uint256 amount) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The name of the scope|
+|`amount`|`uint256`|The amount to be withdrawn in wei|
+
+
+### balanceOf
+
+Get the balance of a given scope
+
+
+```solidity
+function balanceOf(string memory scopeName) external view returns (uint256 balance);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The name of the scope|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`balance`|`uint256`|The balance of the given scope in wei|
+
+
+### mint
+
+Mint a new token
+
+
+```solidity
+function mint(address to, address mintable, bytes calldata data) external payable returns (uint256 tokenId);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`to`|`address`|The address to which the token will be minted|
+|`mintable`|`address`|The address of the IPatchworkMintable contract|
+|`data`|`bytes`|Additional data to be passed to the minting|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|The ID of the minted token|
+
+
+### mintBatch
+
+Mint a batch of new tokens
+
+
+```solidity
+function mintBatch(address to, address mintable, bytes calldata data, uint256 quantity)
+    external
+    payable
+    returns (uint256[] memory tokenIds);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`to`|`address`|The address to which the tokens will be minted|
+|`mintable`|`address`|The address of the IPatchworkMintable contract|
+|`data`|`bytes`|Additional data to be passed to the minting|
+|`quantity`|`uint256`|The number of tokens to mint|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenIds`|`uint256[]`|An array of the IDs of the minted tokens|
+
+
+### proposeProtocolFeeConfig
+
+Proposes a protocol fee configuration
+
+<Warning>Must be protocol owner or Banker to call.</Warning>
+
+<Note>Configuration does not apply until `commitProtocolFeeConfig` is called.</Note>
+
+
+```solidity
+function proposeProtocolFeeConfig(FeeConfig memory config) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`config`|`FeeConfig`|The protocol fee configuration to be set|
+
+
+### commitProtocolFeeConfig
+
+Commits the current proposed protocol fee configuration
+
+<Warning>Must be protocol owner or Banker to call.</Warning>
+
+<Note>May only be called after timelock has passed.</Note>
+
+
+```solidity
+function commitProtocolFeeConfig() external;
+```
+
+### getProtocolFeeConfig
+
+Get the current protocol fee configuration
+
+
+```solidity
+function getProtocolFeeConfig() external view returns (FeeConfig memory config);
+```
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`config`|`FeeConfig`|The current protocol fee configuration|
+
+
+### proposeScopeFeeOverride
+
+Proposes a protocol fee override for a scope
+
+<Warning>Must be protocol owner or Banker to call.</Warning>
+
+
+```solidity
+function proposeScopeFeeOverride(string memory scopeName, FeeConfigOverride memory config) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`||
+|`config`|`FeeConfigOverride`|The protocol fee override configuration to be set|
+
+
+### commitScopeFeeOverride
+
+Commits the current proposed protocol fee override configuration for a scope
+
+<Warning>Must be protocol owner or Banker to call.</Warning>
+
+<Note>May only be called after timelock has passed.</Note>
+
+
+```solidity
+function commitScopeFeeOverride(string memory scopeName) external;
+```
+
+### getScopeFeeOverride
+
+Get the protocol fee override for a scope
+
+
+```solidity
+function getScopeFeeOverride(string memory scopeName) external view returns (FeeConfigOverride memory config);
+```
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`config`|`FeeConfigOverride`|The current protocol fee override|
+
+
+### addProtocolBanker
+
+Add a banker to the protocol
+
+<Warning>Must be protocol owner to call.</Warning>
+
+
+```solidity
+function addProtocolBanker(address addr) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|The address to be added as a protocol banker|
+
+
+### removeProtocolBanker
+
+Remove a banker from the protocol
+
+<Warning>Must be protocol owner to call.</Warning>
+
+
+```solidity
+function removeProtocolBanker(address addr) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|The address to be removed as a protocol banker|
+
+
+### withdrawFromProtocol
+
+Withdraw a specified amount from the protocol balance
+
+<Warning>Must be protocol owner or Banker to call.</Warning>
+
+<Note>Transfers to the msg.sender</Note>
+
+
+```solidity
+function withdrawFromProtocol(uint256 balance) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`balance`|`uint256`|The amount to be withdrawn in wei|
+
+
+### balanceOfProtocol
+
+Get the current balance of the protocol
+
+
+```solidity
+function balanceOfProtocol() external view returns (uint256 balance);
+```
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`balance`|`uint256`|The balance of the protocol in wei|
+
+
+### patch
+
+Create a new patch
+
+
+```solidity
+function patch(address owner, address originalAddress, uint256 originalTokenId, address patchAddress)
+    external
+    payable
+    returns (uint256 tokenId);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`owner`|`address`|The owner of the patch|
+|`originalAddress`|`address`|Address of the original 721|
+|`originalTokenId`|`uint256`|Token ID of the original 721|
+|`patchAddress`|`address`|Address of the IPatchworkPatch to mint|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|Token ID of the newly created patch|
+
+
+### patchBurned
+
+Callback for when a patch is burned
+
+<Warning>Can only be called from the `patchAddress`.</Warning>
+
+
+```solidity
+function patchBurned(address originalAddress, uint256 originalTokenId, address patchAddress) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`originalAddress`|`address`|Address of the original 721|
+|`originalTokenId`|`uint256`|Token ID of the original 721|
+|`patchAddress`|`address`|Address of the IPatchworkPatch to mint|
+
+
+### patch1155
+
+Create a new 1155 patch
+
+
+```solidity
+function patch1155(
+    address to,
+    address originalAddress,
+    uint256 originalTokenId,
+    address originalAccount,
+    address patchAddress
+) external payable returns (uint256 tokenId);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`to`|`address`||
+|`originalAddress`|`address`|Address of the original 1155|
+|`originalTokenId`|`uint256`|Token ID of the original 1155|
+|`originalAccount`|`address`|Address of the account to patch|
+|`patchAddress`|`address`|Address of the IPatchworkPatch to mint|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|Token ID of the newly created patch|
+
+
+### patchBurned1155
+
+Callback for when an 1155 patch is burned
+
+<Warning>Can only be called from the `patchAddress`.</Warning>
+
+
+```solidity
+function patchBurned1155(
+    address originalAddress,
+    uint256 originalTokenId,
+    address originalAccount,
+    address patchAddress
+) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`originalAddress`|`address`|Address of the original 1155|
+|`originalTokenId`|`uint256`|Token ID of the original 1155|
+|`originalAccount`|`address`|Address of the account to patch|
+|`patchAddress`|`address`|Address of the IPatchworkPatch to mint|
+
+
+### patchAccount
+
+Create a new account patch
+
+
+```solidity
+function patchAccount(address owner, address originalAddress, address patchAddress)
+    external
+    payable
+    returns (uint256 tokenId);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`owner`|`address`|The owner of the patch|
+|`originalAddress`|`address`|Address of the original account|
+|`patchAddress`|`address`|Address of the IPatchworkPatch to mint|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|Token ID of the newly created patch|
+
+
+### patchBurnedAccount
+
+Callback for when an account patch is burned
+
+<Warning>Can only be called from the `patchAddress`.</Warning>
+
+
+```solidity
+function patchBurnedAccount(address originalAddress, address patchAddress) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`originalAddress`|`address`|Address of the original 1155|
+|`patchAddress`|`address`|Address of the IPatchworkPatch to mint|
+
+
+### assign
+
+Assigns a relation to have an IPatchworkLiteRef form a LiteRef to a IPatchworkAssignable
+
+
+```solidity
+function assign(address fragment, uint256 fragmentTokenId, address target, uint256 targetTokenId) external payable;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`fragment`|`address`|The IPatchworkAssignable address to assign|
+|`fragmentTokenId`|`uint256`|The IPatchworkAssignable Token ID to assign|
+|`target`|`address`|The IPatchworkLiteRef address to hold the reference to the fragment|
+|`targetTokenId`|`uint256`|The IPatchworkLiteRef Token ID to hold the reference to the fragment|
+
+
+### assign
+
+Assigns a relation to have an IPatchworkLiteRef form a LiteRef to a IPatchworkAssignable
+
+
+```solidity
+function assign(
+    address fragment,
+    uint256 fragmentTokenId,
+    address target,
+    uint256 targetTokenId,
+    uint256 targetMetadataId
+) external payable;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`fragment`|`address`|The IPatchworkAssignable address to assign|
+|`fragmentTokenId`|`uint256`|The IPatchworkAssignable Token ID to assign|
+|`target`|`address`|The IPatchworkLiteRef address to hold the reference to the fragment|
+|`targetTokenId`|`uint256`|The IPatchworkLiteRef Token ID to hold the reference to the fragment|
+|`targetMetadataId`|`uint256`|The metadata ID on the target to store the reference in|
+
+
+### assignBatch
+
+Assign multiple fragments to a target in batch
+
+
+```solidity
+function assignBatch(address[] calldata fragments, uint256[] calldata tokenIds, address target, uint256 targetTokenId)
+    external
+    payable;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`fragments`|`address[]`|The array of addresses of the fragment IPatchworkAssignables|
+|`tokenIds`|`uint256[]`|The array of token IDs of the fragment IPatchworkAssignables|
+|`target`|`address`|The address of the target IPatchworkLiteRef|
+|`targetTokenId`|`uint256`|The token ID of the target IPatchworkLiteRef|
+
+
+### assignBatch
+
+Assign multiple fragments to a target in batch
+
+
+```solidity
+function assignBatch(
+    address[] calldata fragments,
+    uint256[] calldata tokenIds,
+    address target,
+    uint256 targetTokenId,
+    uint256 targetMetadataId
+) external payable;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`fragments`|`address[]`|The array of addresses of the fragment IPatchworkAssignables|
+|`tokenIds`|`uint256[]`|The array of token IDs of the fragment IPatchworkAssignables|
+|`target`|`address`|The address of the target IPatchworkLiteRef|
+|`targetTokenId`|`uint256`|The token ID of the target IPatchworkLiteRef|
+|`targetMetadataId`|`uint256`|The metadata ID on the target to store the references in|
+
+
+### unassignSingle
+
+Unassign a fragment from a target
+
+<Warning>Reverts if Fragment is not an `IPatchworkSingleAssignable`.</Warning>
+
+
+```solidity
+function unassignSingle(address fragment, uint256 fragmentTokenId) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`fragment`|`address`|The IPatchworkSingleAssignable address of the fragment|
+|`fragmentTokenId`|`uint256`|The IPatchworkSingleAssignable token ID of the fragment|
+
+
+### unassignSingle
+
+Unassign a fragment from a target
+
+<Warning>Reverts if Fragment is not an `IPatchworkSingleAssignable`.</Warning>
+
+
+```solidity
+function unassignSingle(address fragment, uint256 fragmentTokenId, uint256 targetMetadataId) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`fragment`|`address`|The IPatchworkSingleAssignable address of the fragment|
+|`fragmentTokenId`|`uint256`|The IPatchworkSingleAssignable token ID of the fragment|
+|`targetMetadataId`|`uint256`|The metadata ID on the target to unassign from|
+
+
+### unassignMulti
+
+Unassigns a multi relation
+
+<Warning>Reverts if Fragment is not an `IPatchworkMultiAssignable`.</Warning>
+
+
+```solidity
+function unassignMulti(address fragment, uint256 fragmentTokenId, address target, uint256 targetTokenId) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`fragment`|`address`|The IPatchworMultiAssignable address to unassign|
+|`fragmentTokenId`|`uint256`|The IPatchworkMultiAssignable Token ID to unassign|
+|`target`|`address`|The IPatchworkLiteRef address which holds a reference to the fragment|
+|`targetTokenId`|`uint256`|The IPatchworkLiteRef Token ID which holds a reference to the fragment|
+
+
+### unassignMulti
+
+Unassigns a multi relation
+
+<Warning>Reverts if Fragment is not an `IPatchworkMultiAssignable`.</Warning>
+
+
+```solidity
+function unassignMulti(
+    address fragment,
+    uint256 fragmentTokenId,
+    address target,
+    uint256 targetTokenId,
+    uint256 targetMetadataId
+) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`fragment`|`address`|The IPatchworMultiAssignable address to unassign|
+|`fragmentTokenId`|`uint256`|The IPatchworkMultiAssignable Token ID to unassign|
+|`target`|`address`|The IPatchworkLiteRef address which holds a reference to the fragment|
+|`targetTokenId`|`uint256`|The IPatchworkLiteRef Token ID which holds a reference to the fragment|
+|`targetMetadataId`|`uint256`|The metadata ID on the target to unassign from|
+
+
+### unassign
+
+Unassigns a relation (single or multi)
+
+
+```solidity
+function unassign(address fragment, uint256 fragmentTokenId, address target, uint256 targetTokenId) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`fragment`|`address`|The IPatchworkAssignable address to unassign|
+|`fragmentTokenId`|`uint256`|The IPatchworkAssignable Token ID to unassign|
+|`target`|`address`|The IPatchworkLiteRef address which holds a reference to the fragment|
+|`targetTokenId`|`uint256`|The IPatchworkLiteRef Token ID which holds a reference to the fragment|
+
+
+### unassign
+
+Unassigns a relation (single or multi)
+
+
+```solidity
+function unassign(
+    address fragment,
+    uint256 fragmentTokenId,
+    address target,
+    uint256 targetTokenId,
+    uint256 targetMetadataId
+) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`fragment`|`address`|The IPatchworkAssignable address to unassign|
+|`fragmentTokenId`|`uint256`|The IPatchworkAssignable Token ID to unassign|
+|`target`|`address`|The IPatchworkLiteRef address which holds a reference to the fragment|
+|`targetTokenId`|`uint256`|The IPatchworkLiteRef Token ID which holds a reference to the fragment|
+|`targetMetadataId`|`uint256`|The metadata ID on the target to unassign from|
+
+
+### applyTransfer
+
+Apply transfer rules and actions of a specific token from one address to another
+
+
+```solidity
+function applyTransfer(address from, address to, uint256 tokenId) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`from`|`address`|The address of the sender|
+|`to`|`address`|The address of the receiver|
+|`tokenId`|`uint256`|The ID of the token to be transferred|
+
+
+### updateOwnershipTree
+
+Update the ownership tree of a specific Patchwork 721
+
+
+```solidity
+function updateOwnershipTree(address addr, uint256 tokenId) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|The address of the Patchwork 721|
+|`tokenId`|`uint256`|The ID of the token whose ownership tree needs to be updated|
+
+
+### proposeAssignerDelegate
+
+Propose an assigner delegate module
+
+
+```solidity
+function proposeAssignerDelegate(address addr) external;
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|The address of the new delegate module|
+
+
+### commitAssignerDelegate
+
+Commit the proposed assigner delegate module
+
+<Warning>Must be called at a later datetime than `timelock`.</Warning>
+
+
+```solidity
+function commitAssignerDelegate() external;
+```
+
+<Separator />
+
+## Events
+---
+### Assign
+Emitted when a fragment is assigned
+
+
+```solidity
+event Assign(
+    address indexed owner,
+    address fragmentAddress,
+    uint256 fragmentTokenId,
+    address indexed targetAddress,
+    uint256 indexed targetTokenId,
+    uint256 scopeFee,
+    uint256 protocolFee
+);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`owner`|`address`|The owner of the target and fragment|
+|`fragmentAddress`|`address`|The address of the fragment's contract|
+|`fragmentTokenId`|`uint256`|The tokenId of the fragment|
+|`targetAddress`|`address`|The address of the target's contract|
+|`targetTokenId`|`uint256`|The tokenId of the target|
+|`scopeFee`|`uint256`|The fee collected to the scope|
+|`protocolFee`|`uint256`|The fee collected to the protocol|
+
+### Unassign
+Emitted when a fragment is unassigned
+
+
+```solidity
+event Unassign(
+    address indexed owner,
+    address fragmentAddress,
+    uint256 fragmentTokenId,
+    address indexed targetAddress,
+    uint256 indexed targetTokenId
+);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`owner`|`address`|The owner of the fragment|
+|`fragmentAddress`|`address`|The address of the fragment's contract|
+|`fragmentTokenId`|`uint256`|The tokenId of the fragment|
+|`targetAddress`|`address`|The address of the target's contract|
+|`targetTokenId`|`uint256`|The tokenId of the target|
+
+### Patch
+Emitted when a patch is minted
+
+
+```solidity
+event Patch(
+    address indexed owner,
+    address originalAddress,
+    uint256 originalTokenId,
+    address indexed patchAddress,
+    uint256 indexed patchTokenId,
+    uint256 scopeFee,
+    uint256 protocolFee
+);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`owner`|`address`|The owner of the patch|
+|`originalAddress`|`address`|The address of the original 721's contract|
+|`originalTokenId`|`uint256`|The tokenId of the original 721|
+|`patchAddress`|`address`|The address of the patch's contract|
+|`patchTokenId`|`uint256`|The tokenId of the patch|
+|`scopeFee`|`uint256`|The fee collected to the scope|
+|`protocolFee`|`uint256`|The fee collected to the protocol|
+
+### ERC1155Patch
+Emitted when a patch is minted
+
+
+```solidity
+event ERC1155Patch(
+    address indexed owner,
+    address originalAddress,
+    uint256 originalTokenId,
+    address originalAccount,
+    address indexed patchAddress,
+    uint256 indexed patchTokenId,
+    uint256 scopeFee,
+    uint256 protocolFee
+);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`owner`|`address`|The owner of the patch|
+|`originalAddress`|`address`|The address of the original 1155's contract|
+|`originalTokenId`|`uint256`|The tokenId of the original 1155|
+|`originalAccount`|`address`|The address of the original 1155's account|
+|`patchAddress`|`address`|The address of the patch's contract|
+|`patchTokenId`|`uint256`|The tokenId of the patch|
+|`scopeFee`|`uint256`|The fee collected to the scope|
+|`protocolFee`|`uint256`|The fee collected to the protocol|
+
+### AccountPatch
+Emitted when an account patch is minted
+
+
+```solidity
+event AccountPatch(
+    address indexed owner,
+    address originalAddress,
+    address indexed patchAddress,
+    uint256 indexed patchTokenId,
+    uint256 scopeFee,
+    uint256 protocolFee
+);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`owner`|`address`|The owner of the patch|
+|`originalAddress`|`address`|The address of the original account|
+|`patchAddress`|`address`|The address of the patch's contract|
+|`patchTokenId`|`uint256`|The tokenId of the patch|
+|`scopeFee`|`uint256`|The fee collected to the scope|
+|`protocolFee`|`uint256`|The fee collected to the protocol|
+
+### ScopeClaim
+Emitted when a new scope is claimed
+
+
+```solidity
+event ScopeClaim(string scopeName, address indexed owner);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The name of the claimed scope|
+|`owner`|`address`|The owner of the scope|
+
+### ScopeTransferElect
+Emitted when a scope has elected a new owner to transfer to
+
+
+```solidity
+event ScopeTransferElect(string scopeName, address indexed from, address indexed to);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The name of the transferred scope|
+|`from`|`address`|The owner of the scope|
+|`to`|`address`|The owner-elect of the scope|
+
+### ScopeTransferCancel
+Emitted when a scope transfer is canceled
+
+
+```solidity
+event ScopeTransferCancel(string scopeName, address indexed from, address indexed to);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The name of the transferred scope|
+|`from`|`address`|The owner of the scope|
+|`to`|`address`|The owner-elect of the scope|
+
+### ScopeTransfer
+Emitted when a scope is transferred
+
+
+```solidity
+event ScopeTransfer(string scopeName, address indexed from, address indexed to);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The name of the transferred scope|
+|`from`|`address`|The address transferring the scope|
+|`to`|`address`|The recipient of the scope|
+
+### ScopeAddOperator
+Emitted when a scope has an operator added
+
+
+```solidity
+event ScopeAddOperator(string scopeName, address indexed actor, address indexed operator);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The name of the scope|
+|`actor`|`address`|The address responsible for the action|
+|`operator`|`address`|The new operator's address|
+
+### ScopeRemoveOperator
+Emitted when a scope has an operator removed
+
+
+```solidity
+event ScopeRemoveOperator(string scopeName, address indexed actor, address indexed operator);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The name of the scope|
+|`actor`|`address`|The address responsible for the action|
+|`operator`|`address`|The operator's address being removed|
+
+### ScopeRuleChange
+Emitted when a scope's rules are changed
+
+
+```solidity
+event ScopeRuleChange(
+    string scopeName, address indexed actor, bool allowUserPatch, bool allowUserAssign, bool requireWhitelist
+);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The name of the scope|
+|`actor`|`address`|The address responsible for the action|
+|`allowUserPatch`|`bool`|Indicates whether user patches are allowed|
+|`allowUserAssign`|`bool`|Indicates whether user assignments are allowed|
+|`requireWhitelist`|`bool`|Indicates whether a whitelist is required|
+
+### ScopeWhitelistAdd
+Emitted when a scope has an address added to the whitelist
+
+
+```solidity
+event ScopeWhitelistAdd(string scopeName, address indexed actor, address indexed addr);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The name of the scope|
+|`actor`|`address`|The address responsible for the action|
+|`addr`|`address`|The address being added to the whitelist|
+
+### ScopeWhitelistRemove
+Emitted when a scope has an address removed from the whitelist
+
+
+```solidity
+event ScopeWhitelistRemove(string scopeName, address indexed actor, address indexed addr);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The name of the scope|
+|`actor`|`address`|The address responsible for the action|
+|`addr`|`address`|The address being removed from the whitelist|
+
+### MintConfigure
+Emitted when a mint is configured
+
+
+```solidity
+event MintConfigure(string scopeName, address indexed actor, address indexed mintable, MintConfig config);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The name of the scope|
+|`actor`|`address`||
+|`mintable`|`address`|The address of the IPatchworkMintable|
+|`config`|`MintConfig`|The mint configuration|
+
+### ScopeBankerAdd
+Emitted when a banker is added to a scope
+
+
+```solidity
+event ScopeBankerAdd(string scopeName, address indexed actor, address indexed banker);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The name of the scope|
+|`actor`|`address`|The address responsible for the action|
+|`banker`|`address`|The banker that was added|
+
+### ScopeBankerRemove
+Emitted when a banker is removed from a scope
+
+
+```solidity
+event ScopeBankerRemove(string scopeName, address indexed actor, address indexed banker);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The name of the scope|
+|`actor`|`address`|The address responsible for the action|
+|`banker`|`address`|The banker that was removed|
+
+### ScopeWithdraw
+Emitted when a withdrawl is made from a scope
+
+
+```solidity
+event ScopeWithdraw(string scopeName, address indexed actor, uint256 amount);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The name of the scope|
+|`actor`|`address`|The address responsible for the action|
+|`amount`|`uint256`|The amount withdrawn|
+
+### ProtocolBankerAdd
+Emitted when a banker is added to the protocol
+
+
+```solidity
+event ProtocolBankerAdd(address indexed actor, address indexed banker);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`actor`|`address`|The address responsible for the action|
+|`banker`|`address`|The banker that was added|
+
+### ProtocolBankerRemove
+Emitted when a banker is removed from the protocol
+
+
+```solidity
+event ProtocolBankerRemove(address indexed actor, address indexed banker);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`actor`|`address`|The address responsible for the action|
+|`banker`|`address`|The banker that was removed|
+
+### ProtocolWithdraw
+Emitted when a withdrawl is made from the protocol
+
+
+```solidity
+event ProtocolWithdraw(address indexed actor, uint256 amount);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`actor`|`address`|The address responsible for the action|
+|`amount`|`uint256`|The amount withdrawn|
+
+### Mint
+Emitted on mint
+
+
+```solidity
+event Mint(
+    address indexed actor,
+    string scopeName,
+    address indexed to,
+    address indexed mintable,
+    bytes data,
+    uint256 scopeFee,
+    uint256 protocolFee
+);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`actor`|`address`|The address responsible for the action|
+|`scopeName`|`string`|The scope of the IPatchworkMintable|
+|`to`|`address`|The receipient of the mint|
+|`mintable`|`address`|The IPatchworkMintable minted|
+|`data`|`bytes`|The data used to mint|
+|`scopeFee`|`uint256`|The fee collected to the scope|
+|`protocolFee`|`uint256`|The fee collected to the protocol|
+
+### MintBatch
+Emitted on batch mint
+
+
+```solidity
+event MintBatch(
+    address indexed actor,
+    string scopeName,
+    address indexed to,
+    address indexed mintable,
+    bytes data,
+    uint256 quantity,
+    uint256 scopeFee,
+    uint256 protocolFee
+);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`actor`|`address`|The address responsible for the action|
+|`scopeName`|`string`|The scope of the IPatchworkMintable|
+|`to`|`address`|The receipient of the mint|
+|`mintable`|`address`|The IPatchworkMintable minted|
+|`data`|`bytes`|The data used to mint|
+|`quantity`|`uint256`|The quantity minted|
+|`scopeFee`|`uint256`|The fee collected to the scope|
+|`protocolFee`|`uint256`|The fee collected to the protocol|
+
+### ProtocolFeeConfigPropose
+Emitted on protocol fee config proposed
+
+
+```solidity
+event ProtocolFeeConfigPropose(FeeConfig config);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`config`|`FeeConfig`|The fee configuration|
+
+### ProtocolFeeConfigCommit
+Emitted on protocol fee config committed
+
+
+```solidity
+event ProtocolFeeConfigCommit(FeeConfig config);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`config`|`FeeConfig`|The fee configuration|
+
+### ScopeFeeOverridePropose
+Emitted on scope fee config override proposed
+
+
+```solidity
+event ScopeFeeOverridePropose(string scopeName, FeeConfigOverride config);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The scope|
+|`config`|`FeeConfigOverride`|The fee configuration|
+
+### ScopeFeeOverrideCommit
+Emitted on scope fee config override committed
+
+
+```solidity
+event ScopeFeeOverrideCommit(string scopeName, FeeConfigOverride config);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The scope|
+|`config`|`FeeConfigOverride`|The fee configuration|
+
+### PatchFeeChange
+Emitted on patch fee change
+
+
+```solidity
+event PatchFeeChange(string scopeName, address indexed addr, uint256 fee);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The scope of the patch|
+|`addr`|`address`|The address of the patch|
+|`fee`|`uint256`|The new fee|
+
+### AssignFeeChange
+Emitted on assign fee change
+
+
+```solidity
+event AssignFeeChange(string scopeName, address indexed addr, uint256 fee);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|The scope of the assignable|
+|`addr`|`address`|The address of the assignable|
+|`fee`|`uint256`|The new fee|
+
+### AssignerDelegatePropose
+Emitted on assigner delegate propose
+
+
+```solidity
+event AssignerDelegatePropose(address indexed addr);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|The address of the delegate|
+
+### AssignerDelegateCommit
+Emitted on assigner delegate commit
+
+
+```solidity
+event AssignerDelegateCommit(address indexed addr);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|The address of the delegate|
+
+## Errors
+### NotAuthorized
+The address is not authorized to perform this action
+
+
+```solidity
+error NotAuthorized(address addr);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|The address attempting to perform the action|
+
+### ScopeExists
+The scope with the provided name already exists
+
+
+```solidity
+error ScopeExists(string scopeName);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|Name of the scope|
+
+### ScopeDoesNotExist
+The scope with the provided name does not exist
+
+
+```solidity
+error ScopeDoesNotExist(string scopeName);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|Name of the scope|
+
+### ScopeTransferNotAllowed
+Transfer of the scope to the provided address is not allowed
+
+
+```solidity
+error ScopeTransferNotAllowed(address to);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`to`|`address`|Address not allowed for scope transfer|
+
+### Frozen
+The token with the provided ID at the given address is frozen
+
+
+```solidity
+error Frozen(address addr, uint256 tokenId);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the token owner|
+|`tokenId`|`uint256`|ID of the frozen token|
+
+### Locked
+The token with the provided ID at the given address is locked
+
+
+```solidity
+error Locked(address addr, uint256 tokenId);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the token owner|
+|`tokenId`|`uint256`|ID of the locked token|
+
+### NotWhitelisted
+The address is not whitelisted for the given scope
+
+
+```solidity
+error NotWhitelisted(string scopeName, address addr);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`scopeName`|`string`|Name of the scope|
+|`addr`|`address`|Address that isn't whitelisted|
+
+### AccountAlreadyPatched
+The address at the given address has already been patched
+
+
+```solidity
+error AccountAlreadyPatched(address addr, address patchAddress);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|The address that was patched|
+|`patchAddress`|`address`|Address of the patch applied|
+
+### AlreadyPatched
+The token at the given address has already been patched
+
+
+```solidity
+error AlreadyPatched(address addr, uint256 tokenId, address patchAddress);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the original 721|
+|`tokenId`|`uint256`|ID of the patched token|
+|`patchAddress`|`address`|Address of the patch applied|
+
+### ERC1155AlreadyPatched
+The ERC1155 path has already been patched
+
+
+```solidity
+error ERC1155AlreadyPatched(address addr, uint256 tokenId, address account, address patchAddress);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the 1155|
+|`tokenId`|`uint256`|ID of the patched token|
+|`account`|`address`|The account patched|
+|`patchAddress`|`address`|Address of the patch applied|
+
+### BadInputLengths
+The provided input lengths are not compatible or valid
+
+*for any multi array inputs, they must be the same length*
+
+
+```solidity
+error BadInputLengths();
+```
+
+### FragmentUnregistered
+The fragment at the given address is unregistered
+
+
+```solidity
+error FragmentUnregistered(address addr);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the unregistered fragment|
+
+### FragmentRedacted
+The fragment at the given address has been redacted
+
+
+```solidity
+error FragmentRedacted(address addr);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the redacted fragment|
+
+### FragmentAlreadyAssigned
+The fragment with the provided ID at the given address is already assigned
+
+
+```solidity
+error FragmentAlreadyAssigned(address addr, uint256 tokenId);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the fragment|
+|`tokenId`|`uint256`|ID of the assigned fragment|
+
+### RefNotFound
+The reference was not found for the given fragment and target
+
+
+```solidity
+error RefNotFound(address target, address fragment, uint256 tokenId);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`target`|`address`|Address of the target token|
+|`fragment`|`address`|Address of the fragment|
+|`tokenId`|`uint256`|ID of the fragment|
+
+### FragmentNotAssigned
+The fragment with the provided ID at the given address is not assigned
+
+
+```solidity
+error FragmentNotAssigned(address addr, uint256 tokenId);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the fragment|
+|`tokenId`|`uint256`|ID of the fragment|
+
+### FragmentNotAssignedToTarget
+The fragment with the provided ID at the given address is not assigned to the target
+
+
+```solidity
+error FragmentNotAssignedToTarget(address addr, uint256 tokenId, address targetAddress, uint256 targetTokenId);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the fragment|
+|`tokenId`|`uint256`|ID of the fragment|
+|`targetAddress`|`address`|Address of the target|
+|`targetTokenId`|`uint256`|ID of the target|
+
+### FragmentAlreadyRegistered
+The fragment at the given address is already registered
+
+
+```solidity
+error FragmentAlreadyRegistered(address addr);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the registered fragment|
+
+### OutOfIDs
+Ran out of available IDs for allocation
+
+<Note>Max 255 IDs per target.</Note>
+
+
+```solidity
+error OutOfIDs();
+```
+
+### UnsupportedTokenId
+The provided token ID is unsupported
+
+<Note>TokenIds may only be 56 bits long.</Note>
+
+
+```solidity
+error UnsupportedTokenId(uint256 tokenId);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|The unsupported token ID|
+
+### CannotLockSoulboundPatch
+Cannot lock the soulbound patch at the given address
+
+
+```solidity
+error CannotLockSoulboundPatch(address addr);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the soulbound patch|
+
+### NotFrozen
+The token with the provided ID at the given address is not frozen
+
+
+```solidity
+error NotFrozen(address addr, uint256 tokenId);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the token owner|
+|`tokenId`|`uint256`|ID of the token|
+
+### IncorrectNonce
+The nonce for the token with the provided ID at the given address is incorrect
+
+<Note>It may be incorrect or a newer nonce may be present.</Note>
+
+
+```solidity
+error IncorrectNonce(address addr, uint256 tokenId, uint256 nonce);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the token owner|
+|`tokenId`|`uint256`|ID of the token|
+|`nonce`|`uint256`|The incorrect nonce|
+
+### SelfAssignmentNotAllowed
+Self assignment of the token with the provided ID at the given address is not allowed
+
+
+```solidity
+error SelfAssignmentNotAllowed(address addr, uint256 tokenId);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the token owner|
+|`tokenId`|`uint256`|ID of the token|
+
+### TransferNotAllowed
+Transfer of the token with the provided ID at the given address is not allowed
+
+
+```solidity
+error TransferNotAllowed(address addr, uint256 tokenId);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the token owner|
+|`tokenId`|`uint256`|ID of the token|
+
+### TransferBlockedByAssignment
+Transfer of the token with the provided ID at the given address is blocked by an assignment
+
+
+```solidity
+error TransferBlockedByAssignment(address addr, uint256 tokenId);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the token owner|
+|`tokenId`|`uint256`|ID of the token|
+
+### MintNotAllowed
+A rule is blocking the mint to this owner address
+
+
+```solidity
+error MintNotAllowed(address addr);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the token owner|
+
+### NotPatchworkAssignable
+The token at the given address is not IPatchworkAssignable
+
+
+```solidity
+error NotPatchworkAssignable(address addr);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the non-assignable token|
+
+### DataIntegrityError
+A data integrity error has been detected
+
+<Note>`addr`+`tokenId` is expected where `addr2`+`tokenId2` is present.</Note>
+
+
+```solidity
+error DataIntegrityError(address addr, uint256 tokenId, address addr2, uint256 tokenId2);
+```
+
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`addr`|`address`|Address of the first token|
+|`tokenId`|`uint256`|ID of the first token|
+|`addr2`|`address`|Address of the second token|
+|`tokenId2`|`uint256`|ID of the second token|
+
+### InsufficientFunds
+The available balance does not satisfy the amount
+
+
+```solidity
+error InsufficientFunds();
+```
+
+### IncorrectFeeAmount
+The supplied fee is not the corret amount
+
+
+```solidity
+error IncorrectFeeAmount();
+```
+
+### MintNotActive
+Minting is not active for this address
+
+
+```solidity
+error MintNotActive();
+```
+
+### FailedToSend
+The value could not be sent
+
+
+```solidity
+error FailedToSend();
+```
+
+### UnsupportedContract
+The contract is not supported
+
+
+```solidity
+error UnsupportedContract();
+```
+
+### UnsupportedOperation
+The operation is not supported
+
+
+```solidity
+error UnsupportedOperation();
+```
+
+### NoProposedFeeSet
+No proposed fee is set
+
+
+```solidity
+error NoProposedFeeSet();
+```
+
+### TimelockNotElapsed
+Timelock has not elapsed
+
+
+```solidity
+error TimelockNotElapsed();
+```
+
+### InvalidFeeValue
+Invalid fee value
+
+
+```solidity
+error InvalidFeeValue();
+```
+
+### NoDelegateProposed
+No delegate proposed
+
+
+```solidity
+error NoDelegateProposed();
+```
+
+<Separator />
+
+## Structs
+---
+
+### FeeConfig
+Fee Configuration
+
+
+```solidity
+struct FeeConfig {
+    uint256 mintBp;
+    uint256 patchBp;
+    uint256 assignBp;
+}
+```
+
+### FeeConfigOverride
+Fee Configuration Override
+
+
+```solidity
+struct FeeConfigOverride {
+    uint256 mintBp;
+    uint256 patchBp;
+    uint256 assignBp;
+    bool active;
+}
+```
+
+### ProposedFeeConfig
+Proposal to change a fee configuration for either protocol or scope override
+
+
+```solidity
+struct ProposedFeeConfig {
+    FeeConfig config;
+    uint256 timestamp;
+    bool active;
+}
+```
+
+### MintConfig
+Mint configuration
+
+
+```solidity
+struct MintConfig {
+    uint256 flatFee;
+    bool active;
+}
+```
+
+### ProposedAssignerDelegate
+Proposed assigner delegate
+
+
+```solidity
+struct ProposedAssignerDelegate {
+    uint256 timestamp;
+    address addr;
+}
+```
+
+### Scope
+Represents a defined scope within the system
+
+<Note>Contains details about the scope ownership, permissions, and mappings for references and assignments.</Note>
+
+
+```solidity
+struct Scope {
+    address owner;
+    address ownerElect;
+    bool allowUserPatch;
+    bool allowUserAssign;
+    bool requireWhitelist;
+    mapping(address => bool) operators;
+    mapping(address => bool) whitelist;
+    mapping(address => MintConfig) mintConfigurations;
+    mapping(address => uint256) patchFees;
+    mapping(address => uint256) assignFees;
+    uint256 balance;
+    mapping(address => bool) bankers;
+}
+```
+
