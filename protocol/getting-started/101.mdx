@@ -1,0 +1,57 @@
+---
+title: 'Patchwork 101'
+description: 'A 10 minute primer to help you understand how Patchwork works'
+icon: 'graduation-cap'
+---
+
+### What is Patchwork and what does it do?
+
+Patchwork is an Ethereum protocol and set of accompanying standards & tools to help you build apps backed by rich onchain data. Patchwork data is mutable, transferable, interactable by smart contracts, and can be expressed through a variety of different ownership models. Patchwork lets you permissionlessly affix / "soulbind" your datasets to any onchain entity, or build them as standalone properties.
+
+### How does it work?
+
+Patchwork stores your app data entirely onchain in data containers that ultimately mimic a database. Patchwork data containers are Patchwork721 contracts & tokens, which are ERC721s that inherit special Patchwork interfaces for handling efficient data storage and protocol interaction.
+
+The schematic blueprints (columns) for the data live in the Patchwork721 contract, and the datasets themselves live in the minted NFTs within the contract, with each token acting as a row and the token's ID acting as a primary key. Schemas and datasets have full data availability in the EVM and are queryable by any smart contract.
+
+All of the orchestration for your data’s lifecycle is handled by the protocol, working in tandem with your scope permissions, contract logic, and end-user agency to ensure absolute integrity of your data.
+
+### Patchwork721 and its extensions
+
+The Patchwork721 standard is a flavor of ERC721 with added features centered around the protocol and data storage. It uses `IPatchworkMetadata` interfaces to intelligently structure-pack your data, resulting in a hyper-optimized and storage-efficient EVM footprint, and significant gas savings compared to using Solidity structs.
+
+There are three primary macro extension types for the Patchwork721 standard: **Patch**, **Fragment**, and **Assignee** (aka LiteRef). These extensions are not exclusive and can be used together in a single contract (with some edge-case limitations) for advanced use cases. For example, a Patch can also be an Assignee.
+
+![PW721](/images/patchwork721.png)
+
+**Patchwork721 without extensions**
+
+By itself, Patchwork721 offers great utility for new projects planning to use plain ERC721. Because they're an extension of ERC721 they have all the standard functionality and utility of a regular NFT, while offering a higher degree of data-richness and data-availability in the EVM.
+
+**Patchwork721 Patch**
+
+Patches are Patchwork721s that are permanently & permissionlessly affixed (ie. `soulbound`) to a target onchain entity (can be a contract address, EOA, non-fungible token, etc.). Patches allow anyone to add context to and build on top of existing projects.
+
+<Tip>An example of a Patch is a contract that lets users mint a 1-5 star rating for any NFT. Those ratings are stored in Patch tokens which are soulbound to the NFT being rated. Another example of a Patch is an attestation service that stores user context in a Patch token soulbound to the user's address.</Tip>
+
+**Patchwork721 Fragment**
+
+An important aspect of Patchwork's rich utility comes from the use of discrete data entities called Fragments. Fragments are individual blocks of data encapsulated in a separate Patchwork721 token. They can be assigned to (and unassigned from) a parent Patchwork721, and can be bought, sold, and traded by users just like any regular NFT. While a Fragment is assigned, ownership changes made to its parent cascade to the Fragment and its siblings atomically.
+
+<Tip>An example of a Fragment is a sword NFT that can be equipped to a character. The sword token contains all of the data related to the sword, and if the character NFT it's assigned to is sold by the owner, the sword NFT is transfered along with it.</Tip>
+
+**Patchwork721 Assignee**
+
+Assignee contracts inherit the ability to hold and own Fragments. They contain a special storage scheme to efficiently hold references to those Fragments, called `LiteRefs`. As mentioned above, when an Assignee is transfered, it carries along its full tree of assigned Fragments.
+
+<Tip>An example of an Assignee is the character NFT from the example above. A character could have a certain number of equipment slots that each hold an equipment Fragment, and those slots can have specific rules for what type of equipment is allowed in each slot.</Tip>
+
+### What are Scopes?
+
+Scopes are developer-reserved namespaces in the Patchwork ecosystem that ➊ contain application rules and permissions for your app, ➋ connect your contracts to protocol-level utility, and ➌ accrue fees paid to your contracts' payable functions. Any protocol-capable contract you deploy will be organized into the Scope you claimed for your app.
+
+<Tip>Scopes currently cost nothing to claim and are created on a first-come-first-serve basis.</Tip>
+
+### How do I get started?
+
+The best way to dive into Patchwork is to scan through the information in the [`Core Concepts`](/protocol/core-concepts/) and [`Working with Patchwork`](/protocol/guide/) sections of the docs, check out the [`Quickstart`](/protocol/getting-started/quickstart.mdx) guide, and get your feet wet with our simple _"Hello World"_ tutorial on the [`Deploying your first app`](/protocol/getting-started/hello-world) page.

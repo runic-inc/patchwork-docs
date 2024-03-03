@@ -1,40 +1,69 @@
 ---
 title: Introduction
-description: 'Welcome to the home of your new documentation'
+description: 'Patchwork is an Ethereum protocol and set of standards designed to supercharge onchain entities new & old with fully onchain data.'
 icon: 'hand-wave'
 ---
 
-<img
-  className="block dark:hidden"
-  src="/images/hero-light.svg"
-  alt="Hero Light"
-/>
-<img
-  className="hidden dark:block"
-  src="/images/hero-dark.svg"
-  alt="Hero Dark"
-/>
+Patchwork allows metadata to be mutable and transferable, permits new data schemas to be attached to tokens, contracts, and addresses long after their creation, and enables projects to be permissionlessly extended by others. Patchwork operates entirely onchain and is fully interactable by smart contracts.
 
-## Setting up
+Patchwork delivers fresh utility around mutability, interoperability, and extensibility. Use it for games, provenance, attestiation, PFPs, and any domain where evolution, collaboration, and data-richness is valued.
+
+<Card title="Get aquainted with Patchwork" icon="graduation-cap">
+  Learn about Patchwork and how it works in 10 minutes.
+</Card>
+## Overview
+
+<Steps>
+  <Step title="Data modeling">
+    Patchwork data modeling is akin to designing a database schema. You provide fields and their corresponding types that your data will adhere to. We currently have 20 different field types you can use in your schemas, ranging from booleans to integers to strings and more.
+
+    When using our PDK, schemas can be modeled in simple JSON and our codegen will translate it into a valid Patchwork metadata schema.
+
+    <Card>
+      Read more about metadata in Core Concepts
+    </Card>
+  </Step>
+  <Step title="Contract generation">
+    There are several entity types in the Patchwork ecosystem. Use a single one or a variety to fit your specific use case. Patches are soulbound data containers that permissionlessly afix metadata to a separate token or address, Fragments are discrete tokens containing granular pieces of data that can be assigned to a Patch or Patchwork721, and Patchwork721s are a superset of Patchwork interfaces that can be used as standalone ERC-721 entities with all the power of Patchwork utility.
+
+    Importantly, because the Patchwork metadata standard uses some complex structure packing to be as storage-efficient as possible, we recommend using our PDK to bootstrap contract creation. We take care of 95% of the contract generation work for you so you can focus more on bringing your app to market and less on writing esoteric packing and unpacking logic, writing getters and setters for your data, figuring out the right interface for a specific implmentation, etc..
+
+    If you prefer to roll your own contracts, import the requisite Patchwork contract interfaces and adhere to the APIs outlined in our Contracts Reference material.
+  </Step>
+  <Step title="Scope creation">
+    Scopes are developer-reserved namespaces in the Patchwork ecosystem that ➊ contain application rules and permissions for your app, ➋ connect your contracts to protocol-level utility, and ➌ accrue fees paid to your contracts' payable functions. Scopes currently cost nothing to claim and are created on a first-come-first-serve basis.
+
+    Scope permissions are set using the protocol's `addOperator` and `addWhitelist` API methods.
+  </Step>
+  <Step title="Data orchestration">
+    Once your data schemas are modeled and baked into your contracts—and those contracts have been deployed to your scope and given scope permissions—you're ready to create and handle data. 
+    
+    Your actual data lifecycle is entirely dependent on your use case and contract logic, but at a macro level the typical end result approximates a relational database. A Patch or Patchwork721 contract outlines your database columns, and each token minted in those contracts acts as a database row. Fragments can be used to encapsulate one or more of each row's field data as a discrete ERC-721 token; those Fragments can be traded, moved to different rows (i.e. different tokens), etc..
+
+    All of the orchestration for your data's lifecycle is handled by the protocol, working in tandem with your scope permissions, contract logic, and end-user agency to ensure absolute integrity of your data.
+  </Step>
+</Steps>
+
+<Steps>
+  <Step title="Scope creation">A developer claims an application scope and configures permissions and assignment whitelists.</Step>
+  <Step>User mints a Patch, which is soulbound to the contract, address, or token ID they are patching.</Step>
+  <Step>Users can mint additional Fragments, which are 721s that serve as metadata entities and can be attached and owned by Patches.</Step>
+  <Step>If a patched NFT is transferred, the ownership of the Patch and any attached Fragments are automatically owned by the new NFT owner.</Step>
+  <Step>Since all metadata in this ecosystem is onchain, other projects are free to write smart contract logic against any of this metadata.</Step>
+</Steps>
+
+
+## How does it compare to existing EIPs/ERCs?
 
 The first step to world-class documentation is setting up your editing environments.
 
-<CardGroup cols={2}>
   <Card
-    title="Edit Your Docs"
-    icon="pen-to-square"
+    title="View GitHub"
+    icon="github"
     href="https://mintlify.com/docs/quickstart"
   >
     Get your docs set up locally for easy development
   </Card>
-  <Card
-    title="Preview Changes"
-    icon="image"
-    href="https://mintlify.com/docs/development"
-  >
-    Preview your changes before you push to make sure they're perfect
-  </Card>
-</CardGroup>
 
 ## Make it yours
 

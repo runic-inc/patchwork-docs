@@ -15,6 +15,18 @@
       "dark": "#030712"
     }
   },
+  "anchors": [
+    {
+      "name": "GitHub",
+      "icon": "github",
+      "url": "https://github.com/runic-inc/patchwork"
+    },
+    {
+      "name": "Join our Discord",
+      "icon": "discord",
+      "url": "https://discord.gg/NgMNtpGg"
+    }
+  ],
   "primaryTab": {
     "name": "Patchwork Protocol"
   },
@@ -33,6 +45,7 @@
       "group": "Get Started",
       "pages": [
         "protocol/getting-started/introduction",
+        "protocol/getting-started/101",
         "protocol/getting-started/quickstart",
         "protocol/getting-started/hello-world"
       ]
