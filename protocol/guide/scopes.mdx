@@ -1,5 +1,69 @@
 ---
 title: Scopes
-description: 'Welcome to the home of your new documentation'
+description: 'Scopes are application-level Patchwork namespaces for configuring settings and permissions or your app.'
 ---
 
+When creating a new application, the first thing you'll do is create a Patchwork Scope for your app. You'll then define within that scope which contracts can mint, assign NFTs, and modify metadata. Scopes are free to claim on a first-come-first-serve basis, and can be transferred to other parties.
+
+## Scope creation
+
+Scopes are claimed using `PatchworkProtocol:claimScope()`. Typically you'll call this in your contracts' deploy script, but it can be manually called if desired.
+
+<Note>When called, the owner of the claimed Scope is set to the party calling the function.</Note>
+
+For example, this Forge deploy script claims the Scope `fooscope123`.
+
+```solidity deploy.s.sol
+pragma solidity ^0.8.13;
+
+import "forge-std/Script.sol";
+import "@patchwork/PatchworkProtocol.sol";
+// ...other imports
+
+contract FooDeploy is Script {
+    function run() external {
+        string memory scopeName = "fooscope123";
+        address patchworkAddress = vm.envAddress("PATCHWORK_PROTOCOL");
+        PatchworkProtocol patchworkProtocol = PatchworkProtocol(patchworkAddress);
+
+        vm.startBroadcast();
+        patchworkProtocol.claimScope("fooscope123");
+
+        // ...rest of deploy code
+    }
+}
+```
+
+
+## Scope permissions
+
+Operator
+
+Whitelist
+
+
+## Adding contracts to your Scope
+
+Registering a contract to your Scope is a 2-part process. The first part is declaring the contract's Scope in the Patchwork721 constructor, where the first param is the name of your claimed Scope.
+
+```solidity Foo.sol
+pragma solidity ^0.8.23;
+
+import "@patchwork/Patchwork721.sol";
+import "./IFoo.sol";
+
+contract Foo is IFoo, Patchwork721 {
+    constructor(address manager_, address owner_)
+        Patchwork721("fooscope123", "Foo", "FOO", manager_, owner_)
+    { }
+
+    // ...rest of contract code
+}
+```
+
+The second part is granting your deployed contract the relevant Scope permissions. This is typically done in your contract's deploy script.
+
+```solidity deploy.s.sol
+    patchworkProtocol.addOperator("fooscope123", address(foocontract));
+    patchworkProtocol.addWhitelist("fooscope123", address(foocontract));
+```
