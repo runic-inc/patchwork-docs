@@ -1,33 +1,51 @@
 ---
 title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+description: 'Patchwork Development Kit Overview'
 ---
-
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
 
 ## Welcome
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+The Patchwork Development Kit provides a toolset for defining onchain metadata schemas and 
+generating Patchwork-compatible contracts. Define schemas in JSON and use the PDK tool to 
+validate and generate solidity.
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+## Installing
 
-## Authentication
+clone https://github.com/runic-inc/pdk
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+1. **Install Foundry**:
+   Foundry is a smart contract development toolchain. You can install it by following the instructions at [Foundry's installation guide](https://book.getfoundry.sh/getting-started/installation).
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+   ```shell
+   forge install
+   ```
+
+2. **Install Node.js dependencies**:
+
+   ```shell
+   npm install
+   ```
+
+## Testing Your Environment
+
+To ensure your environment is set up correctly, you can run the following tests:
+
+- Using npm:
+
+  ```shell
+  npm test
+  ```
+
+- Using Foundry:
+
+  ```shell
+  forge test
+  ```
+
+## Using the PDK
+
+To use the Patchwork Development Kit (PDK), run:
+
+```shell
+npx pdk
 ```
