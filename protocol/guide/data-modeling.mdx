@@ -46,9 +46,90 @@ function schema() external pure returns (MetadataSchema memory) {
 }
 ```
 
+Note the use of Patchwork's `MetadataSchemaEntry` above and the 8 parameters passed to it. Each parameter describes a special piece of information about the field—from its permissions to its content length (single, fixed-size array, etc.) to its visibility—and also includes the necessary info needed for Patchwork to unpack the data from its stored form. 
+
+Here's the specification for `MetadataSchemaEntry`:
+
+```solidity
+struct MetadataSchemaEntry {
+    uint256 id;
+    uint256 permissionId;
+    FieldType fieldType;
+    uint256 fieldCount;
+    FieldVisibility visibility;
+    uint256 slot;
+    uint256 offset;
+    string key;
+}
+```
+
+Looking again at the `rating` field code from the **Ratings.sol** example, this maps to the following assertion:
+
+> My **"rating"** field has an ID of `1` _(these are zero-indexed)_, permission ID of `0`, is a `uint8` type, has only `1` field entry/count per record, is publicly `visible`, is in my second storage slot _(again, zero-indexed)_, has no offset, and has a key of `rating`.
+
+Again, if you use PDK, you don't need to worry too much about the details here as this code is all automatically generated for you from your JSON schema.
+
+<Note>For the rest of this document, we'll be focusing solely on JSON schemas, but you can find more Solidity examples in PDKs test suite.</Note>
+
 ## Field types
 
-## Arrays
+There are 20 available field types to use in your schemas:
+
+```
+boolean
+int8
+int16
+int32
+int64
+int128
+int256
+uint8
+uint16
+uint32
+uint64
+uint128
+uint256
+char8
+char16
+char32
+char64
+literef
+address
+string
+```
+
+Almost all of these are self-explanatory and map directly to Solidity types. The `literef` type is the outlier: this type represents a reference to a Patchwork Fragment. These saved references are referred to as LiteRefs and follow a special packing scheme for hyper-efficient storage.
+
+## Dynamic and fixed-length arrays
+
+By default, your fields will have a length of 1, meaning they only hold one piece of information per field record. If you want to store more than one item per field (i.e. arrays), use the `arrayLength` key in your schema. Setting `arrayLength` to 0 turns the field into a dynamic array, setting it to 1 asserts a length of 1 (equivalent to leaving it unset), and any number higher than one turns the field into a fixed-length array of that size.
+
+For example, the following field spec documents 2 fields. The first is a dynamic-length array that can grow unboundedly, and the second is a fixed-length array that can contain 3 items.
+
+```json
+"fields": [
+    {
+        "id": 1,
+        "key": "favemojis",
+        "type": "char8",
+        "arrayLength": 0,
+        "description": "Dynamic array of favorite emojis"
+    },
+    {
+        "id": 2,
+        "key": "favwords",
+        "type": "char16",
+        "arrayLength": 3,
+        "description": "Three favorite words"
+    }
+]
+```
+
+## Field permissions
+
+
+## Field visibility
+
 
 ## Patchwork metadata storage scheme
 
