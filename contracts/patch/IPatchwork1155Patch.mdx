@@ -1,6 +1,6 @@
 ---
 title: 'IPatchwork1155Patch'
-description: 'Interface for contracts supporting Patchwork patch standard'
+description: 'IPatchwork721 extension for contracts supporting Patchwork patch standard'
 icon: 'frame'
 ---
 import Separator from '/snippets/separator.mdx';
@@ -58,4 +58,48 @@ struct PatchTarget {
     address account;
 }
 ```
+
+
+<Separator />
+---
+
+
+# IPatchworkReversible1155Patch
+This is an IPatchwork1155Patch extension to enable reverse lookup.
+
+<Info>
+<div class="border-b border-zinc-500/20 dark:border-zinc-500/30 pb-4 flex" style={{gap: '4px', fontFamily: 'var(--font-jetbrains-mono)'}}>
+<span class="token keyword">import</span> <span class="token string">"@patchwork/contracts/IPatchworkReversible1155Patch/IPatchworkReversible1155Patch.sol"</span><span class="token punctuation">;</span>
+</div>
+
+**Inherits:**
+[`IPatchwork1155Patch`](/contracts/patch/IPatchwork1155Patch)
+</Info>
+
+
+
+## Functions
+---
+### getTokenIdByTarget
+
+Returns the token ID (if it exists) for an 1155 that may have been patched
+
+<Info>Requires reverse storage enabled.</Info>
+
+
+```solidity
+function getTokenIdByTarget(PatchTarget memory target) external returns (uint256 tokenId);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`target`|`PatchTarget`|The 1155 target that was patched|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`tokenId`|`uint256`|token ID of the patch|
+
 

@@ -1,61 +1,39 @@
 ---
 title: Metadata
-description: 'Welcome to the home of your new documentation'
-icon: 'brackets-curly'
+description: 'Metadata is the heart of Patchwork, and its utility revolves around the lifecycles and applications of it. '
+icon: 'square-2'
 ---
 
-## Setting up
+Metadata is any piece or set of data that provides properties, context, or information about something. For Patchwork, that means data about onchain entities (e.g. an NFT), or data about offchain entities that are valuable to store onchain.
 
-The first step to world-class documentation is setting up your editing environments.
+Take the following schema:
 
-<CardGroup cols={2}>
-  <Card
-    title="Edit Your Docs"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
-  >
-    Get your docs set up locally for easy development
-  </Card>
-  <Card
-    title="Preview Changes"
-    icon="image"
-    href="https://mintlify.com/docs/development"
-  >
-    Preview your changes before you push to make sure they're perfect
-  </Card>
-</CardGroup>
-
-## Make it yours
-
-Update your docs to your brand and add valuable content for the best user conversion.
-
-<CardGroup cols={2}>
-  <Card
-    title="Customize Style"
-    icon="palette"
-    href="https://mintlify.com/docs/settings/global"
-  >
-    Customize your docs to your company's colors and brands
-  </Card>
-  <Card
-    title="Reference APIs"
-    icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
-  >
-    Automatically generate endpoints from an OpenAPI spec
-  </Card>
-  <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/components/accordion"
-  >
-    Build interactive features and designs to guide your users
-  </Card>
-  <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/customers"
-  >
-    Check out our showcase of our favorite documentation
-  </Card>
-</CardGroup>
+```json
+{
+  "scopeName": "foohero",
+  "name": "Character",
+  "symbol": "CHAR",
+  "schemaURI": "https://foohero.foo/my-metadata.json",
+  "imageURI": "https://foohero.foo/avatars/{tokenID}.png",
+  "fields": [
+    {
+        "id": 1,
+        "key": "character",
+        "type": "char16",
+        "description": "Name of character"
+    },
+    {
+        "id": 2,
+        "key": "xp",
+        "type": "uint16",
+        "description": "Character experience points"
+    },
+    {
+        "id": 3,
+        "key": "hp",
+        "type": "uint16",
+        "description": "Character life"
+    }
+  ]
+}
+```

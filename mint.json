@@ -15,6 +15,13 @@
       "dark": "#030712"
     }
   },
+  "topbarLinks": [
+    {
+      "name": "Patchwork Home",
+      "type": "link",
+      "url": "https://patchwork.dev"
+    }
+  ],
   "anchors": [
     {
       "name": "GitHub",
@@ -51,20 +58,12 @@
       ]
     },
     {
-      "group": "Core Concepts",
-      "pages": [
-        "protocol/core-concepts/metadata",
-        "protocol/core-concepts/scopes",
-        "protocol/core-concepts/patches",
-        "protocol/core-concepts/fragments"
-      ]
-    },
-    {
       "group": "Working with Patchwork",
       "pages": [
-        "protocol/guide/interfaces",
         "protocol/guide/scopes",
         "protocol/guide/data-modeling",
+        "protocol/guide/generating-your-contracts",
+        "protocol/guide/patching",
         "protocol/guide/assignments",
         "protocol/guide/freezing-locking",
         "protocol/guide/events",
@@ -74,8 +73,14 @@
     {
       "group": "Info",
       "pages": [
-        "protocol/info/networks",
-        "protocol/info/changelog"
+        "protocol/info/networks", {
+          "group": "Changelogs",
+          "pages": [
+            "protocol/info/changelog-protocol",
+            "protocol/info/changelog-contracts"
+          ]
+        },
+        "protocol/info/audits"
       ]
     },
 
@@ -109,33 +114,32 @@
     {
       "group": "Core Interfaces",
       "pages": [
+        "contracts/core/IPatchwork721",
+        "contracts/core/IPatchworkMetadata",
         "contracts/core/IPatchworkScoped",
-        {
-          "group": "IPatchwork721",
-          "icon": "hexagon-vertical-nft-slanted",
-          "pages": [
-            "contracts/core/IPatchwork721",
-            "contracts/core/IPatchworkMetadata"
-          ]
-        },
-        "contracts/core/IPatchworkLiteRef",
         "contracts/core/IPatchworkMintable"
       ]
     },
     {
-      "group": "Patch Interfaces",
-      "pages": [
-        "contracts/patch/IPatchworkPatch",
-        "contracts/patch/IPatchworkAccountPatch",
-        "contracts/patch/IPatchwork1155Patch"
-      ]
-    },
-    {
-      "group": "Fragment Interfaces",
+      "group": "Fragment extensions",
       "pages": [
         "contracts/fragment/IPatchworkAssignable",
         "contracts/fragment/IPatchworkSingleAssignable",
         "contracts/fragment/IPatchworkMultiAssignable"
+      ]
+    },
+    {
+      "group": "Assignee extensions",
+      "pages": [
+        "contracts/assignee/IPatchworkLiteRef"
+      ]
+    },
+    {
+      "group": "Patch extensions",
+      "pages": [
+        "contracts/patch/IPatchworkPatch",
+        "contracts/patch/IPatchworkAccountPatch",
+        "contracts/patch/IPatchwork1155Patch"
       ]
     },
     {
@@ -146,6 +150,6 @@
     }
   ],
   "footerSocials": {
-    "github": "https://github.com/mintlify"
+    "github": "https://github.com/runic-inc/patchwork-docs"
   }
 }
