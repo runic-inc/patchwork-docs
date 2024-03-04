@@ -1,4 +1,54 @@
 ---
 title: Data modeling
-description: 'Welcome to the home of your new documentation'
+description: 'Learn how to create your Patchwork metadata schemas'
 ---
+
+## Writing schemas
+
+Patchwork data modeling is akin to designing a database schema. You provide fields and their corresponding types that your data will adhere to. We currently have 20 different field types you can use in your schemas, ranging from booleans to integers to strings and more.
+
+Importantly, because the Patchwork metadata standard uses some complex structure packing to be as storage-efficient as possible, we recommend using our PDK to bootstrap your contract. When using our PDK, schemas can be modeled in simple JSON and our codegen will translate it into a valid Patchwork metadata schema.
+
+The following PDK schema outlines a contract that stores rating scores, where each minted NFT has 2 metadata fields: one for the rater, and one for the rating.
+
+```json Ratings.json
+{
+  "scopeName": "fooratings",
+  "name": "Ratings",
+  "symbol": "RATE",
+  "schemaURI": "https://ratingsthing/my-metadata.json",
+  "imageURI": "https://ratingsthing/asset/{tokenID}.png",
+  "fields": [
+    {
+        "id": 1,
+        "key": "rater",
+        "type": "char16",
+        "description": "Address of the person minting the rating"
+    },
+    {
+        "id": 2,
+        "key": "rating",
+        "type": "uint8",
+        "description": "Rating score from 1-5"
+    }
+  ]
+}
+```
+
+PDK translates this into the following Patchwork721 schema, along with the necessary packing and unpacking logic.
+
+```solidity Ratings.sol
+function schema() external pure returns (MetadataSchema memory) {
+    MetadataSchemaEntry[] memory fields = new MetadataSchemaEntry[](2);
+    fields[0] = MetadataSchemaEntry(0, 0, FieldType.ADDRESS, 1, FieldVisibility.PUBLIC, 0, 0, "rater");
+    fields[1] = MetadataSchemaEntry(1, 0, FieldType.UINT8, 1, FieldVisibility.PUBLIC, 1, 0, "rating");
+    return MetadataSchema(1, fields);
+}
+```
+
+## Field types
+
+## Arrays
+
+## Patchwork metadata storage scheme
+
