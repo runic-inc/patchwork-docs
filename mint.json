@@ -63,8 +63,8 @@
         "protocol/guide/scopes",
         "protocol/guide/data-modeling",
         "protocol/guide/generating-your-contracts",
-        "protocol/guide/patching",
         "protocol/guide/assignments",
+        "protocol/guide/patching",
         "protocol/guide/freezing-locking",
         "protocol/guide/events",
         "protocol/guide/fees"
@@ -88,7 +88,7 @@
 
     
     {
-      "group": "PDK Documentation",
+      "group": "Get started",
       "pages": [
         "pdk/introduction",
         "pdk/configs"

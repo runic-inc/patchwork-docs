@@ -54,6 +54,51 @@ Scopes are developer-reserved namespaces in the Patchwork ecosystem that ➊ con
 
 <Tip>Scopes currently cost nothing to claim and are created on a first-come-first-serve basis.</Tip>
 
-### How do I get started?
+### What's this PDK thing?
 
-The best way to dive into Patchwork is to scan through the information in the [`Core Concepts`](/protocol/core-concepts/) and [`Working with Patchwork`](/protocol/guide/) sections of the docs, check out the [`Quickstart`](/protocol/getting-started/quickstart.mdx) guide, and get your feet wet with our simple _"Hello World"_ tutorial on the [`Deploying your first app`](/protocol/getting-started/hello-world) page.
+Our PDK is a low-code CLI tool that takes a simple JSON file documenting your contract schema and spits out an almost-ready-to-deploy Solidity contract. Because the Patchwork metadata standard uses some complex structure packing to be as storage-efficient as possible, we recommend using our PDK to bootstrap contract creation. We take care of 95% of the contract generation work for you so you can focus more on bringing your app to market and less on writing esoteric packing and unpacking logic, writing getters and setters for your data, figuring out the right interfaces for a specific implmentation, etc..
+
+## What's the development process?
+
+<Steps>
+  <Step title="Scope creation">
+    Claim a Scope by calling the protocol's `claimScope()` function with your desired Scope name.
+    
+    <Tip>You can defer this step until contract deployment where you can easily do it with a single line of code in your deploy script.</Tip>
+  </Step>
+  <Step title="Data modeling">
+    Document your fields and their corresponding types that your data will adhere to. We currently have 20 different field types you can use in your schemas, as well as support for fixed-length and dynamic arrays, Fragment references, etc..
+
+    <Tip>When using our PDK, you'll model your schemas in simple JSON and our codegen will take care of the rest.</Tip>
+  </Step>
+  <Step title="Contract generation">
+    Use our PDK to quickly and easily generate the brunt of your contracts. It ingests a JSON file that documents your contract details and desired data fields and spits out lovely Solidity. Add in any additional business logic you need enforced at the contract level, then you're ready to deploy.
+
+    <Info>If you prefer to roll your own contracts, import the requisite Patchwork interfaces and adhere to the APIs outlined in our Contracts Reference material.</Info>
+  </Step>
+  <Step title="Data orchestration">
+    Once your contracts have been deployed and granted Scope permissions, your app is Patchwork-ready all set to create and handle data.
+    
+    Your actual data lifecycle is entirely dependent on your use case and contract logic, but at a macro level the typical end result is the same. A top-level Patchwork721 contract outlines your database columns, and each token minted in those contracts acts as a database row. Fragments can be used to encapsulate one or more of each row's field data as a discrete Patchwork-flavored ERC-721 token; those Fragments can be traded, moved to around to different tokens, etc..
+
+    All of the orchestration for your data's lifecycle is handled by the protocol, working in tandem with your scope permissions, contract logic, and end-user agency to ensure absolute integrity of your data.
+  </Step>
+</Steps>
+
+## What about indexing?
+
+The protocol emits context-rich events for the full spectrum of Patchwork interactions, making it trivially simple to index, use with Syndicate APIs, or react to directly using Typescript libraries. Check out the [events documentation](/contracts/core/IPatchworkProtocol#events).
+
+## How do I get started?
+
+The best way to dive into Patchwork is to scan through the information in the [Working with Patchwork](/protocol/guide/) section of the docs, check out the [Quickstart](/protocol/getting-started/quickstart.mdx) guide, and get your feet wet with our simple `Hello World` tutorial on the [Deploying your first app](/protocol/getting-started/hello-world) page. We'll walk you through the steps of installing PDK, writing your first schema, deploying your contract, and creating your first set of onchain data.
+
+<br />
+<CardGroup cols={2}>
+<Card title="Quickstart" icon="rabbit-running" href="/protocol/getting-started/quickstart">
+    Quick guide to get PDK installed and start writing your app.
+</Card>
+<Card title="Deploy your first app" icon="paper-plane" href="/protocol/getting-started/hello-world">
+    Go from zero to sixty in 5 minutes with a simple `Hello World` app.
+</Card>
+</CardGroup>
