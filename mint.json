@@ -75,6 +75,7 @@
       "pages": [
         "protocol/info/networks", {
           "group": "Changelogs",
+          "icon": "code-merge",
           "pages": [
             "protocol/info/changelog-protocol",
             "protocol/info/changelog-contracts"
