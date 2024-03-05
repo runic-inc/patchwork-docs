@@ -88,17 +88,18 @@
 
     
     {
-      "group": "API Documentation",
+      "group": "PDK Documentation",
       "pages": [
-        "pdk/introduction"
+        "pdk/introduction",
+        "pdk/configs"
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Contract Configuration Examples",
       "pages": [
-        "pdk/endpoint/get",
-        "pdk/endpoint/create",
-        "pdk/endpoint/delete"
+        "pdk/config/basic",
+        "pdk/config/patch",
+        "pdk/config/fragment"
       ]
     },
 

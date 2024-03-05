@@ -1,0 +1,44 @@
+---
+title: 'Contract Configurations'
+---
+
+## Overview
+
+The PDK contract generator will accept a properly schemad JSON as input and will generate the same name solidity contract as output in the current working directory.
+
+Example:
+```shell
+pdk generate MyContract.json
+```
+
+The above command will read MyContract.json and will output MyContract.sol using the parameters and options specified in the JSON.
+
+## Contract Configuration JSON
+
+| Name | Description |
+| ---- | ----------- |
+| `scopeName` | The scope name of the contract |
+| `name` | The ERC-721 Name of the contract |
+| `symbol` | The ERC-721 symbol of the contract |
+| `schemaURI` | The schema URI |
+| `imageURI` | The image URI |
+| `features` | List of features |
+| `fields` | List of fields |
+
+### Contract Configuration JSON fields
+
+| Name | Description |
+| ---- | ----------- |
+| `id` | The field ID (must be unique) |
+| `key` | The field key (must be unique) |
+| `type` | The field type (Must be in field type enum) |
+| `arrayLength` | The array length (1 is default, 0 is dynamic and >1 is a static array) |
+| `description` | The field description |
+
+### Field Types
+
+TODO
+
+### features
+
+TODO
