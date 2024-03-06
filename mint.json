@@ -100,7 +100,14 @@
       "pages": [
         "pdk/config/basic",
         "pdk/config/patch",
-        "pdk/config/fragment"
+        "pdk/config/arrays",
+        "pdk/config/fragmentsingle",
+        "pdk/config/fragmentmulti",
+        "pdk/config/literef8",
+        "pdk/config/dynref",
+        "pdk/config/1155patch",
+        "pdk/config/accountpatch",
+        "pdk/config/patchfragment"
       ]
     },
 
