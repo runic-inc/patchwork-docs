@@ -4,4 +4,72 @@ description: 'Build and launch a simple "Hello World" Patchwork app on Sepolia i
 icon: 'paper-plane'
 ---
 
+<Steps>
+<Step title="Build a Contract Configuration JSON File">
 
+Example: `src/Rizzler.json`
+    ```json
+    {
+      "scopeName": "myscope",
+      "name": "Rizzler",
+      "symbol": "RZLR",
+      "schemaURI": "https://rizzco/rizzler-schema.json",
+      "imageURI": "https://rizzco/assets/{tokenID}.png",
+      "fields": [
+        {
+            "id": 1,
+            "key": "name",
+            "type": "char16",
+            "description": "Short Name"
+        },
+        {
+            "id": 2,
+            "key": "count",
+            "type": "uint64",
+            "description": "Rizz Count"
+        },
+        {
+            "id": 3,
+            "key": "rizz",
+            "type": "uint64",
+            "description": "Rizz Level"
+        }
+      ]
+    }
+    ```
+</Step>
+<Step title="Run the PDK Code Generator">
+
+    ```shell
+    pdk generate Rizzler.json
+    ```
+
+    Make sure the contract `Rizzler.sol` is in your `src` dir of your project
+</Step>
+<Step title="Customize">
+
+    Use your favorite editor or IDE to customize your generated Solidity contracts, adding any logic your app requires.
+
+</Step>
+<Step title="Deploy server-side resources">
+
+    Deploy the generated schema files where the SchemaURI points to and set up any graphical assets
+
+</Step>
+<Step title="Build">
+
+    ```shell
+    forge build
+    ```
+
+    If the build command files, check the quickstart guide for missing dependencies or a project layout issue.
+
+</Step>
+<Step title="Deploy">
+
+    ```shell
+    forge create src/Rizzler.sol:Rizzler --constructor-args "0x<PatchworkProtocolAddress" "0x<InitialOwner>" --rpc-url <sepolia RPC URL> --chain 11155111
+    ```
+<Tip>v2 of Patchwork Protocol is deployed at `0x00000000001616E65bb9FdA42dFBb7155406549b` on all chains</Tip>
+</Step>
+</Steps>
