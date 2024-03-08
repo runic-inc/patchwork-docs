@@ -34,10 +34,28 @@ contract FooDeploy is Script {
 
 ## Scope permissions
 
-Operator
+**Operators**
 
-Whitelist
+Scope Operators are added and removed by the scope owner. 
 
+Operators may perform the following functions:
+- Add/Remove bankers
+- Add/Remove whitelisted addresses
+- Configure minting
+- Set patch and assignment fees
+
+It is common to have an EOA or a contract act as an operator. Contracts as operators are often used to have the contract perform logic and run assignment routines.
+
+**Bankers**
+
+Scope Bankers are added and removed by scope owners or operators.
+
+Bankers may perform the following functions:
+- Withdraw fees collected by the protocol
+
+**Whitelist**
+
+Whitelisting is how scopes prevent spoofing. Whitelisting can be disabled for a scope for cases where spoofing doesn't matter, but by defualt an address must be whitelisted in order to claim it is part of the scope.
 
 ## Adding contracts to your Scope
 
@@ -60,10 +78,59 @@ contract Foo is Patchwork721 {
 The second part is granting your deployed contract the relevant Scope permissions. This is typically done in your contract's deploy script.
 
 ```solidity deploy.s.sol
+    // Sets scope rules to default: No user patch, No user assign, Require whitelist
+    patchworkProtocol.setScopeRules("fooscope123", false, false, true);
+    // Add foocontract as a scope operator so it may perform assignments
     patchworkProtocol.addOperator("fooscope123", address(foocontract));
+    // Whitelist foocontract in the scope
     patchworkProtocol.addWhitelist("fooscope123", address(foocontract));
+```
+
+## Adding and removing operators
+
+```solidity
+    patchworkProtocol.addOperator("fooscope123", opAddr)
+    patchworkProtocol.removeOperator("fooscope123", opAddr)
 ```
 
 ## Transfering Scopes
 
-## Adding bankers
+Scope transfers must first elect a new owner by calling `transferScopeOwner` from the current owner's address, then the new owner must call `acceptScopeTransfer` for the transfer to execute.
+To cancel a transfer before the scope has been accepted, call `cancelScopeTransfer`
+
+```solidity
+    patchworkProtocol.transferScopeOwnership("fooscope123", newOwnerAddr);
+    patchworkProtocol.cancelScopeTransfer("fooscope123")
+    patchworkProtocol.acceptScopeTransfer("fooscope123")
+    patchworkProtocol.getScopeOwnerElect("fooscope123")
+    patchworkProtocol.getScopeOwner("fooscope123")
+```
+
+## Adding and removing bankers
+
+```solidity
+    patchworkProtocol.addBanker("fooscope123", bankerAddr)
+    patchworkProtocol.removeBanker("fooscope123", bankerAddr)
+```
+
+## Withdrawing fees
+
+```solidity
+    uint256 balance = patchworkProtocol.balanceOf("fooscope123");
+    patchworkProtocol.withdraw("fooscope123", balance);
+```
+
+## Configuring minting
+
+```solidity
+    patchworkProtocol.setMintConfiguration(mintableAddr, config)
+```
+
+## Setting patch and assignment fees
+
+```solidity
+    patchworkProtocol.setPatchFee(patchContractAddr, baseFee)
+    patchworkProtocol.getPatchFee(patchContractAddr)
+    patchworkProtocol.setAssignFee(fragmentContractAddr, baseFee)
+    patchworkProtocol.getAssignFee(fragmentContractAddr)
+```
