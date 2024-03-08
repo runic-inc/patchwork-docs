@@ -89,14 +89,14 @@
 
     
     {
-      "group": "Get started",
+      "group": "Getting started",
       "pages": [
         "pdk/introduction",
         "pdk/configs"
       ]
     },
     {
-      "group": "Contract Configuration Examples",
+      "group": "Contract configuration examples",
       "pages": [
         "pdk/config/basic",
         "pdk/config/patch",
