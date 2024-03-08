@@ -125,5 +125,16 @@ For example, the following field spec documents 2 fields. The first is a dynamic
 ]
 ```
 
+The field type `string` is a dynamic field and will not be packed with other fixed-length values.
+
 ## Field permissions
 
+When fields have a permissionID, addresses with permission grants will also be able to write to these fields on an individual basis. 
+
+The function `setPermissions` on a Patchwork721 provides a bitfield of "allows" for an address. For example, to allow writing from 0xabcd to fields 1 and 4, which would be 1001 in binary (indicating a 1 or "allow" for position 1 and position 4) or 9 in base 10
+
+To convert from permissionId to a stored value, use `1 << (permissionId - 1)` making sure to add all of the converted permission IDs for the complete value to set.
+
+```solidity
+setPermissions(0xabcd, 9)
+```
