@@ -18,47 +18,54 @@ validate and generate solidity.'
 
 ## Installing
 
+In a git repository root directory, perform the following steps to prepare a project:
+
 <Steps>
-  <Step title="Clone PDK">
-    ```shell
-   git clone https://github.com/runic-inc/pdk.git
+<Step title="Install Foundry">
+
+   Foundry is a smart contract development toolchain. You can install it by following the instructions at [Foundry's installation guide](https://book.getfoundry.sh/getting-started/installation).
+
+   ```shell
+   forge install
    ```
-  </Step>
-  <Step title="Install Foundry">
-    Foundry is a smart contract development toolchain. You can install it by following the instructions at [Foundry's installation guide](https://book.getfoundry.sh/getting-started/installation).
+
+</Step>
+<Step title="Install Patchwork Contracts Library">
 
     ```shell
-    forge install
+    forge install runic-inc/patchwork
     ```
-  </Step>
-  <Step title="Install Node.js dependencies">
+
+</Step>
+<Step title="Install OpenZeppelin Contracts">
+
     ```shell
-   npm install
-   ```
-  </Step>
+    forge install openzeppelin/openzeppelin-contracts
+    ```
+
+</Step>
+<Step title="Configure Project Remappings">
+
+    In project directory, create the file `remappings.txt`
+    ```
+    @openzeppelin/=lib/openzeppelin-contracts/
+    @patchwork/=lib/patchwork/src/
+    forge-std/=lib/forge-std/src/
+    lib/=lib/
+    ```
+
+</Step>
+<Step title="Install PDK">
+
+    Option 1 - Local project installation (recommended for npm/js projects)
+    ```shell
+    npm i @patchworkdev/pdk
+    ```
+
+    Option 2 - Global binary installation
+    ```shell
+    npm i -g @patchworkdev/pdk
+    ```
+
+</Step>
 </Steps>
-
-
-## Testing your environment
-
-To ensure your environment is set up correctly, you can run the following tests:
-
-- Using npm:
-
-  ```shell
-  npm test
-  ```
-
-- Using Foundry:
-
-  ```shell
-  forge test
-  ```
-
-## Using the PDK
-
-To use the Patchwork Development Kit (PDK), run:
-
-```shell
-npx pdk
-```
