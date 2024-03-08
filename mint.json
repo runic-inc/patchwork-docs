@@ -96,18 +96,34 @@
       ]
     },
     {
-      "group": "Contract configuration examples",
+      "group": "Contract config examples",
       "pages": [
         "pdk/config/basic",
-        "pdk/config/patch",
         "pdk/config/arrays",
-        "pdk/config/fragmentsingle",
-        "pdk/config/fragmentmulti",
-        "pdk/config/literef8",
-        "pdk/config/dynref",
-        "pdk/config/1155patch",
-        "pdk/config/accountpatch",
-        "pdk/config/patchfragment"
+        {
+          "group": "Fragment examples",
+          "pages": [
+            "pdk/config/fragmentsingle",
+            "pdk/config/fragmentmulti"
+          ]
+        },
+        {
+          "group": "Assignee examples",
+          "pages": [
+            "pdk/config/literef8",
+            "pdk/config/dynref"
+          ]
+        },
+        {
+          "group": "Patch examples",
+          "pages": [
+            "pdk/config/patch",
+            "pdk/config/1155patch",
+            "pdk/config/accountpatch"
+          ]
+        },
+        "pdk/config/patchfragment",
+        "pdk/config/patchassignee"
       ]
     },
 
