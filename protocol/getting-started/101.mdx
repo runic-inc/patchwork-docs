@@ -77,9 +77,9 @@ Our PDK is a low-code CLI tool that takes a simple JSON file documenting your co
     <Info>If you prefer to roll your own contracts, import the requisite Patchwork interfaces and adhere to the APIs outlined in our Contracts Reference material.</Info>
   </Step>
   <Step title="Data orchestration">
-    Once your contracts have been deployed and granted Scope permissions, your app is Patchwork-ready all set to create and handle data.
+    Once your contracts have been deployed and granted Scope permissions, your app is Patchwork-ready and is all set to create and handle data.
     
-    Your actual data lifecycle is entirely dependent on your use case and contract logic, but at a macro level the typical end result is the same. A top-level Patchwork721 contract outlines your database columns, and each token minted in those contracts acts as a database row. Fragments can be used to encapsulate one or more of each row's field data as a discrete Patchwork-flavored ERC-721 token; those Fragments can be traded, moved to around to different tokens, etc..
+    Your actual data lifecycle is entirely dependent on your use case and contract logic, but at a macro level the typical end result is the same. A top-level Patchwork721 contract outlines your database columns, and each token minted in those contracts acts as a database row. Fragments can be used to encapsulate one or more of each row's field data as a discrete Patchwork-flavored ERC721 token; those Fragments can be traded, moved to around to different tokens, etc..
 
     All of the orchestration for your data's lifecycle is handled by the protocol, working in tandem with your scope permissions, contract logic, and end-user agency to ensure absolute integrity of your data.
   </Step>
@@ -91,7 +91,7 @@ The protocol emits context-rich events for the full spectrum of Patchwork intera
 
 ## How do I get started?
 
-The best way to dive into Patchwork is to scan through the information in the [Working with Patchwork](/protocol/guide/) section of the docs, check out the [Quickstart](/protocol/getting-started/quickstart.mdx) guide, and get your feet wet with our simple `Hello World` tutorial on the [Deploying your first app](/protocol/getting-started/hello-world) page. We'll walk you through the steps of installing PDK, writing your first schema, deploying your contract, and creating your first set of onchain data.
+The best way to dive into Patchwork is to scan through the information in the [Working with Patchwork](/protocol/guide/) section of the docs, check out the [Quickstart](/protocol/getting-started/quickstart.mdx) guide, and get your feet wet with our simple app tutorial on the [Deploying your first app](/protocol/getting-started/hello-world) page. We'll walk you through the steps of installing PDK, writing your first schema, deploying your contract, and creating your first set of onchain data.
 
 <br />
 <CardGroup cols={2}>
@@ -99,6 +99,6 @@ The best way to dive into Patchwork is to scan through the information in the [W
     Quick guide to get PDK installed and start writing your app.
 </Card>
 <Card title="Deploy your first app" icon="paper-plane" href="/protocol/getting-started/hello-world">
-    Go from zero to sixty in 5 minutes with a simple `Hello World` app.
+    Go from zero to sixty in 5 minutes with a simple app.
 </Card>
 </CardGroup>
