@@ -4,4 +4,93 @@ description: 'Learn the intricacies of Fragment relationships'
 ---
 
 
-_Coming soon._
+A `Fragment` is a contract that can be assigned to an `Assignee` contract. The assignment and associated behaviors can be configured in a number of ways. Fragments assignments are referenced using the Patchwork-primitive type `LiteRef`. 
+
+## Fragment Types
+
+| Type | Description |
+| ---- | ----------- |
+| `SingleAssignable` | May be assigned to only one assignee at a time |
+| `MultiAssignable` | May be assigned to multiple assignees simultaneously |
+
+## Ownership Models
+
+### SingleAssignable: ###
+
+By default, a `SingleAssignable` fragment will exhibit the following behavior:
+* Unassigned = Owned by the Fragment's token holder
+* Assigned = Owned by the Assignee
+
+*Example:*
+A Sword 721 has 4 slots for power-ups. A power-up is a Fragment and the Sword is the Assignee. The user acquires a damage-booster fragment and assigns it to the sword. The user transfers the sword to another account and all assignments transfer with it because they are owned by the sword via assignment.
+
+SingleAssignable behaviors can be changed by overriding functions in the PatchworkFragmentSingle library.
+
+### MultiAssignable: ###
+A `MultiAssignable` can be assigned to many different assignees. They do not change ownership based on behavior and have a different API to reflect their assignment model.
+
+*Example:*
+An emoji library is created as MultiAssignable. A "happy" emoji is assigned to thousands of different assignees. The "happy" emoji is always owned by the original content creator.
+
+## Assignment Rules
+
+```solidity
+function allowAssignment(uint256 ourTokenId, address target, uint256 targetTokenId, address targetOwner, address by, string memory scopeName)
+```
+
+## LiteRefs
+
+A `LiteRef` is a 64 bit value with a layout of:
+
+* Upper 8 bits = Reference Address ID
+* Lower 58 bits = Reference Token ID
+
+Assignees will extend the `PatchworkLiteRef` contract. The Reference Address ID is determined by a call to `registerReferenceAddress(address addr)` on the Assignee as described in the workflow below. The token ID is the token ID of the fragment.
+
+<Note>
+LiteRefs have a limit of 255 registered addresses. It is not recommended to allow users to register addresses as this limit is easily reached in an unmanaged design.
+</Note>
+<Note>
+Fragments must never have more than a 56 bit value of a TokenID in order to work as a LiteRef. This limits each Fragment to minting 72 quadrillion tokens if starting at 0. This large limit works for most applications, specifically if applications use incremental numbering of token IDs. Randomized token IDs must stay within the 56 bit space or errors will occur.
+</Note>
+
+## Workflow
+
+Before assigning a fragment to an assignee, the fragment must be registered with the assignee by calling `registerReferenceAddress(fragmentAddress)`
+Once registered, assignments should always be performed through `PatchworkProtocol`. The protocol enforces data integrity between contracts and also tracks assignments that will be visible in the patchwork explorer.
+
+Assignment functions:
+
+```solidity
+patchworkProtocol.assign(address fragment, uint256 fragmentTokenId, address target, uint256 targetTokenId)
+patchworkProtocol.assign(address fragment, uint256 fragmentTokenId, address target, uint256 targetTokenId, uint256 targetMetadataId)
+patchworkProtocol.assignBatch(address[] calldata fragments, uint256[] calldata tokenIds, address target, uint256 targetTokenId)
+patchworkProtocol.assignBatch(address[] calldata fragments, uint256[] calldata tokenIds, address target, uint256 targetTokenId, uint256 targetMetadataId)
+```
+
+## Metadata Modeling
+
+Patchwork721s become LiteRef assignees via fields of type `literef` added to the metadata schema. 
+
+LiteRefs may be single values, static or dynamic arrays. 
+
+Static arrays are most useful when a contract needs to inspect and react to the entire composition of fragments.
+
+Dynamic arrays are most useful when a large, unknown number of assignments will be made and there is no requirement for the contract to read all of the values in a single transaction.
+
+## Cross-scope permissions
+
+When a Fragment and Assignee are in 2 different scopes, the following rules apply:
+
+1. The fragment must allow the assignment via the call to `allowAssignment()`
+2. The fragment must be whitelisted in the fragment's scope if enabled for the scope
+3. The fragment must not be locked
+4. The target (assignee) must be whitelisted in the target's scope if enabled for the scope
+5. The target (assignee) must have the fragment registered for it
+
+## User-assignment permissions
+
+By default an assignment must be initiated by the scope owner or an operator of the target (assignee) scope. The assignee contract itself may be added as an operator to allow for the assignment logic gate to exist and originate from the assignee contract. 
+
+Another option is to enable user-assignment. Enabling this rule in a scope will allow for users to directly assign registered fragments to their assignee contracts.
+
