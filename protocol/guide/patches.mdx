@@ -1,7 +1,43 @@
 ---
 title: Patching
-description: 'Welcome to the home of your new documentation'
+description: ''
 ---
 
+A patch is a 721 that "extends" another NFT (721, 1155) or an account. A patch is soulbound to the patched target and by default cannot point to anything else.
 
-_Coming soon._
+Patchwork Patches are mostly regular Patchwork 721s and can have Patchwork metadata. They can also be fragments but with soulbound ownership rules.
+
+Patchwork has 3 types of patches: 721, 1155 and Account.
+
+
+## 721 Patch ##
+
+721 patches target an ERC-721 contract by targeting the address and tokenId.
+
+```solidity
+patchworkProtocol.patch(address owner, address originalAddress, uint originalTokenId, address patchAddress)
+```
+
+721 Patch contracts must implement the `IPatchworkPatch` interface and can be generated with the feature `patch` in a PDK contract configuration
+
+
+## 1155 Patch ##
+
+1155 patches target an ERC-1155 contract by targeting the address, tokenId and account address. By using a `0x0` address for the account, you can target the entirety of an 1155's tokenId.
+
+```solidity
+patchworkProtocol.patch1155(address to, address originalAddress, uint originalTokenId, address originalAccount, address patchAddress)
+```
+
+1155 Patch contracts must implement the `IPatchwork1155Patch` interface and can be generated with the feature `1155patch` in a PDK contract configuration
+
+
+## Account Patch ##
+
+An account patch targets a plain address.
+
+```solidity
+patchworkProtocol.patchAccount(address owner, address originalAddress, address patchAddress)
+```
+
+Account Patch contracts must implement the `IPatchworkAccountPatch` interface and can be generated with the feature `accountpatch` in a PDK contract configuration
