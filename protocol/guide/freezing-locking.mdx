@@ -3,4 +3,41 @@ title: Freezing & locking
 description: 'Understand the freezing & locking mechanics that ensure metadata integrity'
 ---
 
-_Coming soon._
+## Freezing ##
+
+Freezing is the process of locking data and/or relations so that a Patchwork721 can be sold or transferred with data guaranteed intact.
+
+Patchwork enables inherited ownership models between assignees and fragments. Without freezing, a malicious actor could sell an assignee and frontrun the transaction with an unassign call, stripping away some value off of the NFT to be sold.
+
+Related functions from `IPatchwork721`
+
+```solidity
+getFreezeNonce(uint256 tokenId)
+setFrozen(uint256 tokenId, bool frozen_)
+frozen(uint256 tokenId);
+transferFromWithFreezeNonce(address from, address to, uint256 tokenId, uint256 nonce)
+safeTransferFromWithFreezeNonce(address from, address to, uint256 tokenId, uint256 nonce)
+safeTransferFromWithFreezeNonce(address from, address to, uint256 tokenId, bytes memory data, uint256 nonce)
+```
+
+*Workflow*
+
+1. The owner will call `setFrozen(myTokenId, true)` to freeze the NFT.
+2. The third party (marketplace) will call `getFreezeNonce(myTokenId)` to get the current freeze nonce.
+3. The third party (marketplace) will call `safeTransferFromWithFreezeNonce()` providing the known freeze nonce to transfer.
+
+If the nonce at transfer is higher than expected, the transfer will revert.
+
+A `Frozen` or `Thawed` event are emitted when frozen state changes
+
+## Locking ##
+
+Locking prevents an NFT from being assigned or transferred. 
+
+```solidity
+setLocked(uint256 tokenId, bool locked_)
+locked(uint256 tokenId)
+```
+
+An IERC5192 `Locked` or `Unlocked` event are emitted when locked state changes
+
