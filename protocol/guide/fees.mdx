@@ -3,5 +3,31 @@ title: Handling fees
 description: 'Learn how fee accrual and accounting works for Scopes'
 ---
 
+Scopes can be configured to charge a fee for mint, assign or patch events.
 
-_Coming soon._
+Related functions:
+
+```solidity
+setMintConfiguration(address addr, MintConfig memory config)
+getMintConfiguration(address addr) external view returns (MintConfig memory config)
+setPatchFee(address addr, uint256 baseFee)
+getPatchFee(address addr) external view returns (uint256 baseFee)
+setAssignFee(address fragmentAddress, uint256 baseFee)
+getAssignFee(address fragmentAddress) external view returns (uint256 baseFee)
+```
+
+All amounts in mint, assign or patch fees are base fee amounts. Patchwork Protocol will be configured to take a percentage of the base fee amount for the protocol fee. The base fee amount is what the user is charged and is split between the scope and the protocol.
+
+Configurations are per-address. For multiple contracts, each contract address must be set explicitly.
+
+Fees are collected and held by the protocol and are made available to withdraw at any time by the scope owner or banker.
+
+```solidity
+addBanker(string memory scopeName, address addr)
+removeBanker(string memory scopeName, address addr)
+withdraw(string memory scopeName, uint256 amount)
+balanceOf(string memory scopeName) external view returns (uint256 balance)
+```
+
+Use `addBanker` to add a banker to your scope and you can withdraw all collected fees by calling `withdraw("myscope", balanceOf("myscope"))`
+
