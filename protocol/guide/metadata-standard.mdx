@@ -1,0 +1,106 @@
+---
+title: Metadata Standard
+description: 'Deep dive the Patchwork metadata standard'
+---
+
+Patchwork uses a metadata format which allows for discoverability, lower gas usage and efficiency reading and writing field sets on and off chain.
+
+Metadata packing is performed by the PDK code generator but may be done in other ways as long as packing rules are followed.
+
+## Onchain Schemas ##
+
+Contracts supporting onchain Patchwork metadata must implement the `schema()` function as documented below
+
+```solidity
+function schema() external view returns (MetadataSchema memory);
+```
+
+A `schema()` call must return a `MetadataSchema` as specified here:
+
+```solidity
+    struct MetadataSchema {
+        uint256 version;                    ///< Version of the metadata schema.
+        MetadataSchemaEntry[] entries;      ///< Array of entries in the schema.
+    }
+
+    struct MetadataSchemaEntry {
+        uint256 id;                        ///< Index or unique identifier of the entry.
+        uint256 permissionId;              ///< Permission identifier associated with the entry.
+        FieldType fieldType;               ///< Type of field data (from the FieldType enum).
+        uint256 fieldCount;                ///< Number of elements of this field (0 = Dynamic Array, 1 = Single, >1 = Static Array)
+        FieldVisibility visibility;        ///< Visibility level of the field.
+        uint256 slot;                      ///< Starting storage slot, may span multiple slots based on width.
+        uint256 offset;                    ///< Offset in bits within the storage slot.
+        string key;                        ///< Key or name associated with the field.
+    }
+```
+
+Currently supported field types are:
+
+```solidity
+    enum FieldType {
+        BOOLEAN,  ///< A Boolean type (true or false).
+        INT8,     ///< An 8-bit signed integer.
+        INT16,    ///< A 16-bit signed integer.
+        INT32,    ///< A 32-bit signed integer.
+        INT64,    ///< A 64-bit signed integer.
+        INT128,   ///< A 128-bit signed integer.
+        INT256,   ///< A 256-bit signed integer.
+        UINT8,    ///< An 8-bit unsigned integer.
+        UINT16,   ///< A 16-bit unsigned integer.
+        UINT32,   ///< A 32-bit unsigned integer.
+        UINT64,   ///< A 64-bit unsigned integer.
+        UINT128,  ///< A 128-bit unsigned integer.
+        UINT256,  ///< A 256-bit unsigned integer.
+        CHAR8,    ///< An 8-character string (64 bits).
+        CHAR16,   ///< A 16-character string (128 bits).
+        CHAR32,   ///< A 32-character string (256 bits).
+        CHAR64,   ///< A 64-character string (512 bits).
+        LITEREF,  ///< A 64-bit Literef reference to a patchwork fragment.
+        ADDRESS,  ///< A 160-bit address.
+        STRING    ///< A dynamically-sized string.
+    }
+```
+
+Fields may be specified in any order so long as the rules below are adhered to
+
+Rules
+
+* IDs must be unique
+* Keys must be unique
+* Field slots and offsets must be accurately described in the schema
+* Fields, including arrays, than span multiple slots must start at an offset of 0 in the first slot. Spanned slots must be contiguous and must not have any other fields specified in overlapping space of the contiguous slot space.
+* Dynamic fields, such as dynamic length arrays and dynamic length strings, may not be packed into static metadata but must be in separate storage.
+* Dynamic fields, such as dynamic length arrays and dynamic length strings, must be marked slot 0, offset 0, length 0 in the schema
+* Individual fields that are not arrays must be marked as length 1 in metadata
+
+Example:
+
+Field 2 is a 512 bit value (CHAR64). Field 2 must be specified at offset 0 of a slot. The schema reports slot 1, offset 0. This should be interpreted as using all of slot 1 and slot 2, as slot 2 is the contiguous span.
+
+## Field Packing ##
+
+All fields are packed into an array of uint256 primitive values. uint256s are chosen over bytes because they can be explicitly and directly accessed without having to read any additional storage. Because of the explicit EVM storage slot alignment, optimized reads and writes are possible by grouping fields together into commonly read/updated slots. This allows for a single SLOAD, an in-memory update and a single SSTORE for a number of values in a single slot.
+
+Fields are packed by shifting the value left by the offset of bits.
+
+Example:
+
+Field 1-4 are all UINT64, starting at offsets 0, 64, 128 and 192 respectively. The storage slot would look like:
+
+4444444444444444333333333333333322222222222222221111111111111111
+
+The expression to pack this would be:
+
+```solidity
+uint256 slot = field1 | uint256(field2) << 64 | uint256(field3) << 128 | uint256(field4) << 192;
+```
+
+The exppression to unpack the fields from this slot would be:
+
+```solidity
+uint64 field1 = uint64(slot);
+uint64 field2 = uint64(slot >> 64);
+uint64 field3 = uint64(slot >> 128);
+uint64 field4 = uint64(slot >> 192);
+```

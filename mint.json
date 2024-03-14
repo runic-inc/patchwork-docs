@@ -66,7 +66,8 @@
         "protocol/guide/patches",
         "protocol/guide/freezing-locking",
         "protocol/guide/events",
-        "protocol/guide/fees"
+        "protocol/guide/fees",
+        "protocol/guide/metadata-standard"
       ]
     },
     {
