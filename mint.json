@@ -125,6 +125,12 @@
         "pdk/config/patchfragment",
         "pdk/config/patchassignee"
       ]
+    },{
+      "group": "create-patchwork",
+      "pages": [
+        "pdk/create-patchwork/introduction",
+        "pdk/create-patchwork/localdev"
+      ]
     },
 
 
