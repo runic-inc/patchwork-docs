@@ -1,0 +1,97 @@
+
+```json
+{
+    "$schema": "https://patchwork.dev/schema/patchwork-project-config.schema.json",
+    "name": "idverification",
+    "scopes": {
+        "myscope": {
+            "name": "myscope"
+        }
+    },
+    "contracts": {
+        "IDVerification": {
+          "config": {
+            "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "IDVerification",
+              "symbol": "IDV",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/idverification.json",
+              "imageURI": "https://replace-me-with-website/assets/idverification/{tokenID}",
+              "features": [
+                "accountpatch"
+              ],
+              "fields": [
+                {
+                  "id": 0,
+                  "key": "status",
+                  "type": "uint8",
+                  "description": "Verification Status (0 = not verified, 1 = verified, 2 = pending)"
+                },
+                {
+                  "id": 1,
+                  "key": "nonce",
+                  "type": "uint64",
+                  "description": "Verification Nonce - New verifications must be greater"
+                },
+                {
+                  "id": 2,
+                  "key": "verifications",
+                  "type": "literef",
+                  "description": "Verifications",
+                  "arrayLength": 8
+                }
+              ],
+              "fragments": [
+                "MyVerification"
+              ]
+          }
+        },
+        "MyVerification": {
+            "config": {
+              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "MyVerification",
+              "symbol": "VER",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/verification.json",
+              "imageURI": "https://replace-me-with-website/assets/verification/{tokenID}",
+              "features": [
+                "mintable",
+                "fragmentsingle"
+              ],
+              "fields": [
+                {
+                  "id": 0,
+                  "key": "createdat",
+                  "type": "uint64",
+                  "description": "CreatedAt Timestamp (seconds since epoch)",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 1,
+                  "key": "verifier",
+                  "type": "address",
+                  "description": "Verifier",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 2,
+                  "key": "nonce",
+                  "type": "uint64",
+                  "description": "Nonce",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 3,
+                  "key": "signature",
+                  "type": "uint256",
+                  "description": "Verifier Signature",
+                  "functionConfig": "load"
+                }
+              ]
+           }
+        }
+    }
+}
+```

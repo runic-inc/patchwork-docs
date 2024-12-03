@@ -1,0 +1,54 @@
+```json
+{
+    "$schema": "https://patchwork.dev/schema/patchwork-project-config.schema.json",
+    "name": "assets",
+    "scopes": {
+        "myscope": {
+            "name": "myscope"
+        }
+    },
+    "contracts": {
+        "MyAsset": {
+            "config": {
+              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "MyAsset",
+              "symbol": "ASSET",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/asset.json",
+              "imageURI": "https://replace-me-with-website/assets/asset/{tokenID}",
+              "features": [
+                "mintable"
+              ],
+              "fields": [
+                {
+                  "id": 0,
+                  "key": "description",
+                  "type": "char32",
+                  "description": "Asset Description"
+                },
+                {
+                  "id": 1,
+                  "key": "tag",
+                  "type": "uint32",
+                  "description": "Asset tag (unique)",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 2,
+                  "key": "status",
+                  "type": "uint8",
+                  "description": "Status (0 = None, 1 = Current, 2 = Disposed)"
+                },
+                {
+                  "id": 3,
+                  "key": "location",
+                  "type": "address",
+                  "description": "Where is this asset or who is currently in possession of it"
+                }
+              ]
+           }
+        }
+    }
+}
+```

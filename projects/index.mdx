@@ -1,0 +1,20 @@
+---
+title: 'Example Project Index'
+---
+
+|Name|Description|
+|----|-----------|
+|[pfp](./pfp)|A basic PFP with onchain metadata|
+|[receipt](./receipt)|A purchase receipt with onchain metadata|
+|[coupon](./coupon)|A general purpose coupon with maximum number of uses, optional transferability and use count tracking as onchain metadata|
+|[elephants](./elephants)|A composable-NFT/PFP project in which individual parts (attributes) are minted and forged together into a new NFT. The attributes may be traded and the big NFT (elephant) can be remixed and reforged.|
+|[canvas](./canvas)|A composition NFT project which has a limitless (dynamic) number of assignable NFTs (bubbles). Users may create a canvas with its own rules and then other users can mint 1 bubble that is assigned to the canvas.|
+|[purchasehistorypatch](./purchasehistorypatch)|An account patch which tracks a limitless (dynamic) number of purchases (receipts) for the account. May not be transferred to other accounts. Uses a library to reduce generated code size.|
+|[idverification](./idverification)|An account patch which tracks the verification status for an account and attaches individual signed verification attestations from independent verifiers. The patch must have a submit function used by verifiers which checks if the signature used a nonce equal to the current account's nonce. If approved, the nonce will increment. A redact function will allow for a verification to be removed and status will be updated.|
+|[reactions](./reactions)|A system which patches existing ERC721 content and allows for unlimited reactions and comments to be bound to the content. The reaction and comment list is reversible so can be enumerated.|
+|[appraisals](./appraisals)|A system which patches both existing ERC721 and ERC1155 and allows for appraisals to be signed and attached to the content. Implementations should add submitAppraisal and redactAppraisal functions which check and increment the nonce.|
+|[game](./game)|A game character and item system where 16 items can be equipped to a character at a given time|
+|[school](./school)|A class and student many to many system (classic relational data modeling example - one student can be in many classes and many students in a class)|
+|[asset](./asset)|Basic company asset management as a 721. Each asset has a description, tag, status and location for tracking a company's assets.|
+|[titles](./titles)|Account patch with Auto titles as assignable fragments. Assignment represents ownership of the title. Titles are signed by an issuer.|
+|[tickets](./tickets)|Ticketing system where tickets are assigned to an event but weakref owned by ticket holders so the tickets can be transferred but will always stay assigned to their event|

@@ -1,0 +1,70 @@
+
+```json
+{
+    "$schema": "https://patchwork.dev/schema/patchwork-project-config.schema.json",
+    "name": "tickets",
+    "scopes": {
+        "myscope": {
+            "name": "myscope"
+        }
+    },
+    "contracts": {
+        "Event": {
+            "config": {
+              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "Event",
+              "symbol": "EVENT",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/event.json",
+              "imageURI": "https://replace-me-with-website/assets/event/{tokenID}",
+              "features": ["mintable"],
+              "fields": [
+                {
+                  "id": 0,
+                  "key": "name",
+                  "type": "char32",
+                  "description": "Name"
+                },
+                {
+                  "id": 1,
+                  "key": "tickets",
+                  "type": "literef",
+                  "arrayLength": 0,
+                  "description": "Event Tickets"
+                }
+              ]
+            },
+            "fragments": [
+                "Ticket"
+            ]
+        },
+        "Ticket": {
+            "config": {
+              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "Ticket",
+              "symbol": "TICKET",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/ticket.json",
+              "imageURI": "https://replace-me-with-website/assets/ticket/{tokenID}",
+              "features": ["mintable","fragmentsingle","weakref"],
+              "fields": [
+                {
+                  "id": 0,
+                  "key": "number",
+                  "type": "uint32",
+                  "description": "Ticket Number"
+                },
+                {
+                  "id": 1,
+                  "key": "seat",
+                  "type": "char8",
+                  "description": "Seat"
+                }
+              ]
+            }
+        }
+    }
+}
+```

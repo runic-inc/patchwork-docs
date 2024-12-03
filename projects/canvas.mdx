@@ -1,0 +1,77 @@
+
+```json
+{
+    "$schema": "https://patchwork.dev/schema/patchwork-project-config.schema.json",
+    "name": "canvas",
+    "scopes": {
+        "canvas": {
+            "name": "canvas"
+        }
+    },
+    "contracts": {
+        "Canvas": {
+            "config": {
+              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "canvas",
+              "name": "Canvas",
+              "symbol": "CANVAS",
+              "baseURI": "https://canvas.patchwork.dev/",
+              "schemaURI": "https://canvas.patchwork.dev/schemas/canvas.json",
+              "imageURI": "https://canvas.patchwork.dev/assets/canvas/{tokenID}",
+              "features": ["mintable"],
+              "fields": [
+                {
+                  "id": 0,
+                  "key": "name",
+                  "type": "char32",
+                  "description": "Name"
+                },
+                {
+                  "id": 1,
+                  "key": "bubbleRefs",
+                  "type": "literef",
+                  "arrayLength": 0,
+                  "description": "Bubble Literefs"
+                }
+              ]
+            },
+            "fragments": [
+                "Bubble"
+            ]
+        },
+        "Bubble": {
+            "config": {
+              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "canvas",
+              "name": "Bubble",
+              "symbol": "BUBBLE",
+              "baseURI": "https://canvas.patchwork.dev/",
+              "schemaURI": "https://canvas.patchwork.dev/schemas/bubble.json",
+              "imageURI": "https://canvas.patchwork.dev/assets/bubble/{tokenID}",
+              "features": ["mintable","fragmentsingle","weakref"],
+              "fields": [
+                {
+                  "id": 0,
+                  "key": "sequence",
+                  "type": "uint256",
+                  "description": "Sequence"
+                },
+                {
+                  "id": 1,
+                  "key": "decorations",
+                  "type": "bytes8",
+                  "arrayLength": 4,
+                  "description": "Decorations"
+                },
+                {
+                  "id": 2,
+                  "key": "minter",
+                  "type": "address",
+                  "description": "Original minter address"
+                }
+              ]
+            }
+        }
+    }
+}
+```

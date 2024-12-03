@@ -1,0 +1,81 @@
+
+```json
+{
+    "$schema": "https://patchwork.dev/schema/patchwork-project-config.schema.json",
+    "name": "game",
+    "scopes": {
+        "myscope": {
+            "name": "myscope"
+        }
+    },
+    "contracts": {
+        "Character": {
+            "config": {
+              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "Character",
+              "symbol": "CHAR",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/character.json",
+              "imageURI": "https://replace-me-with-website/assets/character/{tokenID}",
+              "fields": [
+                {
+                  "id": 0,
+                  "key": "equipment",
+                  "type": "literef",
+                  "arrayLength": 16,
+                  "description": "Equipped Items"
+                },
+                {
+                  "id": 1,
+                  "key": "name",
+                  "type": "char32",
+                  "description": "Name"
+                }
+              ]
+            },
+            "fragments": [
+                "GameItem"
+            ]
+        },
+        "GameItem": {
+            "config": {
+              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "GameItem",
+              "symbol": "ITEM",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/gameitem.json",
+              "imageURI": "https://replace-me-with-website/assets/gameitem/{tokenID}",
+              "features": ["mintable","fragmentsingle"],
+              "fields": [
+                {
+                  "id": 0,
+                  "key": "itemType",
+                  "type": "uint8",
+                  "description": "Item Type"
+                },
+                {
+                  "id": 1,
+                  "key": "itemId",
+                  "type": "uint16",
+                  "description": "Item ID"
+                },
+                {
+                  "id": 2,
+                  "key": "tier",
+                  "type": "uint8",
+                  "description": "Item Tier"
+                },
+                {
+                  "id": 3,
+                  "key": "name",
+                  "type": "char16",
+                  "description": "Item Name"
+                }
+              ]
+            }
+        }
+    }
+}
+```

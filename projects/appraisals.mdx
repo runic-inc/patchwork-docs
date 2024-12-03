@@ -1,0 +1,130 @@
+
+```json
+{
+    "$schema": "https://patchwork.dev/schema/patchwork-project-config.schema.json",
+    "name": "appraisals",
+    "scopes": {
+        "myscope": {
+            "name": "myscope"
+        }
+    },
+    "contracts": {
+        "AppraisalPatch": {
+          "config": {
+            "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "AppraisalPatch",
+              "symbol": "APPAT",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/appraisalpatch.json",
+              "imageURI": "https://replace-me-with-website/assets/appraisalpatch/{tokenID}",
+              "features": [
+                "patch"
+              ],
+              "fields": [
+                {
+                  "id": 0,
+                  "key": "nonce",
+                  "type": "uint64",
+                  "description": "Signature Nonce - New appraisals must be greater"
+                },
+                {
+                  "id": 1,
+                  "key": "appraisals",
+                  "type": "literef",
+                  "description": "Appraisals",
+                  "arrayLength": 8
+                }
+              ],
+              "fragments": [
+                "Appraisal"
+              ]
+          }
+        },
+        "Appraisal1155Patch": {
+          "config": {
+            "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "Appraisal1155Patch",
+              "symbol": "APPAT5",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/appraisal1155patch.json",
+              "imageURI": "https://replace-me-with-website/assets/appraisal1155patch/{tokenID}",
+              "features": [
+                "1155patch"
+              ],
+              "fields": [
+                {
+                  "id": 0,
+                  "key": "nonce",
+                  "type": "uint64",
+                  "description": "Signature Nonce - New appraisals must be greater"
+                },
+                {
+                  "id": 1,
+                  "key": "appraisals",
+                  "type": "literef",
+                  "description": "Appraisals",
+                  "arrayLength": 8
+                }
+              ],
+              "fragments": [
+                "Appraisal"
+              ]
+          }
+        },
+        "Appraisal": {
+            "config": {
+              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "Appraisal",
+              "symbol": "APPR",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/appraisal.json",
+              "imageURI": "https://replace-me-with-website/assets/appraisal/{tokenID}",
+              "features": [
+                "mintable",
+                "fragmentsingle"
+              ],
+              "fields": [
+                {
+                  "id": 0,
+                  "key": "createdat",
+                  "type": "uint64",
+                  "description": "CreatedAt Timestamp (seconds since epoch)",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 1,
+                  "key": "appraiser",
+                  "type": "address",
+                  "description": "Appraiser",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 2,
+                  "key": "nonce",
+                  "type": "uint64",
+                  "description": "Nonce",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 3,
+                  "key": "signature",
+                  "type": "uint256",
+                  "description": "Appraiser Signature",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 4,
+                  "key": "value",
+                  "type": "uint256",
+                  "description": "Appraised Value",
+                  "functionConfig": "load"
+                }
+              ]
+           }
+        }
+    }
+}
+```
