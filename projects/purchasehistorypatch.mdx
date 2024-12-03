@@ -1,0 +1,86 @@
+
+```json
+{
+    "$schema": "https://patchwork.dev/schema/patchwork-project-config.schema.json",
+    "name": "myreceipt",
+    "scopes": {
+        "myscope": {
+            "name": "myscope"
+        }
+    },
+    "contracts": {
+        "AccountPurchaseHistory": {
+          "config": {
+            "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "AccountPurchaseHistory",
+              "symbol": "HIST",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/purchasehistory.json",
+              "imageURI": "https://replace-me-with-website/assets/purchasehistory/{tokenID}",
+              "features": [
+                "accountpatch",
+                "dynamicreflibrary"
+              ],
+              "fields": [
+                {
+                  "id": 0,
+                  "key": "receipts",
+                  "type": "literef",
+                  "description": "Receipts",
+                  "arrayLength": 0
+                }
+              ],
+              "fragments": [
+                "MyReceipt"
+              ]
+          }
+        },
+        "MyReceipt": {
+            "config": {
+              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "MyReceipt",
+              "symbol": "RCPT",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/myreceipt.json",
+              "imageURI": "https://replace-me-with-website/assets/myreceipt/{tokenID}",
+              "features": [
+                "mintable",
+                "fragmentsingle"
+              ],
+              "fields": [
+                {
+                  "id": 0,
+                  "key": "timestamp",
+                  "type": "uint64",
+                  "description": "Purchase Timestamp (seconds since epoch)",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 1,
+                  "key": "itemcode",
+                  "type": "uint32",
+                  "description": "Purchased Item Code",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 2,
+                  "key": "quantity",
+                  "type": "uint64",
+                  "description": "Purchased Quantity",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 3,
+                  "key": "purchaser",
+                  "type": "address",
+                  "description": "Purchaser address",
+                  "functionConfig": "load"
+                }
+              ]
+           }
+        }
+    }
+}
+```

@@ -1,0 +1,68 @@
+
+```json
+{
+    "$schema": "https://patchwork.dev/schema/patchwork-project-config.schema.json",
+    "name": "school",
+    "scopes": {
+        "myscope": {
+            "name": "myscope"
+        }
+    },
+    "contracts": {
+        "Class": {
+            "config": {
+              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "Class",
+              "symbol": "CLASS",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/class.json",
+              "imageURI": "https://replace-me-with-website/assets/class/{tokenID}",
+              "fields": [
+                {
+                  "id": 0,
+                  "key": "teacher",
+                  "type": "address",
+                  "description": "Teacher"
+                },
+                {
+                  "id": 1,
+                  "key": "name",
+                  "type": "char32",
+                  "description": "Name"
+                }
+              ]
+            },
+            "fragments": [
+                "Student"
+            ]
+        },
+        "Student": {
+            "config": {
+              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "Student",
+              "symbol": "ITEM",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/student.json",
+              "imageURI": "https://replace-me-with-website/assets/student/{tokenID}",
+              "features": ["mintable","fragmentmulti"],
+              "fields": [
+                {
+                  "id": 0,
+                  "key": "student",
+                  "type": "address",
+                  "description": "Student"
+                },
+                {
+                  "id": 1,
+                  "key": "name",
+                  "type": "char32",
+                  "description": "Name"
+                }
+              ]
+            }
+        }
+    }
+}
+```
