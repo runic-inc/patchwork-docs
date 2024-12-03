@@ -1,186 +1,173 @@
 {
-  "$schema": "https://mintlify.com/schema.json",
-  "name": "Patchwork Docs",
-  "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
-  },
-  "favicon": "/icon.svg",
-  "colors": {
-    "primary": "#000",
-    "light": "#fff",
-    "dark": "#000",
-    "background": {
-      "light": "#fff",
-      "dark": "#030712"
-    }
-  },
-  "topbarLinks": [
-    {
-      "name": "Patchwork Home",
-      "type": "link",
-      "url": "https://patchwork.dev"
-    }
-  ],
-  "anchors": [
-    {
-      "name": "GitHub",
-      "icon": "github",
-      "url": "https://github.com/runic-inc/patchwork"
-    },
-    {
-      "name": "Join our Discord",
-      "icon": "discord",
-      "url": "https://discord.gg/vq43ss25Bu"
-    }
-  ],
-  "primaryTab": {
-    "name": "Patchwork Protocol"
-  },
-  "tabs": [
-    {
-      "name": "Patchwork Development Kit",
-      "url": "pdk"
-    },
-    {
-      "name": "Contracts Reference",
-      "url": "contracts"
-    }
-  ],
-  "navigation": [
-    {
-      "group": "Get Started",
-      "pages": [
-        "protocol/getting-started/introduction",
-        "protocol/getting-started/101",
-        "protocol/getting-started/quickstart",
-        "protocol/getting-started/hello-world"
-      ]
-    },
-    {
-      "group": "Working with Patchwork",
-      "pages": [
-        "protocol/guide/scopes",
-        "protocol/guide/data-modeling",
-        "protocol/guide/assignments",
-        "protocol/guide/patches",
-        "protocol/guide/freezing-locking",
-        "protocol/guide/events",
-        "protocol/guide/fees",
-        "protocol/guide/metadata-standard"
-      ]
-    },
-    {
-      "group": "Info",
-      "pages": [
-        "protocol/info/networks", {
-          "group": "Changelogs",
-          "icon": "code-merge",
-          "pages": [
-            "protocol/info/changelog-protocol",
-            "protocol/info/changelog-contracts"
-          ]
-        },
-        "protocol/info/audits"
-      ]
-    },
+	"$schema": "https://mintlify.com/schema.json",
+	"name": "Patchwork Docs",
+	"logo": {
+		"dark": "/logo/dark.svg",
+		"light": "/logo/light.svg"
+	},
+	"favicon": "/icon.svg",
+	"colors": {
+		"primary": "#000",
+		"light": "#fff",
+		"dark": "#000",
+		"background": {
+			"light": "#fff",
+			"dark": "#030712"
+		}
+	},
+	"topbarLinks": [
+		{
+			"name": "Patchwork Home",
+			"type": "link",
+			"url": "https://patchwork.dev"
+		}
+	],
+	"anchors": [
+		{
+			"name": "GitHub",
+			"icon": "github",
+			"url": "https://github.com/runic-inc/patchwork"
+		},
+		{
+			"name": "Patchwork Wizard",
+			"icon": "wand-magic-sparkles",
+			"url": "https://wizard.patchwork.dev/"
+		},
+		{
+			"name": "Join our Discord",
+			"icon": "discord",
+			"url": "https://discord.gg/vq43ss25Bu"
+		}
+	],
+	"primaryTab": {
+		"name": "Patchwork Protocol"
+	},
+	"tabs": [
+		{
+			"name": "Patchwork Development Kit",
+			"url": "pdk"
+		},
+		{
+			"name": "Contracts Reference",
+			"url": "contracts"
+		}
+	],
+	"navigation": [
+		{
+			"group": "Get Started",
+			"pages": [
+				"protocol/getting-started/introduction",
+				"protocol/getting-started/101",
+				"protocol/getting-started/quickstart",
+				"protocol/getting-started/hello-world"
+			]
+		},
+		{
+			"group": "Working with Patchwork",
+			"pages": [
+				"protocol/guide/scopes",
+				"protocol/guide/data-modeling",
+				"protocol/guide/assignments",
+				"protocol/guide/patches",
+				"protocol/guide/freezing-locking",
+				"protocol/guide/events",
+				"protocol/guide/fees",
+				"protocol/guide/metadata-standard"
+			]
+		},
+		{
+			"group": "Info",
+			"pages": [
+				"protocol/info/networks",
+				{
+					"group": "Changelogs",
+					"icon": "code-merge",
+					"pages": [
+						"protocol/info/changelog-protocol",
+						"protocol/info/changelog-contracts"
+					]
+				},
+				"protocol/info/audits"
+			]
+		},
 
+		{
+			"group": "Introduction",
+			"pages": [
+				"pdk/overview",
+				"pdk/getting-started",
+				"pdk/configuration",
+				"pdk/local-development"
+			]
+		},
+		{
+			"group": "Contract config examples",
+			"pages": [
+				"pdk/config/basic",
+				"pdk/config/arrays",
+				{
+					"group": "Fragment examples",
+					"pages": [
+						"pdk/config/fragmentsingle",
+						"pdk/config/fragmentmulti"
+					]
+				},
+				{
+					"group": "Assignee examples",
+					"pages": ["pdk/config/literef8", "pdk/config/dynref"]
+				},
+				{
+					"group": "Patch examples",
+					"pages": [
+						"pdk/config/patch",
+						"pdk/config/1155patch",
+						"pdk/config/accountpatch"
+					]
+				},
+				"pdk/config/patchfragment",
+				"pdk/config/patchassignee"
+			]
+		},
 
-
-    
-    {
-      "group": "Getting started",
-      "pages": [
-        "pdk/introduction",
-        "pdk/configs"
-      ]
-    },
-    {
-      "group": "Contract config examples",
-      "pages": [
-        "pdk/config/basic",
-        "pdk/config/arrays",
-        {
-          "group": "Fragment examples",
-          "pages": [
-            "pdk/config/fragmentsingle",
-            "pdk/config/fragmentmulti"
-          ]
-        },
-        {
-          "group": "Assignee examples",
-          "pages": [
-            "pdk/config/literef8",
-            "pdk/config/dynref"
-          ]
-        },
-        {
-          "group": "Patch examples",
-          "pages": [
-            "pdk/config/patch",
-            "pdk/config/1155patch",
-            "pdk/config/accountpatch"
-          ]
-        },
-        "pdk/config/patchfragment",
-        "pdk/config/patchassignee"
-      ]
-    },{
-      "group": "create-patchwork",
-      "pages": [
-        "pdk/create-patchwork/introduction",
-        "pdk/create-patchwork/localdev"
-      ]
-    },
-
-
-
-    
-    {
-      "group": "Protocol API",
-      "pages": [
-        "contracts/core/IPatchworkProtocol"
-      ]
-    },
-    {
-      "group": "Core Interfaces",
-      "pages": [
-        "contracts/core/IPatchwork721",
-        "contracts/core/IPatchworkMetadata",
-        "contracts/core/IPatchworkScoped",
-        "contracts/core/IPatchworkMintable"
-      ]
-    },
-    {
-      "group": "Fragment extensions",
-      "pages": [
-        "contracts/fragment/IPatchworkAssignable",
-        "contracts/fragment/IPatchworkSingleAssignable",
-        "contracts/fragment/IPatchworkMultiAssignable"
-      ]
-    },
-    {
-      "group": "Assignee extensions",
-      "pages": [
-        "contracts/assignee/IPatchworkLiteRef"
-      ]
-    },
-    {
-      "group": "Patch extensions",
-      "pages": [
-        "contracts/patch/IPatchworkPatch",
-        "contracts/patch/IPatchworkAccountPatch",
-        "contracts/patch/IPatchwork1155Patch"
-      ]
-    },
-    {
-      "group": "Utils",
-      "pages": [
-        "contracts/utils/PatchworkUtils"
-      ]
-    }
-  ],
-  "footerSocials": {
-    "github": "https://github.com/runic-inc/patchwork-docs"
-  }
+		{
+			"group": "Protocol API",
+			"pages": ["contracts/core/IPatchworkProtocol"]
+		},
+		{
+			"group": "Core Interfaces",
+			"pages": [
+				"contracts/core/IPatchwork721",
+				"contracts/core/IPatchworkMetadata",
+				"contracts/core/IPatchworkScoped",
+				"contracts/core/IPatchworkMintable"
+			]
+		},
+		{
+			"group": "Fragment extensions",
+			"pages": [
+				"contracts/fragment/IPatchworkAssignable",
+				"contracts/fragment/IPatchworkSingleAssignable",
+				"contracts/fragment/IPatchworkMultiAssignable"
+			]
+		},
+		{
+			"group": "Assignee extensions",
+			"pages": ["contracts/assignee/IPatchworkLiteRef"]
+		},
+		{
+			"group": "Patch extensions",
+			"pages": [
+				"contracts/patch/IPatchworkPatch",
+				"contracts/patch/IPatchworkAccountPatch",
+				"contracts/patch/IPatchwork1155Patch"
+			]
+		},
+		{
+			"group": "Utils",
+			"pages": ["contracts/utils/PatchworkUtils"]
+		}
+	],
+	"footerSocials": {
+		"github": "https://github.com/runic-inc/patchwork-docs"
+	}
 }

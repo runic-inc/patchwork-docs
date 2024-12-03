@@ -1,0 +1,50 @@
+---
+title: 'Getting started'
+description: 'create-patchwork is the fastest way to build a full-stack Patchwork application, generating everything you need for a deployable onchain app in minutes.'
+---
+
+<Note>
+Before you get started, make sure you have [Foundry](https://book.getfoundry.sh/getting-started/installation) installed, as our toolkit depends on it.
+</Note>
+
+## Quickstart
+
+<Steps>
+
+  <Step title="Initialize your app">
+Once you have Foundry installed, set up your new app using `create-patchwork`.
+
+<CodeGroup>
+
+```bash pnpm
+pnpm create patchwork
+```
+```bash npm
+npx create-patchwork
+```
+
+</CodeGroup>
+
+This will scaffold a new starter project with all the services you'll need to get started, including a React frontend, a Ponder indexer with built-in tRPC server, and Docker configurations for orchestrating the above and working with Anvil.
+
+
+  </Step>
+
+  <Step title="Configure your Patchwork config">
+    In the root directory of your newly created project, you'll find a `patchwork.config.ts` file. This is where you'll configure your app's contracts and settings.
+    <Card href="/pdk/configs">**Learn more about `patchwork.config.ts`**</Card>
+  </Step>
+  <Step title="Spin up test environment">
+    If you have Docker installed and running, you can spin up your app's test environment with a single command:
+
+    ```bash
+    pdk localDev up
+    ```
+
+    This will run all relevant code generators, start your app's services, and deploy your contracts to Anvil. Once it's done, you'll be able to access your app at `http://localhost:3000`.
+  </Step>
+</Steps>
+
+## Manual installation
+
+We don't recommend setting up your project manually at this time, as our tooling depends on a specific project structure. We're working on ways to make things more flexible, but for now we recommened sticking with `create-patchwork`.

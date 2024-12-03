@@ -1,0 +1,28 @@
+---
+title: 'Overview'
+description: 'The Patchwork Development Kit makes working with Patchwork a breeze. With just a few commands you can quickly scaffold a new project, generate solidity contracts, generate frontend and backend code to interact with those contracts, and spin up a functional Docker container to start testing everything end-to-end.'
+---
+
+## What's included?
+
+Our primary entrypoint is our `create-patchwork` CLI tool, which takes care of initializing your new project. It includes the following services and sets up PDK for code generation:
+
+#### Services
+
+- Ponder for offchain event indexing, with built-in tRPC API
+- Vite+React frontend with TailwindCSS and Rainbowkit
+- Docker configuration for service orchestration
+- Dozzle for monitoring Docker
+- Anvil integration for convenient local testing
+- Postgres for event persistence
+
+#### Code generators
+
+- Smart contract code
+- Contract create2 deploy scripts
+- Ponder configurations (dotenv, database schemas, event handlers)
+- tRPC API
+- React hooks (tRPC query hooks, Wagmi hooks)
+
+<br />
+<Card title="Quickstart" href="/pdk/getting-started" icon="rocket" horizontal>Use create-patchwork to get started in under a minute</Card>
