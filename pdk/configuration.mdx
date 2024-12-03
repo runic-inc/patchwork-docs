@@ -36,8 +36,29 @@ export default {
             ],
             features: [Feature.MINTABLE],
         },
+        MySecondContract: {
+            scopeName: 'myapp',
+            name: 'My Second Contract',
+            symbol: 'SECOND',
+            baseURI: 'https://www.example.com/',
+            schemaURI: 'https://www.example.com/schemas/mysecondcontract.json',
+            imageURI: 'https://www.example.com/assets/mysecondcontract/{tokenID}',
+            fields: [
+                {
+                    id: 0,
+                    key: 'examplefield',
+                    type: 'char32',
+                    description: 'My Example Field',
+                },
+            ],
+            features: [Feature.MINTABLE],
+        },
     },
-    contractRelations: {},
+    contractRelations: {
+        MyFirstContract: {
+            fragments: ['MySecondContract'],
+        }
+    },
     scopes: [
         {
             name: 'myapp',
@@ -63,29 +84,40 @@ export default {
 
 From this file, we can generate Solidity boilerplate, indexer schemas, React hooks and more.
 
-## Contract configuration JSON
+## Project configuration
+
+| Name | Description |
+| ---- | ----------- |
+| `name` | The name of your app |
+| `scopes` | Scope configuration records |
+| `contracts` | Contract configuration records |
+| `contractRelations` | Contract relations records |
+| `networks` | Network configuration records |
+
+## Contract configuration
 
 | Name | Description |
 | ---- | ----------- |
 | `scopeName` | The scope name of the contract |
 | `name` | The ERC-721 Name of the contract |
 | `symbol` | The ERC-721 symbol of the contract |
+| `baseURI` | The base URI |
 | `schemaURI` | The schema URI |
 | `imageURI` | The image URI |
 | `features` | List of features |
 | `fields` | List of fields |
 
-### Contract configuration JSON fields
+### Contract fields
 
 | Name | Description |
 | ---- | ----------- |
 | `id` | The field ID (must be unique) |
 | `key` | The field key (must be unique) |
-| `type` | The field type (Must be in field type enum) |
+| `type` | The field Type (Must be in field type enum) |
 | `arrayLength` | The array length (1 is default, 0 is dynamic and >1 is a static array) |
 | `description` | The field description |
 
-### Field types
+### Contract field types
 
 | Name | Description |
 | ---- | ----------- |
@@ -111,14 +143,16 @@ From this file, we can generate Solidity boilerplate, indexer schemas, React hoo
 | `string`  | A dynamically-sized string.         |
 
 
-### Features
+### Contract features
 
 | Name | Description |
 | ---- | ----------- |
-| `fragmentmulti` | A multi-assignable fragment |
-| `fragmentsingle`| A single-assignable fragment|
-| `patch`         | A 721 patch         |
-| `patchaccount`  | An account patch  |
-| `patch1155`     | An 1155 patch     |
-| `mintable`      | Mintable      |
-| `reversible`    | Reversible (patch)    |
+| `FRAGMENTMULTI` | A multi-assignable fragment |
+| `FRAGMENTSINGLE`| A single-assignable fragment|
+| `PATCH`         | A 721 patch         |
+| `PATCHACCOUNT`  | An account patch  |
+| `PATCH1155`     | An 1155 patch     |
+| `MINTABLE`      | Mintable      |
+| `REVERSIBLE`    | Reversible (patch)    |
+
+If you're using Typescript, you'll need to import the `Feature` enum from `@patchworkdev/common/types`.
