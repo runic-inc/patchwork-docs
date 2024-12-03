@@ -1,0 +1,93 @@
+
+```json
+{
+    "$schema": "https://patchwork.dev/schema/patchwork-project-config.schema.json",
+    "name": "mypfp",
+    "scopes": {
+        "myscope": {
+            "name": "myscope"
+        }
+    },
+    "contracts": {
+        "MyPFP": {
+            "config": {
+              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "MyPFP",
+              "symbol": "PFP",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/mypfp.json",
+              "imageURI": "https://replace-me-with-website/assets/mypfp/{tokenID}",
+              "features": [
+                "mintable"
+              ],
+              "fields": [
+                {
+                  "id": 0,
+                  "key": "bgcolor",
+                  "type": "uint16",
+                  "description": "Background Color",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 1,
+                  "key": "skincolor",
+                  "type": "uint16",
+                  "description": "Skin Color",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 2,
+                  "key": "shirt",
+                  "type": "uint16",
+                  "description": "Shirt",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 3,
+                  "key": "necklace",
+                  "type": "uint16",
+                  "description": "Necklace",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 4,
+                  "key": "mouth",
+                  "type": "uint16",
+                  "description": "Mouth",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 5,
+                  "key": "eyes",
+                  "type": "uint16",
+                  "description": "Eyes",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 6,
+                  "key": "hair",
+                  "type": "uint16",
+                  "description": "Hair",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 7,
+                  "key": "hat",
+                  "type": "uint16",
+                  "description": "Hat",
+                  "functionConfig": "load"
+                },
+                {
+                  "id": 8,
+                  "key": "rarityscore",
+                  "type": "uint16",
+                  "description": "Rarity Score",
+                  "functionConfig": "load"
+                }
+              ]
+           }
+        }
+    }
+}
+```

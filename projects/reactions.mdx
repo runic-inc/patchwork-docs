@@ -1,0 +1,98 @@
+
+```json
+{
+    "$schema": "https://patchwork.dev/schema/patchwork-project-config.schema.json",
+    "name": "reactions",
+    "scopes": {
+        "myscope": {
+            "name": "myscope"
+        }
+    },
+    "contracts": {
+        "ReactionPatch": {
+            "config": {
+              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "ReactionPatch",
+              "symbol": "RPATCH",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/reactionpatch.json",
+              "imageURI": "https://replace-me-with-website/assets/reactionpatch/{tokenID}",
+              "features": ["patch", "reversible"],
+              "fields": [
+                  {
+                      "id": 1,
+                      "key": "reactions",
+                      "type": "literef",
+                      "arrayLength": 0,
+                      "description": "Reactions"
+                  },
+                  {
+                      "id": 2,
+                      "key": "reserved",
+                      "type": "uint256",
+                      "arrayLength": 1,
+                      "description": "Reserved"
+                  }
+              ]
+            },
+            "fragments": [
+                "Reaction",
+                "Comment"
+            ]
+        },
+        "Reaction": {
+            "config": {
+              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "Reaction",
+              "symbol": "REACT",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/reaction.json",
+              "imageURI": "https://replace-me-with-website/assets/reaction/{tokenID}",
+              "features": ["mintable", "fragmentsingle"],
+              "fields": [
+                {
+                    "id": 1,
+                    "key": "typeId",
+                    "type": "uint32",
+                    "description": "Reaction Type ID"
+                },
+                {
+                    "id": 2,
+                    "key": "value",
+                    "type": "uint32",
+                    "description": "Reaction Value"
+                },
+                {
+                    "id": 3,
+                    "key": "stickerPackAddr",
+                    "type": "address",
+                    "description": "Sticker Pack Address"
+                }
+              ]
+            }
+        },
+        "Comment": {
+            "config": {
+              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
+              "scopeName": "myscope",
+              "name": "Comment",
+              "symbol": "COMMENT",
+              "baseURI": "https://replace-me-with-website/",
+              "schemaURI": "https://replace-me-with-website/schemas/comment.json",
+              "imageURI": "https://replace-me-with-website/assets/comment/{tokenID}",
+              "features": ["mintable", "fragmentsingle"],
+              "fields": [
+                {
+                    "id": 1,
+                    "key": "comment",
+                    "type": "string",
+                    "description": "Comment"
+                }
+              ]
+            }
+        }
+    }
+}
+```

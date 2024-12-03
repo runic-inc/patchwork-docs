@@ -50,6 +50,10 @@
 		{
 			"name": "Contracts Reference",
 			"url": "contracts"
+		},
+		{
+			"name": "Example Projects",
+			"url": "projects"
 		}
 	],
 	"navigation": [
@@ -165,6 +169,30 @@
 		{
 			"group": "Utils",
 			"pages": ["contracts/utils/PatchworkUtils"]
+		},
+
+		{
+			"group": "",
+			"pages": ["projects/index"]
+		},
+		{
+			"group": "Example Projects",
+			"pages": [
+				"projects/appraisals",
+				"projects/asset",
+				"projects/canvas",
+				"projects/coupon",
+				"projects/elephants",
+				"projects/game",
+				"projects/idverification",
+				"projects/pfp",
+				"projects/purchasehistorypatch",
+				"projects/reactions",
+				"projects/receipt",
+				"projects/school",
+				"projects/tickets",
+				"projects/titles"
+			]
 		}
 	],
 	"footerSocials": {
