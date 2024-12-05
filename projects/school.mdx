@@ -1,68 +1,72 @@
 
-```json
-{
-    "$schema": "https://patchwork.dev/schema/patchwork-project-config.schema.json",
-    "name": "school",
-    "scopes": {
-        "myscope": {
-            "name": "myscope"
+```typescript
+import { ContractConfig, Feature, FunctionConfig, MintConfig, ProjectConfig } from "@patchworkdev/common/types";
+
+const schoolProjectConfig: ProjectConfig = {
+    name: "school",
+    scopes: [
+        {
+            name: "myscope",
+            whitelist: true,
+            userAssign: false,
+            userPatch: false,
+            mintConfigs: {},
+            patchFees: {},
+            assignFees: {}
         }
-    },
-    "contracts": {
+    ],
+    contracts: {
         "Class": {
-            "config": {
-              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
-              "scopeName": "myscope",
-              "name": "Class",
-              "symbol": "CLASS",
-              "baseURI": "https://replace-me-with-website/",
-              "schemaURI": "https://replace-me-with-website/schemas/class.json",
-              "imageURI": "https://replace-me-with-website/assets/class/{tokenID}",
-              "fields": [
+            scopeName: "myscope",
+            name: "Class",
+            symbol: "CLASS",
+            baseURI: "https://replace-me-with-website/",
+            schemaURI: "https://replace-me-with-website/schemas/class.json",
+            imageURI: "https://replace-me-with-website/assets/class/{tokenID}",
+            fields: [
                 {
-                  "id": 0,
-                  "key": "teacher",
-                  "type": "address",
-                  "description": "Teacher"
+                    id: 0,
+                    key: "teacher",
+                    type: "address",
+                    description: "Teacher",
                 },
                 {
-                  "id": 1,
-                  "key": "name",
-                  "type": "char32",
-                  "description": "Name"
+                    id: 1,
+                    key: "name",
+                    type: "char32",
+                    description: "Name",
                 }
-              ]
-            },
-            "fragments": [
-                "Student"
-            ]
+            ],
+            features: [],
+            fragments: []
         },
         "Student": {
-            "config": {
-              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
-              "scopeName": "myscope",
-              "name": "Student",
-              "symbol": "ITEM",
-              "baseURI": "https://replace-me-with-website/",
-              "schemaURI": "https://replace-me-with-website/schemas/student.json",
-              "imageURI": "https://replace-me-with-website/assets/student/{tokenID}",
-              "features": ["mintable","fragmentmulti"],
-              "fields": [
+            scopeName: "myscope",
+            name: "Student",
+            symbol: "ITEM",
+            baseURI: "https://replace-me-with-website/",
+            schemaURI: "https://replace-me-with-website/schemas/student.json",
+            imageURI: "https://replace-me-with-website/assets/student/{tokenID}",
+            fields: [
                 {
-                  "id": 0,
-                  "key": "student",
-                  "type": "address",
-                  "description": "Student"
+                    id: 0,
+                    key: "student",
+                    type: "address",
+                    description: "Student",
                 },
                 {
-                  "id": 1,
-                  "key": "name",
-                  "type": "char32",
-                  "description": "Name"
+                    id: 1,
+                    key: "name",
+                    type: "char32",
+                    description: "Name",
                 }
-              ]
-            }
+            ],
+            features: [Feature.MINTABLE, Feature.FRAGMENTMULTI],
+            fragments: []
         }
     }
-}
+};
+
+export default schoolProjectConfig;
+
 ```

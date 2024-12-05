@@ -1,81 +1,85 @@
 
-```json
-{
-    "$schema": "https://patchwork.dev/schema/patchwork-project-config.schema.json",
-    "name": "elephants",
-    "scopes": {
-        "elephants": {
-            "name": "elephants"
+```typescript
+import { ContractConfig, Feature, FunctionConfig, MintConfig, ProjectConfig } from "@patchworkdev/common/types";
+
+const elephantsProjectConfig: ProjectConfig = {
+    name: "elephants",
+    scopes: [
+        {
+            name: "elephants",
+            whitelist: true,
+            userAssign: false,
+            userPatch: false,
+            mintConfigs: {},
+            patchFees: {},
+            assignFees: {}
         }
-    },
-    "contracts": {
+    ],
+    contracts: {
         "Elephant": {
-            "config": {
-              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
-              "scopeName": "elephants",
-              "name": "Elephants",
-              "symbol": "ELEPHANT",
-              "baseURI": "https://elephants.fun/metadata/elephant/",
-              "schemaURI": "https://elephants.fun/schemas/elephant.json",
-              "imageURI": "https://elephants.fun/assets/elephant/{tokenID}",
-              "fields": [
+            scopeName: "elephants",
+            name: "Elephants",
+            symbol: "ELEPHANT",
+            baseURI: "https://elephants.fun/metadata/elephant/",
+            schemaURI: "https://elephants.fun/schemas/elephant.json",
+            imageURI: "https://elephants.fun/assets/elephant/{tokenID}",
+            fields: [
                 {
-                  "id": 0,
-                  "key": "attributeLiteRefs",
-                  "type": "literef",
-                  "arrayLength": 8,
-                  "description": "Attribute LiteRefs"
+                    id: 0,
+                    key: "attributeLiteRefs",
+                    type: "literef",
+                    description: "Attribute LiteRefs",
+                    arrayLength: 8,
                 },
                 {
-                  "id": 1,
-                  "key": "name",
-                  "type": "char32",
-                  "description": "Name"
+                    id: 1,
+                    key: "name",
+                    type: "char32",
+                    description: "Name",
                 }
-              ]
-            },
-            "fragments": [
-                "Attribute"
-            ]
+            ],
+            features: [],
+            fragments: []
         },
         "Attribute": {
-            "config": {
-              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
-              "scopeName": "elephants",
-              "name": "Elephants: Attributes",
-              "symbol": "ATTRIBUTE",
-              "baseURI": "https://elephants.fun/metadata/attribute/",
-              "schemaURI": "https://elephants.fun/schemas/attribute.json",
-              "imageURI": "https://elephants.fun/assets/attribute/{tokenID}",
-              "features": ["mintable","fragmentsingle"],
-              "fields": [
+            scopeName: "elephants",
+            name: "Elephants: Attributes",
+            symbol: "ATTRIBUTE",
+            baseURI: "https://elephants.fun/metadata/attribute/",
+            schemaURI: "https://elephants.fun/schemas/attribute.json",
+            imageURI: "https://elephants.fun/assets/attribute/{tokenID}",
+            fields: [
                 {
-                  "id": 0,
-                  "key": "attributeType",
-                  "type": "uint8",
-                  "description": "Attribute Type"
+                    id: 0,
+                    key: "attributeType",
+                    type: "uint8",
+                    description: "Attribute Type",
                 },
                 {
-                  "id": 1,
-                  "key": "attributeId",
-                  "type": "uint16",
-                  "description": "Attribute ID"
+                    id: 1,
+                    key: "attributeId",
+                    type: "uint16",
+                    description: "Attribute ID",
                 },
                 {
-                  "id": 2,
-                  "key": "tier",
-                  "type": "uint8",
-                  "description": "Attribute Tier"
+                    id: 2,
+                    key: "tier",
+                    type: "uint8",
+                    description: "Attribute Tier",
                 },
                 {
-                  "id": 3,
-                  "key": "name",
-                  "type": "char16",
-                  "description": "Attribute Name"
+                    id: 3,
+                    key: "name",
+                    type: "char16",
+                    description: "Attribute Name",
                 }
-              ]
-            }
+            ],
+            features: [Feature.MINTABLE, Feature.FRAGMENTSINGLE],
+            fragments: []
         }
     }
-}
+};
+
+export default elephantsProjectConfig;
+
 ```

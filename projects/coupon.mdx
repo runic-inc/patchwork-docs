@@ -1,64 +1,69 @@
-```json
-{
-    "$schema": "https://patchwork.dev/schema/patchwork-project-config.schema.json",
-    "name": "mycoupon",
-    "scopes": {
-        "myscope": {
-            "name": "myscope"
+```typescript
+import { ContractConfig, Feature, FunctionConfig, MintConfig, ProjectConfig } from "@patchworkdev/common/types";
+
+const mycouponProjectConfig: ProjectConfig = {
+    name: "mycoupon",
+    scopes: [
+        {
+            name: "myscope",
+            whitelist: true,
+            userAssign: false,
+            userPatch: false,
+            mintConfigs: {},
+            patchFees: {},
+            assignFees: {}
         }
-    },
-    "contracts": {
+    ],
+    contracts: {
         "MyCoupon": {
-            "config": {
-              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
-              "scopeName": "myscope",
-              "name": "MyCoupon",
-              "symbol": "CPN",
-              "baseURI": "https://replace-me-with-website/",
-              "schemaURI": "https://replace-me-with-website/schemas/mycoupon.json",
-              "imageURI": "https://replace-me-with-website/assets/mycoupon/{tokenID}",
-              "features": [
-                "mintable"
-              ],
-              "fields": [
+            scopeName: "myscope",
+            name: "MyCoupon",
+            symbol: "CPN",
+            baseURI: "https://replace-me-with-website/",
+            schemaURI: "https://replace-me-with-website/schemas/mycoupon.json",
+            imageURI: "https://replace-me-with-website/assets/mycoupon/{tokenID}",
+            fields: [
                 {
-                  "id": 0,
-                  "key": "expiry",
-                  "type": "uint64",
-                  "description": "Expiry Timestamp (seconds since epoch)",
-                  "functionConfig": "load"
+                    id: 0,
+                    key: "expiry",
+                    type: "uint64",
+                    description: "Expiry Timestamp (seconds since epoch)",
+                    functionConfig: FunctionConfig.LOAD,
                 },
                 {
-                  "id": 1,
-                  "key": "couponcode",
-                  "type": "uint32",
-                  "description": "Coupon Code",
-                  "functionConfig": "load"
+                    id: 1,
+                    key: "couponcode",
+                    type: "uint32",
+                    description: "Coupon Code",
+                    functionConfig: FunctionConfig.LOAD,
                 },
                 {
-                  "id": 2,
-                  "key": "maxuses",
-                  "type": "uint64",
-                  "description": "How many times this coupon may be used",
-                  "functionConfig": "load"
+                    id: 2,
+                    key: "maxuses",
+                    type: "uint64",
+                    description: "How many times this coupon may be used",
+                    functionConfig: FunctionConfig.LOAD,
                 },
                 {
-                  "id": 3,
-                  "key": "uses",
-                  "type": "uint64",
-                  "description": "Number of uses",
-                  "functionConfig": "all"
+                    id: 3,
+                    key: "uses",
+                    type: "uint64",
+                    description: "Number of uses",
+                    functionConfig: FunctionConfig.ALL,
                 },
                 {
-                  "id": 4,
-                  "key": "transferable",
-                  "type": "bool",
-                  "description": "Is this coupon transferable",
-                  "functionConfig": "load"
+                    id: 4,
+                    key: "transferable",
+                    type: "bool",
+                    description: "Is this coupon transferable",
+                    functionConfig: FunctionConfig.LOAD,
                 }
-              ]
-           }
+            ],
+            features: [Feature.MINTABLE],
+            fragments: []
         }
     }
-}
+};
+
+export default mycouponProjectConfig;
 ```

@@ -1,70 +1,73 @@
 
-```json
-{
-    "$schema": "https://patchwork.dev/schema/patchwork-project-config.schema.json",
-    "name": "tickets",
-    "scopes": {
-        "myscope": {
-            "name": "myscope"
+```typescript
+import { ContractConfig, Feature, FunctionConfig, MintConfig, ProjectConfig } from "@patchworkdev/common/types";
+
+const ticketsProjectConfig: ProjectConfig = {
+    name: "tickets",
+    scopes: [
+        {
+            name: "myscope",
+            whitelist: true,
+            userAssign: false,
+            userPatch: false,
+            mintConfigs: {},
+            patchFees: {},
+            assignFees: {}
         }
-    },
-    "contracts": {
+    ],
+    contracts: {
         "Event": {
-            "config": {
-              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
-              "scopeName": "myscope",
-              "name": "Event",
-              "symbol": "EVENT",
-              "baseURI": "https://replace-me-with-website/",
-              "schemaURI": "https://replace-me-with-website/schemas/event.json",
-              "imageURI": "https://replace-me-with-website/assets/event/{tokenID}",
-              "features": ["mintable"],
-              "fields": [
+            scopeName: "myscope",
+            name: "Event",
+            symbol: "EVENT",
+            baseURI: "https://replace-me-with-website/",
+            schemaURI: "https://replace-me-with-website/schemas/event.json",
+            imageURI: "https://replace-me-with-website/assets/event/{tokenID}",
+            fields: [
                 {
-                  "id": 0,
-                  "key": "name",
-                  "type": "char32",
-                  "description": "Name"
+                    id: 0,
+                    key: "name",
+                    type: "char32",
+                    description: "Name",
                 },
                 {
-                  "id": 1,
-                  "key": "tickets",
-                  "type": "literef",
-                  "arrayLength": 0,
-                  "description": "Event Tickets"
+                    id: 1,
+                    key: "tickets",
+                    type: "literef",
+                    description: "Event Tickets",
+                    arrayLength: 0,
                 }
-              ]
-            },
-            "fragments": [
-                "Ticket"
-            ]
+            ],
+            features: [Feature.MINTABLE],
+            fragments: []
         },
         "Ticket": {
-            "config": {
-              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
-              "scopeName": "myscope",
-              "name": "Ticket",
-              "symbol": "TICKET",
-              "baseURI": "https://replace-me-with-website/",
-              "schemaURI": "https://replace-me-with-website/schemas/ticket.json",
-              "imageURI": "https://replace-me-with-website/assets/ticket/{tokenID}",
-              "features": ["mintable","fragmentsingle","weakref"],
-              "fields": [
+            scopeName: "myscope",
+            name: "Ticket",
+            symbol: "TICKET",
+            baseURI: "https://replace-me-with-website/",
+            schemaURI: "https://replace-me-with-website/schemas/ticket.json",
+            imageURI: "https://replace-me-with-website/assets/ticket/{tokenID}",
+            fields: [
                 {
-                  "id": 0,
-                  "key": "number",
-                  "type": "uint32",
-                  "description": "Ticket Number"
+                    id: 0,
+                    key: "number",
+                    type: "uint32",
+                    description: "Ticket Number",
                 },
                 {
-                  "id": 1,
-                  "key": "seat",
-                  "type": "char8",
-                  "description": "Seat"
+                    id: 1,
+                    key: "seat",
+                    type: "char8",
+                    description: "Seat",
                 }
-              ]
-            }
+            ],
+            features: [Feature.MINTABLE, Feature.FRAGMENTSINGLE, Feature.WEAKREF],
+            fragments: []
         }
     }
-}
+};
+
+export default ticketsProjectConfig;
+
 ```

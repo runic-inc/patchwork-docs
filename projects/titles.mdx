@@ -1,106 +1,104 @@
 
-```json
-{
-    "$schema": "https://patchwork.dev/schema/patchwork-project-config.schema.json",
-    "name": "titles",
-    "scopes": {
-        "myscope": {
-            "name": "myscope"
+```typescript
+import { ContractConfig, Feature, FunctionConfig, MintConfig, ProjectConfig } from "@patchworkdev/common/types";
+
+const titlesProjectConfig: ProjectConfig = {
+    name: "titles",
+    scopes: [
+        {
+            name: "myscope",
+            whitelist: true,
+            userAssign: false,
+            userPatch: false,
+            mintConfigs: {},
+            patchFees: {},
+            assignFees: {}
         }
-    },
-    "contracts": {
+    ],
+    contracts: {
         "TitleAccountPatch": {
-          "config": {
-            "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
-            "scopeName": "myscope",
-            "name": "TitleAccountPatch",
-            "symbol": "TTLPAT",
-            "baseURI": "https://replace-me-with-website/",
-            "schemaURI": "https://replace-me-with-website/schemas/titlepatch.json",
-            "imageURI": "https://replace-me-with-website/assets/titlepatch/{tokenID}",
-            "features": [
-              "accountpatch"
+            scopeName: "myscope",
+            name: "TitleAccountPatch",
+            symbol: "TTLPAT",
+            baseURI: "https://replace-me-with-website/",
+            schemaURI: "https://replace-me-with-website/schemas/titlepatch.json",
+            imageURI: "https://replace-me-with-website/assets/titlepatch/{tokenID}",
+            fields: [
+                {
+                    id: 0,
+                    key: "titles",
+                    type: "literef",
+                    description: "Titles",
+                    arrayLength: 0,
+                }
             ],
-            "fields": [
-              {
-                "id": 0,
-                "key": "titles",
-                "type": "literef",
-                "description": "Titles",
-                "arrayLength": 0
-              }
-            ],
-            "fragments": [
-              "AutoTitle"
-            ]
-          }
+            features: [Feature.ACCOUNTPATCH],
+            fragments: ["AutoTitle"]
         },
         "AutoTitle": {
-            "config": {
-              "$schema": "https://patchwork.dev/schema/patchwork-contract-config.schema.json",
-              "scopeName": "myscope",
-              "name": "AutoTitle",
-              "symbol": "AUTO",
-              "baseURI": "https://replace-me-with-website/",
-              "schemaURI": "https://replace-me-with-website/schemas/autotitle.json",
-              "imageURI": "https://replace-me-with-website/assets/autotitle/{tokenID}",
-              "features": [
-                "mintable",
-                "fragmentsingle"
-              ],
-              "fields": [
+            scopeName: "myscope",
+            name: "AutoTitle",
+            symbol: "AUTO",
+            baseURI: "https://replace-me-with-website/",
+            schemaURI: "https://replace-me-with-website/schemas/autotitle.json",
+            imageURI: "https://replace-me-with-website/assets/autotitle/{tokenID}",
+            fields: [
                 {
-                  "id": 0,
-                  "key": "createdat",
-                  "type": "uint64",
-                  "description": "CreatedAt Timestamp (seconds since epoch)",
-                  "functionConfig": "load"
+                    id: 0,
+                    key: "createdat",
+                    type: "uint64",
+                    description: "CreatedAt Timestamp (seconds since epoch)",
+                    functionConfig: FunctionConfig.LOAD,
                 },
                 {
-                  "id": 1,
-                  "key": "issuer",
-                  "type": "address",
-                  "description": "Issuer",
-                  "functionConfig": "load"
+                    id: 1,
+                    key: "issuer",
+                    type: "address",
+                    description: "Issuer",
+                    functionConfig: FunctionConfig.LOAD,
                 },
                 {
-                  "id": 2,
-                  "key": "signature",
-                  "type": "uint256",
-                  "description": "Issuer Signature",
-                  "functionConfig": "load"
+                    id: 2,
+                    key: "signature",
+                    type: "uint256",
+                    description: "Issuer Signature",
+                    functionConfig: FunctionConfig.LOAD,
                 },
                 {
-                  "id": 3,
-                  "key": "vin",
-                  "type": "char32",
-                  "description": "VIN",
-                  "functionConfig": "load"
+                    id: 3,
+                    key: "vin",
+                    type: "char32",
+                    description: "VIN",
+                    functionConfig: FunctionConfig.LOAD,
                 },
                 {
-                  "id": 4,
-                  "key": "make",
-                  "type": "char16",
-                  "description": "Make",
-                  "functionConfig": "load"
+                    id: 4,
+                    key: "make",
+                    type: "char16",
+                    description: "Make",
+                    functionConfig: FunctionConfig.LOAD,
                 },
                 {
-                  "id": 5,
-                  "key": "model",
-                  "type": "char16",
-                  "description": "Model",
-                  "functionConfig": "load"
+                    id: 5,
+                    key: "model",
+                    type: "char16",
+                    description: "Model",
+                    functionConfig: FunctionConfig.LOAD,
                 },
                 {
-                  "id": 6,
-                  "key": "year",
-                  "type": "uint16",
-                  "description": "Year",
-                  "functionConfig": "load"
+                    id: 6,
+                    key: "year",
+                    type: "uint16",
+                    description: "Year",
+                    functionConfig: FunctionConfig.LOAD,
                 }
-              ]
-           }
+            ],
+            features: [Feature.MINTABLE, Feature.FRAGMENTSINGLE],
+            fragments: []
         }
     }
-}
+};
+
+export default titlesProjectConfig;
+
 ```
