@@ -111,7 +111,7 @@
 			]
 		},
 		{
-			"group": "Contract config examples",
+			"group": "Patchwork Project examples",
 			"pages": [
 				"pdk/config/basic",
 				"pdk/config/arrays",

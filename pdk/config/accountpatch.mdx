@@ -2,21 +2,42 @@
 title: 'Patch for account targets'
 ---
 
-```json
-{
-  "scopeName": "test",
-  "name": "AccountPatch",
-  "symbol": "AP",
-  "schemaURI": "https://mything/my-metadata.json",
-  "imageURI": "https://mything/my/{tokenID}.png",
-  "features": ["accountpatch"],
-  "fields": [
-      {
-          "id": 1,
-          "key": "name",
-          "type": "char32",
-          "description": "Name"
-      }
-  ]
-}
+```typescript
+import { ContractConfig, Feature, ProjectConfig } from "@patchworkdev/common/types";
+
+const accountPatchProjectConfig: ProjectConfig = {
+    name: "account-patch-project",
+    scopes: [
+        {
+            name: "test",
+            whitelist: true,
+            userAssign: false,
+            userPatch: false,
+            mintConfigs: {},
+            patchFees: {},
+            assignFees: {}
+        }
+    ],
+    contracts: {
+        "AccountPatch": {
+            scopeName: "test",
+            name: "AccountPatch",
+            symbol: "AP",
+            baseURI: "https://mything/my/",
+            schemaURI: "https://mything/my-metadata.json",
+            imageURI: "https://mything/my/{tokenID}.png",
+            fields: [
+                {
+                    id: 1,
+                    key: "name",
+                    type: "char32",
+                    description: "Name"
+                }
+            ],
+            features: [Feature.ACCOUNTPATCH]
+        }
+    }
+};
+
+export default accountPatchProjectConfig;
 ```

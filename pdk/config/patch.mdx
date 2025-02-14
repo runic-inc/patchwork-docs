@@ -2,21 +2,43 @@
 title: 'Patch for ERC721 targets'
 ---
 
-```json
-{
-  "scopeName": "test",
-  "name": "Patch",
-  "symbol": "PATCH",
-  "schemaURI": "https://mything/my-metadata.json",
-  "imageURI": "https://mything/my/{tokenID}.png",
-  "features": ["patch"],
-  "fields": [
-      {
-          "id": 1,
-          "key": "name",
-          "type": "char32",
-          "description": "Name"
-      }
-  ]
-}
+```typescript
+import { ContractConfig, Feature, ProjectConfig } from "@patchworkdev/common/types";
+
+const patchProjectConfig: ProjectConfig = {
+    name: "patch-project",
+    scopes: [
+        {
+            name: "test",
+            whitelist: true,
+            userAssign: false,
+            userPatch: false,
+            mintConfigs: {},
+            patchFees: {},
+            assignFees: {}
+        }
+    ],
+    contracts: {
+        "Patch": {
+            scopeName: "test",
+            name: "Patch",
+            symbol: "PATCH",
+            baseURI: "https://mything/my/",
+            schemaURI: "https://mything/my-metadata.json",
+            imageURI: "https://mything/my/{tokenID}.png",
+            fields: [
+                {
+                    id: 1,
+                    key: "name",
+                    type: "char32",
+                    description: "Name"
+                }
+            ],
+            features: [Feature.PATCH]
+        }
+    }
+};
+
+export default patchProjectConfig;
+
 ```

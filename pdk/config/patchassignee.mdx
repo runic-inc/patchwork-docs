@@ -2,28 +2,50 @@
 title: 'Patch + Assignee'
 ---
 
-```json
-{
-  "scopeName": "test",
-  "name": "PatchFragment",
-  "symbol": "PFRAG",
-  "schemaURI": "https://mything/my-metadata.json",
-  "imageURI": "https://mything/my/{tokenID}.png",
-  "features": ["patch"],
-  "fields": [
-      {
-          "id": 1,
-          "key": "name",
-          "type": "char32",
-          "description": "Name"
-      },
-      {
-          "id": 1,
-          "key": "frags",
-          "type": "literef",
-          "description": "My 6 Fragments",
-          "arrayLength": 6
-      },
-  ]
-}
+```typescript
+import { ContractConfig, Feature, ProjectConfig } from "@patchworkdev/common/types";
+
+const patchFragmentProjectConfig: ProjectConfig = {
+    name: "patch-fragment-project",
+    scopes: [
+        {
+            name: "test",
+            whitelist: true,
+            userAssign: false,
+            userPatch: false,
+            mintConfigs: {},
+            patchFees: {},
+            assignFees: {}
+        }
+    ],
+    contracts: {
+        "PatchFragment": {
+            scopeName: "test",
+            name: "PatchFragment",
+            symbol: "PFRAG",
+            baseURI: "https://mything/my/",
+            schemaURI: "https://mything/my-metadata.json",
+            imageURI: "https://mything/my/{tokenID}.png",
+            fields: [
+                {
+                    id: 1,
+                    key: "name",
+                    type: "char32",
+                    description: "Name"
+                },
+                {
+                    id: 1,
+                    key: "frags",
+                    type: "literef",
+                    arrayLength: 6,
+                    description: "My 6 Fragments"
+                }
+            ],
+            features: [Feature.PATCH]
+        }
+    }
+};
+
+export default patchFragmentProjectConfig;
+
 ```

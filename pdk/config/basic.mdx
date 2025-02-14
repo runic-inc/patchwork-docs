@@ -2,20 +2,43 @@
 title: 'Basic Patchwork721'
 ---
 
-```json
-{
-  "scopeName": "test",
-  "name": "Basic1",
-  "symbol": "BASIC",
-  "schemaURI": "https://mything/my-metadata.json",
-  "imageURI": "https://mything/my/{tokenID}.png",
-  "fields": [
-    {
-        "id": 1,
-        "key": "name",
-        "type": "char16",
-        "description": "Short Name"
+```typescript
+import { ContractConfig, ProjectConfig } from "@patchworkdev/common/types";
+
+const basicPatchwork721ProjectConfig: ProjectConfig = {
+    name: "basic-patchwork721-project",
+    scopes: [
+        {
+            name: "test",
+            whitelist: true,
+            userAssign: false,
+            userPatch: false,
+            mintConfigs: {},
+            patchFees: {},
+            assignFees: {}
+        }
+    ],
+    contracts: {
+        "Basic1": {
+            scopeName: "test",
+            name: "Basic1",
+            symbol: "BASIC",
+            baseURI: "https://mything/my/",
+            schemaURI: "https://mything/my-metadata.json",
+            imageURI: "https://mything/my/{tokenID}.png",
+            fields: [
+                {
+                    id: 1,
+                    key: "name",
+                    type: "char16",
+                    description: "Short Name"
+                }
+            ],
+            features: []
+        }
     }
-  ]
-}
+};
+
+export default basicPatchwork721ProjectConfig;
+
 ```
