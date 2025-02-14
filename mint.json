@@ -99,8 +99,14 @@
 			"group": "Introduction",
 			"pages": [
 				"pdk/overview",
-				"pdk/getting-started",
+				"pdk/getting-started"
+			]
+		},
+		{
+			"group": "Configuration and Development",
+			"pages": [
 				"pdk/configuration",
+				"pdk/wizard",
 				"pdk/local-development"
 			]
 		},

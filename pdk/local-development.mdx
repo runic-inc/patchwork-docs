@@ -9,10 +9,10 @@ There are 5 services that comprise create-patchwork applications:
 4. **www** (React frontend)
 5. **Dozzle** (container logs)
 
-If you have Docker installed, the easiest way to run these all is using the `pdk localDev` command:
+If you have Docker installed, the easiest way to run these all is using the `pnpm pnpm pdk localDev` command:
 
 ```shell
-pdk dev up
+pnpm pdk dev up
 ```
 
 This command will start all containers, deploy contracts to your preferred network (automatically if you are using Anvil), configure environment variables, and rerun any generators that need it because of downstream changes.
@@ -20,21 +20,21 @@ This command will start all containers, deploy contracts to your preferred netwo
 To stop development, do:
 
 ```shell
-pdk dev down
+pnpm pdk dev down
 ```
 
 If you’d like to switch networks, you can run:
 
 ```shell
-pdk network switch <network>
+pnpm pdk network switch <network>
 ```
 
 You can see a list of supported networks by running:
 
 ```shell
-pdk network list
+pnpm pdk network list
 ```
 
-You can also manually rerun any generator by running them with `pdk`.
+You can also manually rerun any generator by running them with `pnpm pdk`.
 
-From your created project root, run `pdk` to see a list of all available commands.
+From your created project root, run `pnpm pdk` to see a list of all available commands.
