@@ -1,0 +1,19 @@
+---
+title: 'Patchwork Wizard'
+description: 'Build your Patchwork config using our visual editor'
+---
+
+# Wizard
+
+Instead of building your configuration by hand, you can use our visual editor at [wizard.patchwork.dev](https://wizard.patchwork.dev).
+
+## Text-to-Config
+
+Our wizard features a text-to-config tool. Describe the app you’d like to create, and the tool uses AI to generate a configuration for you. To activate, click **Use AI to configure**.
+
+## Exporting Your Config
+
+Once you’re satisfied with your project configuration, click **Export project** to download the config file. Then, run the following command to create your project with the exported configuration:
+
+```bash
+pnpm create patchwork newconfig.config.ts
