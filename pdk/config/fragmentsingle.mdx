@@ -2,21 +2,43 @@
 title: 'Single-assignable Fragment'
 ---
 
-```json
-{
-  "scopeName": "test",
-  "name": "FragmentSingle",
-  "symbol": "FS",
-  "schemaURI": "https://mything/my-metadata.json",
-  "imageURI": "https://mything/my/{tokenID}.png",
-  "features": ["fragmentsingle"],
-  "fields": [
-      {
-          "id": 1,
-          "key": "name",
-          "type": "char32",
-          "description": "Name"
-      }
-  ]
-}
+```typescript
+import { ContractConfig, Feature, ProjectConfig } from "@patchworkdev/common/types";
+
+const fragmentSingleProjectConfig: ProjectConfig = {
+    name: "fragment-single-project",
+    scopes: [
+        {
+            name: "test",
+            whitelist: true,
+            userAssign: false,
+            userPatch: false,
+            mintConfigs: {},
+            patchFees: {},
+            assignFees: {}
+        }
+    ],
+    contracts: {
+        "FragmentSingle": {
+            scopeName: "test",
+            name: "FragmentSingle",
+            symbol: "FS",
+            baseURI: "https://mything/my/",
+            schemaURI: "https://mything/my-metadata.json",
+            imageURI: "https://mything/my/{tokenID}.png",
+            fields: [
+                {
+                    id: 1,
+                    key: "name",
+                    type: "char32",
+                    description: "Name"
+                }
+            ],
+            features: [Feature.FRAGMENTSINGLE]
+        }
+    }
+};
+
+export default fragmentSingleProjectConfig;
+
 ```

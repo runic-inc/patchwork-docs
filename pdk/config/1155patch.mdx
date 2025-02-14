@@ -2,21 +2,40 @@
 title: 'Patch for ERC1155 targets'
 ---
 
-```json
-{
-  "scopeName": "test",
-  "name": "My1155Patch",
-  "symbol": "AP",
-  "schemaURI": "https://mything/my-metadata.json",
-  "imageURI": "https://mything/my/{tokenID}.png",
-  "features": ["1155patch"],
-  "fields": [
-      {
-          "id": 1,
-          "key": "name",
-          "type": "char32",
-          "description": "Name"
-      }
-  ]
-}
+```typescript
+const my1155PatchProjectConfig: ProjectConfig = {
+    name: "my1155patch-project",
+    scopes: [
+        {
+            name: "test",
+            whitelist: true,
+            userAssign: false,
+            userPatch: false,
+            mintConfigs: {},
+            patchFees: {},
+            assignFees: {}
+        }
+    ],
+    contracts: {
+        "My1155Patch": {
+            scopeName: "test",
+            name: "My1155Patch",
+            symbol: "AP",
+            baseURI: "https://mything/my/",
+            schemaURI: "https://mything/my-metadata.json",
+            imageURI: "https://mything/my/{tokenID}.png",
+            fields: [
+                {
+                    id: 1,
+                    key: "name",
+                    type: "char32",
+                    description: "Name"
+                }
+            ],
+            features: [Feature["1155PATCH"]]
+        }
+    }
+};
+
+export default my1155PatchProjectConfig;
 ```

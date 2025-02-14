@@ -2,28 +2,51 @@
 title: 'Fixed-length references'
 ---
 
-```json
-{
-  "scopeName": "test",
-  "name": "LiteRef8",
-  "symbol": "LR8",
-  "schemaURI": "https://mything/my-metadata.json",
-  "imageURI": "https://mything/my/{tokenID}.png",
-  "fields": [
-      {
-          "id": 1,
-          "key": "attributeIDs",
-          "type": "literef",
-          "arrayLength": 8,
-          "description": "The attributes equipped by this this"
-      },
-      {
-          "id": 2,
-          "permissionId": 1,
-          "key": "counter",
-          "type": "uint32",
-          "description": "Counter"
-      }
-  ]
-}
+```typescript
+import { ContractConfig, ProjectConfig } from "@patchworkdev/common/types";
+
+const liteRef8ProjectConfig: ProjectConfig = {
+    name: "literef8-project",
+    scopes: [
+        {
+            name: "test",
+            whitelist: true,
+            userAssign: false,
+            userPatch: false,
+            mintConfigs: {},
+            patchFees: {},
+            assignFees: {}
+        }
+    ],
+    contracts: {
+        "LiteRef8": {
+            scopeName: "test",
+            name: "LiteRef8",
+            symbol: "LR8",
+            baseURI: "https://mything/my/",
+            schemaURI: "https://mything/my-metadata.json",
+            imageURI: "https://mything/my/{tokenID}.png",
+            fields: [
+                {
+                    id: 1,
+                    key: "attributeIDs",
+                    type: "literef",
+                    arrayLength: 8,
+                    description: "The attributes equipped by this this"
+                },
+                {
+                    id: 2,
+                    permissionId: 1,
+                    key: "counter",
+                    type: "uint32",
+                    description: "Counter"
+                }
+            ],
+            features: []
+        }
+    }
+};
+
+export default liteRef8ProjectConfig;
+
 ```
