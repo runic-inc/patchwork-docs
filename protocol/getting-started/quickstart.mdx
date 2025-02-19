@@ -6,15 +6,17 @@ icon: 'rabbit-running'
 
 ## Setup your development environment
 
-In a git repository root directory, perform the following steps to prepare a project:
-
 <Steps>
 <Step title="Install Foundry">
 
    Foundry is a smart contract development toolchain. You can install it by following the instructions at [Foundry's installation guide](https://book.getfoundry.sh/getting-started/installation).
 
+</Step>
+
+<Step title="Initialize Forge">
+In the root of a new empty project folder, run:
    ```shell
-   forge install
+   forge init
    ```
 
 </Step>
@@ -34,7 +36,7 @@ In a git repository root directory, perform the following steps to prepare a pro
 </Step>
 <Step title="Configure Project Remappings">
 
-    In project directory, create the file `remappings.txt`
+    In project root, create the file `remappings.txt`
     ```
     @openzeppelin/=lib/openzeppelin-contracts/
     @patchwork/=lib/patchwork/src/
