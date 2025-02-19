@@ -6,10 +6,10 @@ Our PDK generators will accept a Patchwork project configuration file as input a
 
 Here's an example Patchwork project configuration:
 ```typescript patchwork.config.ts
-import { ContractConfig, Feature, FunctionConfig, ProjectConfig } from "@patchworkdev/common/types";
+import { Feature, FunctionConfig, ProjectConfig } from "@patchworkdev/common/types";
 
 const exampleConfig: ProjectConfig = {
-    name: "Example Project Config",
+    name: "ExampleProjectConfig",
     scopes: [
         {
             name: "test",
@@ -17,12 +17,12 @@ const exampleConfig: ProjectConfig = {
             whitelist: true,
             userAssign: false,
             userPatch: false,
-            bankers: ["0x000000254729296a45a3885639AC7E10F9d54979", "Contract1"],
-            operators: ["0x000000111129296a45a3885639AC7E10F9d54979", "Contract1"],
+            bankers: ["0x000000254729296a45a3885639AC7E10F9d54979", "AccountPatch"],
+            operators: ["0x000000111129296a45a3885639AC7E10F9d54979", "AccountPatch"],
         }
     ],
     contracts: {
-        "Contract1": {
+        AccountPatch: {
             scopeName: "test",
             name: "AccountPatch",
             symbol: "AP",
@@ -46,9 +46,9 @@ const exampleConfig: ProjectConfig = {
                 }
             ],
             features: [Feature.ACCOUNTPATCH],
-            fragments: ["Contract2"]
+            fragments: ["SecondContract"]
         },
-        "Contract2": {
+        SecondContract: {
             scopeName: "test",
             name: "SecondContract",
             symbol: "SC",

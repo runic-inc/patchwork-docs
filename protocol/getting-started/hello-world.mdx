@@ -9,19 +9,16 @@ icon: 'paper-plane'
 
 Example: `patchwork.config.ts`
     ```typescript
-import { ContractConfig, ProjectConfig } from "@patchworkdev/common/types";
+import { ProjectConfig } from "@patchworkdev/common/types";
 
 const rizzlerProjectConfig: ProjectConfig = {
-    name: "rizzler-project",
+    name: "RizzlerProject",
     scopes: [
         {
             name: "rizzler",
             whitelist: true,
             userAssign: false,
             userPatch: false,
-            mintConfigs: {},
-            patchFees: {},
-            assignFees: {}
         }
     ],
     contracts: {
@@ -35,7 +32,7 @@ const rizzlerProjectConfig: ProjectConfig = {
             fields: [
                 {
                     id: 1,
-                    key: "name",
+                    key: "shortname",
                     type: "char16",
                     description: "Short Name"
                 },

@@ -3,19 +3,16 @@ title: 'Basic Patchwork721'
 ---
 
 ```typescript
-import { ContractConfig, ProjectConfig } from "@patchworkdev/common/types";
+import { ProjectConfig } from "@patchworkdev/common/types";
 
 const basicPatchwork721ProjectConfig: ProjectConfig = {
-    name: "basic-patchwork721-project",
+    name: "BasicPatchwork721Project",
     scopes: [
         {
             name: "test",
             whitelist: true,
             userAssign: false,
             userPatch: false,
-            mintConfigs: {},
-            patchFees: {},
-            assignFees: {}
         }
     ],
     contracts: {

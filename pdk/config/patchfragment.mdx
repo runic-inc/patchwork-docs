@@ -3,19 +3,16 @@ title: 'Patch + Fragment'
 ---
 
 ```typescript
-import { ContractConfig, Feature, ProjectConfig } from "@patchworkdev/common/types";
+import { Feature, ProjectConfig } from "@patchworkdev/common/types";
 
 const patchFragmentProjectConfig: ProjectConfig = {
-    name: "patch-fragment-project",
+    name: "PatchFragmentProject",
     scopes: [
         {
             name: "test",
             whitelist: true,
             userAssign: false,
             userPatch: false,
-            mintConfigs: {},
-            patchFees: {},
-            assignFees: {}
         }
     ],
     contracts: {
@@ -39,6 +36,6 @@ const patchFragmentProjectConfig: ProjectConfig = {
     }
 };
 
-export default patchFragmentProjectConfig;
+export default patchFragmentProjectConfig;;
 
 ```

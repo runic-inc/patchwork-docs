@@ -3,17 +3,16 @@ title: 'Patch for ERC1155 targets'
 ---
 
 ```typescript
+import { Feature, ProjectConfig } from "@patchworkdev/common/types";
+
 const my1155PatchProjectConfig: ProjectConfig = {
-    name: "my1155patch-project",
+    name: "My1155PatchProject",
     scopes: [
         {
             name: "test",
             whitelist: true,
             userAssign: false,
             userPatch: false,
-            mintConfigs: {},
-            patchFees: {},
-            assignFees: {}
         }
     ],
     contracts: {

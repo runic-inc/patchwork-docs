@@ -3,19 +3,16 @@ title: 'Fixed-length references'
 ---
 
 ```typescript
-import { ContractConfig, ProjectConfig } from "@patchworkdev/common/types";
+import { ProjectConfig } from "@patchworkdev/common/types";
 
 const liteRef8ProjectConfig: ProjectConfig = {
-    name: "literef8-project",
+    name: "Literef8Project",
     scopes: [
         {
             name: "test",
             whitelist: true,
             userAssign: false,
             userPatch: false,
-            mintConfigs: {},
-            patchFees: {},
-            assignFees: {}
         }
     ],
     contracts: {

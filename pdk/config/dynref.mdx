@@ -3,19 +3,16 @@ title: 'Dynamic references'
 ---
 
 ```typescript
-import { ContractConfig, ProjectConfig } from "@patchworkdev/common/types";
+import { ProjectConfig } from "@patchworkdev/common/types";
 
 const dynamicReferencesProjectConfig: ProjectConfig = {
-    name: "dynamic-references-project",
+    name: "DynamicReferencesProject",
     scopes: [
         {
             name: "test",
             whitelist: true,
             userAssign: false,
             userPatch: false,
-            mintConfigs: {},
-            patchFees: {},
-            assignFees: {}
         }
     ],
     contracts: {
@@ -47,5 +44,6 @@ const dynamicReferencesProjectConfig: ProjectConfig = {
 };
 
 export default dynamicReferencesProjectConfig;
+
 
 ```
