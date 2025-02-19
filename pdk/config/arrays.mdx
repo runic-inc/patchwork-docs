@@ -3,19 +3,16 @@ title: 'Complex metadata with arrays'
 ---
 
 ```typescript
-import { ContractConfig, ProjectConfig } from "@patchworkdev/common/types";
+import { ProjectConfig } from "@patchworkdev/common/types";
 
 const arraysProjectConfig: ProjectConfig = {
-    name: "arrays-project",
+    name: "ArraysProject",
     scopes: [
         {
             name: "test",
             whitelist: true,
             userAssign: false,
             userPatch: false,
-            mintConfigs: {},
-            patchFees: {},
-            assignFees: {}
         }
     ],
     contracts: {

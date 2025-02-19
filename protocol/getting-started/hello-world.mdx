@@ -1,27 +1,26 @@
 ---
 title: 'Deploying your first app'
-description: 'Build and launch a simple Patchwork app on Sepolia in less than 5 minutes.'
+description: 'Build and launch a simple Patchwork app on Base Sepolia in less than 5 minutes.'
 icon: 'paper-plane'
 ---
 
 <Steps>
 <Step title="Build a Project Config File">
 
+<Tip>Need help designing your config? Head to https://wizard.patchwork.dev to build it with a visual editor, or even better, let AI build it for you from a description of how you'd like your app to work.</Tip>
+
 Example: `patchwork.config.ts`
     ```typescript
-import { ContractConfig, ProjectConfig } from "@patchworkdev/common/types";
+import { ProjectConfig } from "@patchworkdev/common/types";
 
 const rizzlerProjectConfig: ProjectConfig = {
-    name: "rizzler-project",
+    name: "RizzlerProject",
     scopes: [
         {
             name: "rizzler",
             whitelist: true,
             userAssign: false,
             userPatch: false,
-            mintConfigs: {},
-            patchFees: {},
-            assignFees: {}
         }
     ],
     contracts: {
@@ -35,7 +34,7 @@ const rizzlerProjectConfig: ProjectConfig = {
             fields: [
                 {
                     id: 1,
-                    key: "name",
+                    key: "shortname",
                     type: "char16",
                     description: "Short Name"
                 },
@@ -61,30 +60,43 @@ export default rizzlerProjectConfig;
 
     ```
 </Step>
-<Step title="Run the code generators using create patchwork">
+<Step title="Use PDK to generate your app's contracts">
 
     ```shell
-    pnpm create patchwork patchwork.config.ts
+    pdk generate contracts patchwork.config.ts
     ```
 
 </Step>
 <Step title="Customize">
 
     Use your favorite editor or IDE to customize your generated Solidity contracts, adding any logic your app requires.
-
-</Step>
-<Step title="Deploy server-side resources">
-
-    Deploy the generated schema files where the SchemaURI points to and set up any graphical assets.
-
+<Tip>For each contract section in your config, there will be two contracts generated (e.g., Rizzler.sol, and RizzlerGenerated.sol). We recommend putting custom logic and method overrides in the contract without the Generated suffix, as this won't get overwritten when the generators are rerun.</Tip>
 </Step>
 
-<Step title="Deploy to local fork and start services">
-<Tip>Local development requires Docker to be installed</Tip>
+<Step title="Build Contracts">
 
     ```shell
-    pnpm pdk dev up
+    pdk generate contractBuild patchwork.config.ts
     ```
-<Tip>v2 of Patchwork Protocol is deployed at `0x00000000001616E65bb9FdA42dFBb7155406549b` on all chains</Tip>
+</Step>
+
+<Step title="Deploy server-side resources">
+    Deploy the generated schema files where the SchemaURI points to and set up any graphical assets.
+</Step>
+
+<Step title="Generate contract deploy script">
+    ```shell
+    pdk generate deployScripts
+    ```
+</Step>
+
+<Step title="Deploy to Base Sepolia">
+    ```shell
+    OWNER=<your-wallet-address> PATCHWORK_PROTOCOL=0x5fCa9f36772CE35bFbD3Cc75E854F0bEBDDD1ed4 TRY_DEPLOY=true forge script --optimize --optimizer-runs=200 -vvv RizzlerProject-deploy.s.sol --rpc-url https://sepolia.base.org --private-key <your-private-key> --broadcast
+    ```
+<Warning>For test deployments, use a testnet only private key that doesn't control any valuable mainnet assets. For prodcution deployments, it is recommended to deploy with a hardware wallet add a line to the end of the deployment script that transfers contract ownership to a safe as the final deployment step.</Warning>
+<Tip>v2 of Patchwork Protocol is deployed at `0x00000000001616E65bb9FdA42dFBb7155406549b` on Base and Sepolia. It is deployed to `0x5fCa9f36772CE35bFbD3Cc75E854F0bEBDDD1ed4` on Base Sepolia.</Tip>
 </Step>
 </Steps>
+
+Congrats! You've deployed your first Patchwork App! Need help generating the rest of your app's frontend and backend services? Head over to the [create-patchwork docs](/pdk/overview).
